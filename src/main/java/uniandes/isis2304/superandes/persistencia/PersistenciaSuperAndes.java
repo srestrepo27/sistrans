@@ -24,6 +24,7 @@ import uniandes.isis2304.superandes.negocio.Bodega;
 import uniandes.isis2304.superandes.negocio.Cliente;
 import uniandes.isis2304.superandes.negocio.Compra;
 import uniandes.isis2304.superandes.negocio.Pedido;
+import uniandes.isis2304.superandes.negocio.Producto;
 import uniandes.isis2304.superandes.negocio.Provee;
 
 
@@ -431,6 +432,29 @@ public class PersistenciaSuperAndes
 
 		}
 		return ret;
+	}
+	
+	
+	public void realizarVenta(PersistenceManager pm,List<Producto> productos, long cliente)
+	{
+		int total=0;
+		String factura="SUPER ANDES 2018" +"\n";
+		LocalDateTime now= LocalDateTime.now();
+		SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd"); 
+		String f=dt.format(now);
+		factura+=f+"\n";
+		for(Producto p:productos)
+		{
+			total+=p.getPrecioVenta();
+			sqlProducto.venderProducto(pm, p.getCodigoBarras());
+			factura+=p.getNombre() + ".................."+ p.getPrecioVenta()+"\n";
+			
+		}
+		factura+="TOTAL:.................."+ "$" +total;
+		 for(Producto p:productos)
+		 {
+			 sqlCompra.adicionarCompra(pm, p.getCodigoBarras(), cliente, factura, total);
+		 }
 	}
 	
 	
