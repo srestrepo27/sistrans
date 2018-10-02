@@ -70,5 +70,13 @@ class SQLProvee
 			return (List<Provee>) q.executeUnique();
 		}
 		
+		public Provee obtenerProveeProducto(PersistenceManager pm, String producto)
+		{
+			Query q= pm.newQuery(SQL, "SELECT * FROM" + pp.darTablaProvee() + "WHERE producto=?");
+			q.setResultClass(Provee.class);
+			q.setParameters(producto);
+			return (Provee) q.executeUnique();
+		}
+		
 		
 }

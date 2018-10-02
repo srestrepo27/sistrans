@@ -3,6 +3,7 @@ package uniandes.isis2304.superandes.persistencia;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -364,7 +365,9 @@ public class PersistenciaSuperAndes
 	{
 		return (Bodega) sqlBodega.darBodegaPorId(pmf.getPersistenceManager(), id);
 	}
-	//REQUERIMIENTOS FUNCIONALES DE CONSULTA
+	/* ****************************************************************
+	 * 			REQUERIMIENTOS FUNCIONALES DE CONSULTA
+	 *****************************************************************/
 	
 	public int ocupacionEstantes(PersistenceManager pm)
 	{
@@ -393,6 +396,43 @@ public class PersistenciaSuperAndes
 	{
 		return sqlCompra.RFC6(pm, cedula, fecha1, fecha2);
 	}
+	
+	/* ****************************************************************
+	 * 			METODOS AUTOMATICOS
+	 *****************************************************************/
+	public long realizarPedido(PersistenceManager pm, String codigoDeBarras)
+	{
+		int nivel= sqlProducto.darNivelReoProducto(pm, codigoDeBarras);
+		
+		int cantidad= sqlProducto.darCantidadProducto(pm, codigoDeBarras);
+		
+		long ret=0;
+		if(cantidad<nivel)
+		{
+			Provee provee= sqlProvee.obtenerProveeProducto(pm, codigoDeBarras);
+			String proveedor=provee.getProveedor();
+			SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd"); 
+			
+			LocalDateTime now= LocalDateTime.now();
+			now=now.plusDays(3);
+			String f=dt.format(now);
+			Date fecha=null;
+			try {
+				fecha = (Date) dt.parse(f);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			long id=nextval();
+			List<Cliente> clientes= sqlCliente.darClientes(pm);
+			long superMercadoId=clientes.get(0).getSuperMercadoId();
+			ret=(long) sqlPedido.adicionarPedido(pm, id, fecha,proveedor, superMercadoId);
+
+		}
+		return ret;
+	}
+	
 	
 	/* ****************************************************************
 	 * 			Métodos para manejar los clientes 

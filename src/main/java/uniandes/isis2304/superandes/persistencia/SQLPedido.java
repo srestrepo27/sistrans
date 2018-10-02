@@ -44,6 +44,7 @@ class SQLPedido
 		{
 			Query q= pm.newQuery(SQL,"INSERT INTO "+ pp.darTablaPedido()+ " (id,fecha,proveedorNit,superMercadoId) values (?,?,?,?)");
 			q.setParameters(id,fecha,proveedorNit,superMercadoId);
+			
 			return (long) q.executeUnique();
 		}
 		
