@@ -11,6 +11,7 @@ public class Compra implements VOCompra
 	
 	private double total;
 	
+	
 	public Compra(String producto, long cliente, String factura, double total) {
 		this.producto = producto;
 		this.cliente = cliente;

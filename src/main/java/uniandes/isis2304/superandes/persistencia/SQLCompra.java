@@ -56,7 +56,13 @@ class SQLCompra
 			return (long) q.executeUnique();
 		
 		}
-		
+		public Compra darCompra(PersistenceManager pm, String factura)
+		{
+			Query q= pm.newQuery(SQL,"SELECT * FROM" +pp.darTablaCompra()+"WHERE factura=?");
+			q.setParameters(factura);
+			q.setResultClass(Compra.class);
+			return(Compra)q.executeUnique();
+		}
 		public long eliminarCompraPorClienteId(PersistenceManager pm, long clienteId)
 		{
 			Query q= pm.newQuery(SQL,"DELET FROM" + pp.darTablaCompra()+ "WHERE clienteId=?)" );

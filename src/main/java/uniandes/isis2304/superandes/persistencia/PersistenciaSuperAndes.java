@@ -19,7 +19,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import uniandes.isis2304.parranderos.negocio.Bebedor;
 import uniandes.isis2304.superandes.negocio.Bodega;
 import uniandes.isis2304.superandes.negocio.Cliente;
 import uniandes.isis2304.superandes.negocio.Compra;
@@ -366,6 +365,7 @@ public class PersistenciaSuperAndes
 		return (Bodega) sqlBodega.darBodegaPorId(pmf.getPersistenceManager(), id);
 	}
 	//REQUERIMIENTOS FUNCIONALES DE CONSULTA
+	
 	public int ocupacionEstantes(PersistenceManager pm)
 	{
 		//INCOMPLETO
@@ -374,6 +374,7 @@ public class PersistenciaSuperAndes
 		int cantidad= (int) q.executeUnique();
 		return cantidad;
 	}
+	
 	public int ocupacionBodegas(PersistenceManager pm)
 	{
 		//INCOMPLETO
@@ -382,10 +383,12 @@ public class PersistenciaSuperAndes
 		int cantidad= (int) q.executeUnique();
 		return cantidad;
 	}
+	
 	public List<Pedido> RFC5(PersistenceManager pm)
 	{
 	return sqlPedido.RFC5(pm);
 	}
+	
 	public List<Compra> RFC6(PersistenceManager pm,long cedula, String fecha1, String fecha2)
 	{
 		return sqlCompra.RFC6(pm, cedula, fecha1, fecha2);
