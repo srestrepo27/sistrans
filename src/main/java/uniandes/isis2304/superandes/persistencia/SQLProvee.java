@@ -67,7 +67,7 @@ class SQLProvee
 			Query q= pm.newQuery(SQL, "SELECT * FROM" + pp.darTablaProvee() + "WHERE proveedor=? ");
 			q.setResultClass(Provee.class);
 			q.setParameters(proveedor);
-			return (List<Provee>) q.executeUnique();
+			return (List<Provee>) q.execute();
 		}
 		
 		public Provee obtenerProveeProducto(PersistenceManager pm, String producto)

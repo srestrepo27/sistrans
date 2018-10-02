@@ -73,6 +73,6 @@ class SQLPromocionSucursal
 			Query q= pm.newQuery(SQL,"SELECT * FROM " + pp.darTablaPromocionSucursal() + " WHERE sucursalNombre=?" );
 			q.setResultClass(PromocionSucursal.class);
 			q.setParameters(sucursalNombre);
-			return(List<PromocionSucursal>) q.executeUnique();
+			return(List<PromocionSucursal>) q.execute();
 		}
 }

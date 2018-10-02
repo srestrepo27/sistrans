@@ -1,4 +1,4 @@
-package uniandes.isis2304.superandes.persistencia;
+ package uniandes.isis2304.superandes.persistencia;
 
 import java.sql.Date;
 import java.text.ParseException;
@@ -370,22 +370,21 @@ public class PersistenciaSuperAndes
 	 * 			REQUERIMIENTOS FUNCIONALES DE CONSULTA
 	 *****************************************************************/
 	
-	public int ocupacionEstantes(PersistenceManager pm)
+	public String ocupacionEstantes(PersistenceManager pm)
 	{
-		//INCOMPLETO
+		//INCOMPLETO, solo da 1 producto
 		Query q= pm.newQuery(SQL,"SELECT count(estantesId) FROM PRODUCTO GROUPBY estantesId");
-		q.setResultClass(Integer.class);
-		int cantidad= (int) q.executeUnique();
-		return cantidad;
+		q.setResultClass(String.class);
+		return(String) q.executeUnique();
 	}
 	
-	public int ocupacionBodegas(PersistenceManager pm)
+	public String ocupacionBodegas(PersistenceManager pm)
 	{
-		//INCOMPLETO
+		//INCOMPLETO, solo da 1 producto
 		Query q= pm.newQuery(SQL,"SELECT count(bodegasId) FROM PRODUCTO GROUPBY bodegasId");
 		q.setResultClass(Integer.class);
-		int cantidad= (int) q.executeUnique();
-		return cantidad;
+		return(String) q.executeUnique();
+
 	}
 	
 	public List<Pedido> RFC5(PersistenceManager pm)

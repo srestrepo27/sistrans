@@ -72,7 +72,7 @@ class SQLSucursal
 			Query q= pm.newQuery(SQL, "SELECT * FROM" + pp.darTablaSucursal() + "WHERE ciudad=?");
 			q.setResultClass(Sucursal.class);
 			q.setParameters(ciudad);
-			return (List<Sucursal>) q.executeUnique();
+			return (List<Sucursal>) q.execute();
 		}
 		
 		public long cambiarDireccionSucursal(PersistenceManager pm,  String nombre, String direccion)
