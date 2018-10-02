@@ -19,7 +19,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import uniandes.isis2304.parranderos.negocio.Bebedor;
 import uniandes.isis2304.superandes.negocio.Bodega;
+import uniandes.isis2304.superandes.negocio.Cliente;
 import uniandes.isis2304.superandes.negocio.Compra;
 import uniandes.isis2304.superandes.negocio.Pedido;
 import uniandes.isis2304.superandes.negocio.Provee;
@@ -388,4 +390,152 @@ public class PersistenciaSuperAndes
 	{
 		return sqlCompra.RFC6(pm, cedula, fecha1, fecha2);
 	}
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los clientes 
+	 *****************************************************************/
+	public Cliente adicionarcliente ( String pCorreo, String pNombre, int pPuntos, long id)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();            
+            long idcliente = nextval ();
+            long tuplasInsertadas = sqlCliente.adicionarCliente(pm,idcliente, pNombre, pCorreo, pPuntos, id);
+            tx.commit();
+            
+            log.trace ("Inserción del cliente: " + idcliente + ": " + tuplasInsertadas + " tuplas insertadas");
+            return new Cliente(idcliente, pCorreo, pNombre, pPuntos, id);
+            }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+        
+	}
+
+	public long eliminarClienteId (long id) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlCliente.eliminarClientePorId(pm, id);
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	public long eliminarClientePorNombre(String nombre) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlCliente.eliminarClientePorNombre(pm, nombre);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	public Cliente darClienterPorId (long id) 
+	{
+		return (Cliente) sqlCliente.darClientePorId(pmf.getPersistenceManager(), id);
+	}
+	public long cambiarCorreoCliente (long id, String correo)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlCliente.cambiarCorreoCliente(pm, id, correo);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+        
+	}
+	public List<Cliente> darClientes ()
+	{
+		return sqlCliente.darClientes (pmf.getPersistenceManager());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+ 
+	
+
 }
