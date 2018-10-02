@@ -5,13 +5,17 @@ import java.util.List;
 
 import javax.jdo.JDODataStoreException;
 import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Transaction;
 
 import org.apache.log4j.Logger;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
+import uniandes.isis2304.superandes.negocio.Bodega;
 
 
 
@@ -47,6 +51,8 @@ public class PersistenciaSuperAndes
 	private PersistenceManagerFactory pmf;
 	
 	private List <String> tablas;
+	
+	private SQLUtil sqlUtil;
 	
 	private SQLBodega sqlBodega;
 	
@@ -276,5 +282,78 @@ public class PersistenciaSuperAndes
 			return je.getNestedExceptions() [0].getMessage();
 		}
 		return resp;
+	}
+	private long nextval ()
+	{
+        long resp = sqlUtil.nextval (pmf.getPersistenceManager());
+        log.trace ("Generando secuencia: " + resp);
+        return resp;
+    }
+
+
+	/* ****************************************************************
+	 * 			Métodos para manejar las BODEGAS
+	 *****************************************************************/
+	public Bodega adicionarBodega(long id, double peso, double volumen,String sucursal,String categoria) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();            
+            long idBodega = nextval ();
+            long tuplasInsertadas = sqlBodega.adicionarBodega(pm, idBodega, peso, volumen, sucursal, categoria);
+            tx.commit();
+            
+            log.trace ("Inserción bodega: " + idBodega + ": " + tuplasInsertadas + " tuplas insertadas");
+            return new Bodega(idBodega, peso, volumen, sucursal, categoria);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+        
+	}
+
+	public long eliminarBodegaPorId (long idBebida) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlBodega.eliminarBodega(pm, idBebida);
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	public Bodega darBodega (long id)
+	{
+		return (Bodega) sqlBodega.darBodegaPorId(pmf.getPersistenceManager(), id);
 	}
 }
