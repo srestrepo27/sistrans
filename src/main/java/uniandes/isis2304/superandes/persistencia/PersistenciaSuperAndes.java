@@ -364,7 +364,22 @@ public class PersistenciaSuperAndes
 		return (Bodega) sqlBodega.darBodegaPorId(pmf.getPersistenceManager(), id);
 	}
 	//REQUERIMIENTOS FUNCIONALES DE CONSULTA
-	
+	public int ocupacionEstantes(PersistenceManager pm)
+	{
+		//INCOMPLETO
+		Query q= pm.newQuery(SQL,"SELECT count(estantesId) FROM PRODUCTO GROUPBY estantesId");
+		q.setResultClass(Integer.class);
+		int cantidad= (int) q.executeUnique();
+		return cantidad;
+	}
+	public int ocupacionBodegas(PersistenceManager pm)
+	{
+		//INCOMPLETO
+		Query q= pm.newQuery(SQL,"SELECT count(bodegasId) FROM PRODUCTO GROUPBY bodegasId");
+		q.setResultClass(Integer.class);
+		int cantidad= (int) q.executeUnique();
+		return cantidad;
+	}
 	public List<Pedido> RFC5(PersistenceManager pm)
 	{
 	return sqlPedido.RFC5(pm);
