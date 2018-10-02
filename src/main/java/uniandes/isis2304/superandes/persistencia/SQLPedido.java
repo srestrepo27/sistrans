@@ -77,4 +77,11 @@ class SQLPedido
 			q.setResultClass(Pedido.class);
 			return (List<Pedido>) q.executeUnique();
 		} 
+		
+		public List<Pedido> RFC5(PersistenceManager pm)
+		{
+			Query q= pm.newQuery(SQL,"SELECT * FROM PEDIDO GROUP BY proveedorNit");
+			q.setResultClass(Pedido.class);
+			return(List<Pedido>) q.executeUnique();
+		}
 }

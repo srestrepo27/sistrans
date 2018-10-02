@@ -1,5 +1,8 @@
 package uniandes.isis2304.superandes.persistencia;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -82,6 +85,29 @@ class SQLCompra
 			q.setParameters(clienteId);
 			q.setResultClass(Compra.class);
 			return (List<Compra>) q.executeUnique();
+		}
+		
+		public List<Compra> RFC6(PersistenceManager pm,long cedula, String fecha1, String fecha2)
+		{
+			Query q= pm.newQuery(SQL,"SELECT * FROM COMPRA WHERE clienteId=? AND fecha BETWEEN ? AND ? ");
+			SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd"); 
+			Date date1=null;
+			try {
+				 date1 = (Date) dt.parse(fecha1);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			Date date2=null;
+			try {
+				 date2 = (Date) dt.parse(fecha2);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			q.setParameters(cedula,date1,date2);
+			q.setResultClass(Compra.class);
+			return(List<Compra>) q.executeUnique();
 		}
 		
 }

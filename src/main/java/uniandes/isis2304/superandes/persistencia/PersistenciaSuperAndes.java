@@ -1,5 +1,8 @@
 package uniandes.isis2304.superandes.persistencia;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,6 +10,7 @@ import javax.jdo.JDODataStoreException;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Query;
 import javax.jdo.Transaction;
 
 import org.apache.log4j.Logger;
@@ -16,6 +20,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import uniandes.isis2304.superandes.negocio.Bodega;
+import uniandes.isis2304.superandes.negocio.Compra;
+import uniandes.isis2304.superandes.negocio.Pedido;
+import uniandes.isis2304.superandes.negocio.Provee;
 
 
 
@@ -355,5 +362,15 @@ public class PersistenciaSuperAndes
 	public Bodega darBodega (long id)
 	{
 		return (Bodega) sqlBodega.darBodegaPorId(pmf.getPersistenceManager(), id);
+	}
+	//REQUERIMIENTOS FUNCIONALES DE CONSULTA
+	
+	public List<Pedido> RFC5(PersistenceManager pm)
+	{
+	return sqlPedido.RFC5(pm);
+	}
+	public List<Compra> RFC6(PersistenceManager pm,long cedula, String fecha1, String fecha2)
+	{
+		return sqlCompra.RFC6(pm, cedula, fecha1, fecha2);
 	}
 }
