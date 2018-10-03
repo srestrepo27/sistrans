@@ -245,6 +245,14 @@ public class SuperAndes
 		ps.realizarVenta( productos, cliente);
 		Log.info("realizando venta de " +productos.size() +"al cliente" + cliente);
 	}
+	
+	public void realizarPedido(String codigoBarras)
+	{
+		Log.info("realizando verificacion si se necesita pedido");
+		ps.realizarPedido(codigoBarras);
+		Log.info("realizando pedido de"+ codigoBarras);
+		
+	}
 	public long[] limpiarsuperAndes() 
 	{
 		Log.info ("Limpiando la BD de SuperAndes");

@@ -2,10 +2,19 @@ package uniandes.isis2304.superandes.interfazDemo;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.jdo.JDODataStoreException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,6 +22,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 import org.apache.log4j.Logger;
 
@@ -23,7 +33,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
 
+import uniandes.isis2304.superandes.negocio.Cliente;
+import uniandes.isis2304.superandes.negocio.Producto;
 import uniandes.isis2304.superandes.negocio.SuperAndes;
+import uniandes.isis2304.superandes.negocio.VOCliente;
+import uniandes.isis2304.superandes.negocio.VOCompra;
+import uniandes.isis2304.superandes.negocio.VOProducto;
 
 
 public class InterfazSuperAndesDemo extends JFrame implements ActionListener
@@ -78,11 +93,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener
 	     */
 	    private JMenuBar menu;
 	    
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
-		} 
+		
 		/* ****************************************************************
 		 * 			Métodos
 		 *****************************************************************/
@@ -212,4 +223,241 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener
 	        }        
 	        setJMenuBar ( menu );	
 	    }
+	    /* ****************************************************************
+		 * 			Demos de cliente
+		 *****************************************************************/
+	    public void demoCliente()
+	    {
+	    	try
+	    	{
+	    		long codigo=1;
+	  			String nombre="John";
+	  			String correo="john@gmail.com";
+	  			int puntos=0;
+	  			long s=0;
+	  			boolean error=false;
+	  			
+	  			VOCliente cliente= superAndes.adicionarCliente(codigo, correo, nombre, puntos, s);
+	  			
+	  			if(cliente==null)
+	  			{
+	  				error=true;
+	  				cliente=superAndes.darClietePorId(codigo);
+	  			}
+	  			
+	  			List<VOCliente> lista= superAndes.darVOCLiente();
+	  			long tbEliminados= superAndes.eliminarClienteId(codigo);
+	  			
+	  			String resultado= "Demo de creacion y listado de Cliente \n";
+	  			resultado+="\n\n *************Generando datos de prueba *********** \n";
+	  			if(error)
+	  			{
+	  				resultado+= "*** Exception creando cliente \n";
+	  				resultado+= "*** Es probable que el cliente ya exista\n";
+	  				resultado+= "*** Revise el log de superandes para mas detalles";
+	  			}
+	  			resultado+="Adicionando el cliente con codigo: " + nombre + "\n";
+	  			resultado+= "\n\n *******Ejecutando la demo ******* \n";
+	  			resultado+= "\n" + listarClientes(lista);
+	  			resultado+="\n\n **********Limpiando base de datos*********\n";
+	  			resultado+= tbEliminados + "Clientes eliminados\n";
+	  			resultado+= "\n Demo terminada";
+	  			
+	  			panelDatos.actualizarInterfaz(resultado);
+	    	}
+	    	catch(Exception e)
+	    	{
+	    		String resultado= generarMensajeError(e);
+	    		panelDatos.actualizarInterfaz(resultado);
+	    	}
+	    	
+	    	
+	    	
+	    	
+	    	
+	    }
+	    
+	    /* ****************************************************************
+	  		 * 			Demos de venta
+	  		 *****************************************************************/
+	    public void demoVender()
+	    {
+	    	try
+	    	{
+	    		boolean error=false;
+	    		VOCliente cliente= superAndes.adicionarCliente(1, "correo@gmail.com", "juan", 0, 0);
+	    		if(cliente==null)
+	    		{
+	    			error=true;
+	  				cliente=superAndes.darClietePorId(1);
+	    		}
+	    		List<VOCliente> listaCliente= superAndes.darVOCLiente();
+	    		long id=10;
+	    		VOProducto producto1= superAndes.adicionarproducto("HHH", "cm", "galleta", "oreo", 44.4, 30.4, "paquete", 2.3, 5, "paquete", false, "empaquetados", 5, id, id, id);
+	    		List<Producto> lista= new ArrayList<Producto>();
+	    		lista.add((Producto) producto1);
+	    		List<Producto> listaProductos=superAndes.darProductoPorNombre("galleta");
+	    		superAndes.realizarVenta(lista, cliente.getCodigo());
+	    		List<VOCompra> listaCompra= superAndes.darVOCompra();
+	    		
+	    		long productosEliminados= superAndes.eliminarProducto();
+	    		long clientesEliminados=superAndes.eliminarClienteId(1);
+	    		long comprasEliminadas= superAndes.eliminarCompra();
+	    		String resultado= "Demo de creacion y listado de Compra \n";
+	  			resultado+="\n\n *************Generando datos de prueba *********** \n";
+	    		if(error)
+	  			{
+	  				resultado+= "*** Exception creando compra \n";
+	  				resultado+= "*** Es probable que el cliente ya exista\n";
+	  				resultado+= "*** Revise el log de superandes para mas detalles";
+	  			}
+	    		resultado+="\n" + listarClientes(listaCliente);
+	    		resultado+="\n" +listarProductos(listaProductos);
+	    		resultado+="\n"+ listarCompras(listaCompra);
+	    		
+	    		resultado+= "\n\n *******Ejecutando la demo ******* \n";
+	  			resultado+="\n\n **********Limpiando base de datos*********\n";
+	  			resultado+= clientesEliminados + "Clientes eliminados\n";
+	  			resultado+= comprasEliminadas + "Compras eliminadas\n";
+
+	  			resultado+= productosEliminados + "Productos eliminados\n";
+
+	  			resultado+= "\n Demo terminada";
+	  			panelDatos.actualizarInterfaz(resultado);
+	    	}
+	    	catch (Exception e) 
+			{
+//				e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}
+	    }
+	    
+	    private String listarClientes(List<VOCliente> lista) 
+	    {
+	    	String resp = "Los clientes son:\n";
+	    	int i = 1;
+	        for (VOCliente tb : lista)
+	        {
+	        	resp += i++ + ". " + tb.toString() + "\n";
+	        }
+	        return resp;
+		}
+	    
+	    private String listarProductos(List<Producto> lista) 
+	    {
+	    	String resp = "Los productos son:\n";
+	    	int i = 1;
+	        for (Producto tb : lista)
+	        {
+	        	resp += i++ + ". " + tb.toString() + "\n";
+	        }
+	        return resp;
+		}
+	    
+	    private String listarCompras(List<VOCompra> lista) 
+	    {
+	    	String resp = "Los productos son:\n";
+	    	int i = 1;
+	        for (VOCompra tb : lista)
+	        {
+	        	resp += i++ + ". " + tb.toString() + "\n";
+	        }
+	        return resp;
+		}
+	    
+	    private String generarMensajeError(Exception e) 
+		{
+			String resultado = "************ Error en la ejecución\n";
+			resultado += e.getLocalizedMessage() + ", " + darDetalleException(e);
+			resultado += "\n\nRevise datanucleus.log y parranderos.log para más detalles";
+			return resultado;
+		}
+	    
+	    private String darDetalleException(Exception e) 
+		{
+			String resp = "";
+			if (e.getClass().getName().equals("javax.jdo.JDODataStoreException"))
+			{
+				JDODataStoreException je = (javax.jdo.JDODataStoreException) e;
+				return je.getNestedExceptions() [0].getMessage();
+			}
+			return resp;
+		}
+	    
+		private boolean limpiarArchivo(String nombreArchivo) 
+		{
+			BufferedWriter bw;
+			try 
+			{
+				bw = new BufferedWriter(new FileWriter(new File (nombreArchivo)));
+				bw.write ("");
+				bw.close ();
+				return true;
+			} 
+			catch (IOException e) 
+			{
+//				e.printStackTrace();
+				return false;
+			}
+		}
+		
+		private void mostrarArchivo (String nombreArchivo)
+		{
+			try
+			{
+				Desktop.getDesktop().open(new File(nombreArchivo));
+			}
+			catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		/* ****************************************************************
+		 * 			Métodos de la Interacción
+		 *****************************************************************/
+	    /**
+	     * Método para la ejecución de los eventos que enlazan el menú con los métodos de negocio
+	     * Invoca al método correspondiente según el evento recibido
+	     * @param pEvento - El evento del usuario
+	     */
+	    @Override
+		public void actionPerformed(ActionEvent pEvento)
+		{
+			String evento = pEvento.getActionCommand( );		
+	        try 
+	        {
+				Method req = InterfazSuperAndesDemo.class.getMethod ( evento );			
+				req.invoke ( this );
+			} 
+	        catch (Exception e) 
+	        {
+				e.printStackTrace();
+			} 
+		}
+		
+		/* ****************************************************************
+		 * 			Programa principal
+		 *****************************************************************/
+	    /**
+	     * Este método ejecuta la aplicación, creando una nueva interfaz
+	     * @param args Arreglo de argumentos que se recibe por línea de comandos
+	     */
+	    public static void main( String[] args )
+	    {
+	        try
+	        {
+	        	
+	            // Unifica la interfaz para Mac y para Windows.
+	            UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
+	            InterfazSuperAndesDemo interfaz = new InterfazSuperAndesDemo( );
+	            interfaz.setVisible( true );
+	        }
+	        catch( Exception e )
+	        {
+	            e.printStackTrace( );
+	        }
+	    }
+
 	}

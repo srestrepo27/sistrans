@@ -317,9 +317,11 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 				{
 					throw new Exception("unidades insuficientes");
 				}
+				superAndes.realizarPedido(p.getCodigoBarras());
 			}
 			
 			superAndes.realizarVenta(lista, id);
+			
 		}
 		catch(Exception e)
 		{
