@@ -21,7 +21,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import uniandes.isis2304.parranderos.negocio.Visitan;
 import uniandes.isis2304.superandes.negocio.Bodega;
 import uniandes.isis2304.superandes.negocio.Cliente;
 import uniandes.isis2304.superandes.negocio.Compra;
@@ -591,13 +590,15 @@ public class PersistenciaSuperAndes
 	/* ****************************************************************
 	 * 			Métodos para manejar los compra 
 	 *****************************************************************/
-	public Compra  adicionarCompra  (String productoCodigo,long clienteId, String factura,double total, Timestamp fecha,long id )
+	public Compra  adicionarCompra  (String productoCodigo,long clienteId, String factura,double total, Timestamp fecha )
 	{	
 	PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
             tx.begin();
+            long id = nextval ();
+
             long tuplasInsertadas = sqlCompra.adicionarCompra(pm, productoCodigo, clienteId, factura, total, fecha, id);
             tx.commit();
 
@@ -724,13 +725,14 @@ public class PersistenciaSuperAndes
 	 * 			Métodos para manejar los estates 
 	 *****************************************************************/
 	
-	public Estante adicionarEstante (long id, double peso, double volumen, String sucursal, String categoria)
+	public Estante adicionarEstante ( double peso, double volumen, String sucursal, String categoria)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
             tx.begin();
+            long id = nextval ();
             long tuplasInsertadas = sqlEstante.adicionarEstante(pm, id, peso, volumen, sucursal, categoria);
             tx.commit();
 

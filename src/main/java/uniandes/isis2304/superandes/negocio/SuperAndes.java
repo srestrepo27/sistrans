@@ -1,5 +1,6 @@
 package uniandes.isis2304.superandes.negocio;
 
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.google.gson.JsonObject;
 
+import uniandes.isis2304.parranderos.negocio.Bebedor;
 import uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes;
 public class SuperAndes 
 {
@@ -93,7 +95,91 @@ public class SuperAndes
         Log.info ("Listando clientes: " + clientes.size() + " clientes existentes");
         return clientes;	
      }
- 
+	/* ****************************************************************
+	 * 			Métodos para manejar los estantes  
+	 *****************************************************************/
+	public Estante adicionarEstante ( double peso, double volumen, String sucursal, String categoria)
+	{
+        Log.info ("Adicionando estante: " + peso+ volumen+sucursal);
+        Estante estante = ps.adicionarEstante(peso, volumen, sucursal, categoria);
+        Log.info ("Adicionando estnte: " + peso+ volumen+sucursal);
+        return estante;
+	}
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar las sucursales  
+	 *****************************************************************/
+	
+	
+	public Sucursal adicionarsucursal ( String nombre,String  direccion,String  ciudad)
+	{
+        Log.info ("Adicionando sucursal: " + nombre);
+        Sucursal sucursal = ps.adicionarSucursal(nombre, direccion, ciudad);
+        Log.info ("Adicionando sucursal: " + nombre );
+        return sucursal;
+	}
+
+	/* ****************************************************************
+	 * 			Métodos para manejar los productos
+	 *****************************************************************/
+	
+	public Producto adicionarproducto ( String codigoBarras, String unidadMedida, String nombre, String marca, double precioVenta,
+			double precioCompra, String presentacion, double precioXunidad, int cantidad, String empaque,
+			boolean percedero, String categoria, int nivelReo, long estantesId, long bodegasId, long pedidoId)
+	{
+        Log.info ("Adicionando producto: " + nombre);
+        Producto producto  = ps.adicionarProducto(codigoBarras, unidadMedida, nombre, marca, precioVenta, precioCompra, presentacion, precioXunidad, cantidad, empaque, percedero, categoria, nivelReo, estantesId, bodegasId, pedidoId);
+        Log.info ("Adicionando producto: " + nombre );
+        return producto;
+	}
+	/* ****************************************************************
+	 * 			Métodos para manejar los proveedor
+	 *****************************************************************/
+	
+	public Proveedor adicionarproveedor  ( String pNombre, String pNit)
+	{
+        Log.info ("Adicionando proveedor : " + pNit);
+        Proveedor proveedor = ps.adicionarProveedor(pNombre, pNit);
+        Log.info ("Adicionando proveedor: " + pNit );
+        return proveedor ;
+	
+	}
+	/* ****************************************************************
+	 * 			Métodos para manejar los compra 
+	 *****************************************************************/
+	
+	public Compra adicionarcompra ( String productoCodigo,long clienteId, String factura,double total, Timestamp fecha )
+	{
+        Log.info ("Adicionando compra: " + productoCodigo+ clienteId);
+       Compra compra = ps.adicionarCompra(productoCodigo, clienteId, factura, total, fecha);
+        Log.info ("Adicionando compra: " + productoCodigo+ clienteId );
+        return compra ;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 		
 
