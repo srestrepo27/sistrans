@@ -371,6 +371,14 @@ public class PersistenciaSuperAndes
 	{
 		return (Bodega) sqlBodega.darBodegaPorId(pmf.getPersistenceManager(), id);
 	}
+	public List<Bodega> darBodegas ()
+	{
+		return sqlBodega.darBodegas (pmf.getPersistenceManager());
+	}
+ 
+	
+	
+	
 	/* ****************************************************************
 	 * 			REQUERIMIENTOS FUNCIONALES DE CONSULTA
 	 *****************************************************************/
@@ -586,6 +594,7 @@ public class PersistenciaSuperAndes
 	{
 		return sqlCliente.darClientes (pmf.getPersistenceManager());
 	}
+	
 
 	/* ****************************************************************
 	 * 			Métodos para manejar los compra 
@@ -621,6 +630,12 @@ public class PersistenciaSuperAndes
             pm.close();
         }
 	}
+	public List<Compra> darCompras ()
+	{
+		return sqlCompra.darCompras (pmf.getPersistenceManager());
+	}
+ 
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar los proveedores 
 	 *****************************************************************/

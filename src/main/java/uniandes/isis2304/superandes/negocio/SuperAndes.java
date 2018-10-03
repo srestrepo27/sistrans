@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 
 import com.google.gson.JsonObject;
 
-import uniandes.isis2304.parranderos.negocio.Bebedor;
 import uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes;
 public class SuperAndes 
 {
@@ -56,6 +55,18 @@ public class SuperAndes
         Log.info ("Buscando bebedor por Id: " + bodega != null ? bodega : "NO EXISTE");
         return bodega ;
 	}
+	public List<VOBodega> darVOTBoegas ()
+	{
+		Log.info ("Generando las VO bodegas");        
+        List<VOBodega> vobodegas = new LinkedList<VOBodega> ();
+        for (Bodega tb : ps.darBodegas ())
+        {
+        	vobodegas.add (tb);
+        }
+        Log.info ("Generando los VO de Bodega: " + vobodegas.size() + " existentes");
+        return vobodegas;
+	}
+
 	/* ****************************************************************
 	 * 			Métodos para manejar los clientes 
 	 *****************************************************************/
@@ -95,6 +106,17 @@ public class SuperAndes
         Log.info ("Listando clientes: " + clientes.size() + " clientes existentes");
         return clientes;	
      }
+	public List<VOCliente> darVOCLiente ()
+	{
+		Log.info ("Generando los VO de cliente");        
+        List<VOCliente> voTipos = new LinkedList<VOCliente> ();
+        for (Cliente tb : ps.darClientes ())
+        {
+        	voTipos.add (tb);
+        }
+        Log.info ("Generando los VO de Tipos de bebida: " + voTipos.size() + " existentes");
+        return voTipos;
+	}
 	/* ****************************************************************
 	 * 			Métodos para manejar los estantes  
 	 *****************************************************************/
@@ -155,8 +177,62 @@ public class SuperAndes
         Log.info ("Adicionando compra: " + productoCodigo+ clienteId );
         return compra ;
 	}
+	public List<VOCompra> darVOCompra ()
+	{
+		Log.info ("Generando los VO de compras");        
+        List<VOCompra> voTipos = new LinkedList<VOCompra> ();
+        for (Compra tb : ps.darCompras ())
+        {
+        	voTipos.add (tb);
+        }
+        Log.info ("Generando los VO de compras: " + voTipos.size() + " existentes");
+        return voTipos;
+	}
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar las empresas  
+	 *****************************************************************/
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los estantes
+	 *****************************************************************/
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los pedidos 
+	 *****************************************************************/
 	
 	
+	/* ****************************************************************
+	 * 			Métodos para manejar las personas 
+	 *****************************************************************/
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los producos 
+	 *****************************************************************/
+	
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los promocion proveedores 
+	 *****************************************************************/
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los promocion sucursal 
+	 *****************************************************************/
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar la asociacion provee
+	 *****************************************************************/
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los proveedores
+	 *  
+	 *****************************************************************/
+	
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los supermercados
+	 *  
+	 *****************************************************************/
 	
 	
 	

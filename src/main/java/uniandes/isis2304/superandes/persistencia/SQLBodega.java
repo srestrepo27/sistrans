@@ -1,5 +1,7 @@
 package uniandes.isis2304.superandes.persistencia;
 
+import java.util.List;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
@@ -58,6 +60,12 @@ class SQLBodega
 		q.setResultClass(Bodega.class);
 		q.setParameters(id);
 		return (Bodega) q.executeUnique();
+	}
+	public List<Bodega> darBodegas (PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBodega ());
+		q.setResultClass(Bodega.class);
+		return (List<Bodega>) q.executeList();
 	}
 	
 }
