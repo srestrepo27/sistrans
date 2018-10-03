@@ -309,6 +309,16 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 				lista.add(p);
 			}
 			
+			for(int i=0;i<lista.size();i++)
+			{
+				Producto p= lista.get(i);
+				
+				if(p.getCantidad()-1<0)
+				{
+					throw new Exception("unidades insuficientes");
+				}
+			}
+			
 			superAndes.realizarVenta(lista, id);
 		}
 		catch(Exception e)
