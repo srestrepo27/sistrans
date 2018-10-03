@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 
 import com.google.gson.JsonObject;
 
-import uniandes.isis2304.parranderos.negocio.Bebedor;
 import uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes;
 public class SuperAndes 
 {
@@ -61,7 +60,7 @@ public class SuperAndes
 	public Cliente  adicionarCliente (long pCodigo, String pCorreo, String pNombre, int pPuntos, long id)
 	{
 		Log.info("Adicionando cliente "+ id);
-		Cliente cliente = ps.adicionarcliente(pCodigo, pCorreo, pNombre, pPuntos, id);
+		Cliente cliente = ps.adicionarcliente( pCorreo, pNombre, pPuntos, id);
 		Log.info("Adicionando cliente "+ id);
         return cliente ;
 	}

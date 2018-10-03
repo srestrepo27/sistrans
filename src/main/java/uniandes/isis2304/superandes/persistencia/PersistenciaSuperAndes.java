@@ -1,6 +1,7 @@
 package uniandes.isis2304.superandes.persistencia;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -20,12 +21,16 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import uniandes.isis2304.parranderos.negocio.Visitan;
 import uniandes.isis2304.superandes.negocio.Bodega;
 import uniandes.isis2304.superandes.negocio.Cliente;
 import uniandes.isis2304.superandes.negocio.Compra;
+import uniandes.isis2304.superandes.negocio.Estante;
 import uniandes.isis2304.superandes.negocio.Pedido;
 import uniandes.isis2304.superandes.negocio.Producto;
 import uniandes.isis2304.superandes.negocio.Provee;
+import uniandes.isis2304.superandes.negocio.Proveedor;
+import uniandes.isis2304.superandes.negocio.Sucursal;
 
 
 
@@ -304,7 +309,8 @@ public class PersistenciaSuperAndes
 	/* ****************************************************************
 	 * 			Métodos para manejar las BODEGAS
 	 *****************************************************************/
-	public Bodega adicionarBodega(long id, double peso, double volumen,String sucursal,String categoria) 
+	public Bodega adicionarBodega(long id, double peso,
+			double volumen,String sucursal,String categoria) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -437,6 +443,7 @@ public class PersistenciaSuperAndes
 	
 	public void realizarVenta(PersistenceManager pm,List<Producto> productos, long cliente)
 	{
+		Timestamp t= new Timestamp(System.currentTimeMillis());
 		int total=0;
 		String factura="SUPER ANDES 2018" +"\n";
 		LocalDateTime now= LocalDateTime.now();
@@ -453,7 +460,8 @@ public class PersistenciaSuperAndes
 		factura+="TOTAL:.................."+ "$" +total;
 		 for(Producto p:productos)
 		 {
-			 sqlCompra.adicionarCompra(pm, p.getCodigoBarras(), cliente, factura, total);
+			 long id=nextval();
+			 sqlCompra.adicionarCompra(pm, p.getCodigoBarras(), cliente, factura, total,t,id );
 		 }
 	}
 	
@@ -580,16 +588,173 @@ public class PersistenciaSuperAndes
 	{
 		return sqlCliente.darClientes (pmf.getPersistenceManager());
 	}
+
+	/* ****************************************************************
+	 * 			Métodos para manejar los compra 
+	 *****************************************************************/
+	public Compra  adicionarCompra  (String productoCodigo,long clienteId, String factura,double total, Timestamp fecha,long id )
+	{	
+	PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long tuplasInsertadas = sqlCompra.adicionarCompra(pm, productoCodigo, clienteId, factura, total, fecha, id);
+            tx.commit();
+
+            log.trace ("Inserción de compra: [" + clienteId + ", " + productoCodigo + id+ "]. " + tuplasInsertadas + " tuplas insertadas");
+
+            return new  Compra(productoCodigo, clienteId, factura, total, fecha, id);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	/* ****************************************************************
+	 * 			Métodos para manejar los proveedores 
+	 *****************************************************************/
+	
+	public Proveedor adicionarProveedor (String pNombre, String pNit){
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long tuplasInsertadas = sqlProveedor.adicionarProveedor(pm, pNit, pNombre);
+            tx.commit();
+
+            log.trace ("Inserción de un proveedor: [" + pNit + ", " + pNombre + "]. " + tuplasInsertadas + " tuplas insertadas");
+
+            return new Proveedor(pNombre, pNit);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	/* ****************************************************************
+	 * 			Métodos para manejar los productos
+	 *****************************************************************/
 	
 	
+	public Producto adicionarProducto(String codigoBarras, String unidadMedida, String nombre, String marca, double precioVenta,
+			double precioCompra, String presentacion, double precioXunidad, int cantidad, String empaque,
+			boolean percedero, String categoria, int nivelReo, long estantesId, long bodegasId, long pedidoId) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long tuplasInsertadas = sqlProducto.adicionarProducto(pm, codigoBarras, unidadMedida, nombre, marca, precioVenta, precioCompra, presentacion, precioXunidad, cantidad, empaque,percedero, nivelReo, estantesId, bodegasId, pedidoId);
+            tx.commit();
+
+            log.trace ("Inserción de producto: ["  +codigoBarras + "]. " + tuplasInsertadas + " tuplas insertadas");
+
+            return new Producto(codigoBarras, unidadMedida, nombre, marca, precioVenta, precioCompra, presentacion, precioXunidad, cantidad, empaque, percedero, categoria, nivelReo, estantesId, bodegasId, pedidoId);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	/* ****************************************************************
+	 * 			Métodos para manejar las sucursales
+	 *****************************************************************/
+	public Sucursal adicionarSucursal (  String nombre,String direccion,String ciudad)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long tuplasInsertadas = sqlSucursal.adicionarSucursal(pm, nombre, direccion, ciudad);
+            tx.commit();
+
+            log.trace ("Inserción de gustan: [" + nombre + "]. " + tuplasInsertadas + " tuplas insertadas");
+
+            return new Sucursal(nombre, direccion, ciudad);
+         }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	/* ****************************************************************
+	 * 			Métodos para manejar los estates 
+	 *****************************************************************/
 	
-	
-	
-	
-	
-	
-	
-	
+	public Estante adicionarEstante (long id, double peso, double volumen, String sucursal, String categoria)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long tuplasInsertadas = sqlEstante.adicionarEstante(pm, id, peso, volumen, sucursal, categoria);
+            tx.commit();
+
+            log.trace ("Inserción de estante: [" + id + ", " + sucursal + "]. " + tuplasInsertadas + " tuplas insertadas");
+
+            return new Estante(id, peso, volumen, sucursal, categoria);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
 	
 	
 	

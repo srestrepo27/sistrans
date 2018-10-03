@@ -1,6 +1,7 @@
 package uniandes.isis2304.superandes.persistencia;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -42,24 +43,24 @@ class SQLCompra
 			this.pp = pp;
 		}
 		
-		public long adicionarCompra(PersistenceManager pm, String productoCodigo,long clienteId, String factura,double total)
+		public long adicionarCompra(PersistenceManager pm, String productoCodigo,long clienteId, String factura,double total, Timestamp fecha,long id )
 		{
 			Query q= pm.newQuery(SQL, "INSERT INTO" + pp.darTablaCompra() + "(productoCodigo,clienteId,factura,total) values (?,?,?,?)");
-			q.setParameters(productoCodigo,clienteId,factura,total);
+			q.setParameters(productoCodigo,clienteId,factura,total,fecha,id);
 			return (long) q.executeUnique();
 		}
 		
-		public long eliminarCompra(PersistenceManager pm, String productoCodigo,long clienteId )
+		public long eliminarCompra(PersistenceManager pm, String id )
 		{
 			Query q= pm.newQuery(SQL,"DELET FROM" + pp.darTablaCompra()+ "WHERE productoCodigo= ? AND clienteId=?)" );
-			q.setParameters(productoCodigo,clienteId);
+			q.setParameters( id);
 			return (long) q.executeUnique();
 		
 		}
-		public Compra darCompra(PersistenceManager pm, String factura)
+		public Compra darCompra(PersistenceManager pm, String id)
 		{
 			Query q= pm.newQuery(SQL,"SELECT * FROM" +pp.darTablaCompra()+"WHERE factura=?");
-			q.setParameters(factura);
+			q.setParameters(id);
 			q.setResultClass(Compra.class);
 			return(Compra)q.executeUnique();
 		}
