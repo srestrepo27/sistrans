@@ -68,6 +68,6 @@ class SQLProveedor
 			q.setResultClass(Proveedor.class);
 
 			q.setParameters(nombre);
-			return (List<Proveedor>) q.executeUnique();
+			return (List<Proveedor>) q.execute();
 		}
 }

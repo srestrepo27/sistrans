@@ -74,14 +74,14 @@ class SQLProducto
 		Query q= pm.newQuery(SQL,"SELECT * FROM " +pp.darTablaProducto()+ " WHERE nombre=?");
 		q.setResultClass(Producto.class);
 		q.setParameters(nombre);
-		return ( List<Producto>) q.executeUnique();
+		return ( List<Producto>) q.execute();
 	}
 	
 	public List<Producto> darProductos(PersistenceManager pm)
 	{
 		Query q= pm.newQuery(SQL,"SELECT * FROM " +pp.darTablaProducto());
 		q.setResultClass(Producto.class);
-		return ( List<Producto>) q.executeUnique();
+		return ( List<Producto>) q.execute();
 	}
 	
 	public int darCantidadProducto(PersistenceManager pm, String codigoDeBarras)

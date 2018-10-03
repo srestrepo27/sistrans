@@ -67,7 +67,7 @@ class SQLPedido
 			Query q= pm.newQuery(SQL,"SELECT * FROM "+ pp.darTablaPedido()+ " WHERE superMercadoId=?");
 			q.setParameters(superMercadoId);
 			q.setResultClass(Pedido.class);
-			return (List<Pedido>) q.executeUnique();
+			return (List<Pedido>) q.execute();
 		}
 		
 
@@ -76,13 +76,13 @@ class SQLPedido
 			Query q= pm.newQuery(SQL,"SELECT * FROM "+ pp.darTablaPedido()+ " WHERE proveedorNit=?");
 			q.setParameters(proveedorNit);
 			q.setResultClass(Pedido.class);
-			return (List<Pedido>) q.executeUnique();
+			return (List<Pedido>) q.execute();
 		} 
 		
 		public List<Pedido> RFC5(PersistenceManager pm)
 		{
 			Query q= pm.newQuery(SQL,"SELECT * FROM PEDIDO GROUP BY proveedorNit");
 			q.setResultClass(Pedido.class);
-			return(List<Pedido>) q.executeUnique();
+			return(List<Pedido>) q.execute();
 		}
 }

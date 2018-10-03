@@ -65,7 +65,7 @@ class SQLPromocionProveedor
 			Query q= pm.newQuery(SQL,"SELECT * FROM " + pp.darTablaPromocionProveedor() + " WHERE proveedor=?" );
 			q.setResultClass(PromocionProveedor.class);
 			q.setParameters(proveedor);
-			return (List<PromocionProveedor>) q.executeUnique();
+			return (List<PromocionProveedor>) q.execute();
 		}
 		
 		public PromocionProveedor darPromocionPorId(PersistenceManager pm, long id)

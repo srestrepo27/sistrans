@@ -75,7 +75,7 @@ class SQLCompra
 		{
 			Query q= pm.newQuery(SQL,"SELECT * FROM" + pp.darTablaCompra());
 			q.setResultClass(Compra.class);
-			return (List<Compra>) q.executeUnique();
+			return (List<Compra>) q.execute();
 		}
 		
 		public List<Compra> darComprasProducto(PersistenceManager pm, String productoCodigo)
@@ -83,7 +83,7 @@ class SQLCompra
 			Query q= pm.newQuery(SQL,"SELECT * FROM" + pp.darTablaCompra()+ "WHERE productoCodigo= ?)");
 			q.setParameters(productoCodigo);
 			q.setResultClass(Compra.class);
-			return (List<Compra>) q.executeUnique();
+			return (List<Compra>) q.execute();
 		}
 		
 		public List<Compra> darComprasCliente(PersistenceManager pm, long clienteId)
@@ -91,7 +91,7 @@ class SQLCompra
 			Query q= pm.newQuery(SQL,"SELECT * FROM" + pp.darTablaCompra()+ "WHERE clienteId= ?)");
 			q.setParameters(clienteId);
 			q.setResultClass(Compra.class);
-			return (List<Compra>) q.executeUnique();
+			return (List<Compra>) q.execute();
 		}
 		
 		public List<Compra> RFC6(PersistenceManager pm,long cedula, String fecha1, String fecha2)
@@ -114,7 +114,7 @@ class SQLCompra
 			} 
 			q.setParameters(cedula,date1,date2);
 			q.setResultClass(Compra.class);
-			return(List<Compra>) q.executeUnique();
+			return(List<Compra>) q.execute();
 		}
 		
 }

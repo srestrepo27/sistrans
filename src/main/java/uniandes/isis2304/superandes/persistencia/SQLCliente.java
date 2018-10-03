@@ -75,14 +75,14 @@ class SQLCliente
 		Query q= pm.newQuery(SQL,"SELECT * FROM" + pp.darTablaCliente() + "WHERE nombre= ?");
 		q.setResultClass(Cliente.class);
 		q.setParameters(nombre);
-		return (List<Cliente>) q.executeUnique();
+		return (List<Cliente>) q.execute();
 	}
 	
 	public List<Cliente> darClientes(PersistenceManager pm)
 	{
 		Query q= pm.newQuery(SQL,"SELECT * FROM" + pp.darTablaCliente());
 		q.setResultClass(Cliente.class);
-		return (List<Cliente>) q.executeUnique();
+		return (List<Cliente>) q.execute();
 	}
 	
 	public long cambiarCorreoCliente(PersistenceManager pm, long id, String correo)
