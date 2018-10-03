@@ -24,6 +24,7 @@ import com.google.gson.JsonObject;
 import uniandes.isis2304.superandes.negocio.Bodega;
 import uniandes.isis2304.superandes.negocio.Cliente;
 import uniandes.isis2304.superandes.negocio.Compra;
+import uniandes.isis2304.superandes.negocio.Empresa;
 import uniandes.isis2304.superandes.negocio.Estante;
 import uniandes.isis2304.superandes.negocio.Pedido;
 import uniandes.isis2304.superandes.negocio.Producto;
@@ -772,6 +773,110 @@ public class PersistenciaSuperAndes
 	}
 
 	
+	/* ****************************************************************
+	 * 			Métodos para manejar los empresa
+	 *****************************************************************/
+	
+
+	public Empresa adicionarEmpresa ( String nit ,String  direccion, long clientesCodigo)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            
+            long tuplasInsertadas = sqlEmpresa.adicionarEmpresa(pm,nit , direccion, clientesCodigo);
+            tx.commit();
+
+            log.trace ("Inserción de estante: [" + nit + "]. " + tuplasInsertadas + " tuplas insertadas");
+
+            return new Empresa(nit, direccion, clientesCodigo);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+	
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los pedidos 
+	 *****************************************************************/
+	public Pedido adicionarPedido (Date fecha , String proveedorNit, long superMercadoId)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long id = nextval ();
+            long tuplasInsertadas = sqlPedido.adicionarPedido(pm, id, fecha, proveedorNit, superMercadoId);
+            tx.commit();
+
+            log.trace ("Inserción de pedido: [" + id + "]. " + tuplasInsertadas + " tuplas insertadas");
+            String fe =  fecha.toString(); 
+            return new Pedido(id, fe, proveedorNit, superMercadoId);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar las personas 
+	 *****************************************************************/
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los producos 
+	 *****************************************************************/
+	
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los promocion proveedores 
+	 *****************************************************************/
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los promocion sucursal 
+	 *****************************************************************/
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar la asociacion provee
+	 *****************************************************************/
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los proveedores
+	 *  
+	 *****************************************************************/
+	
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los supermercados
+	 *  
+	 *****************************************************************/
 	
 	
 	

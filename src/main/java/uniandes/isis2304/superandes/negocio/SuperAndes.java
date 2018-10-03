@@ -1,5 +1,6 @@
 package uniandes.isis2304.superandes.negocio;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
@@ -192,15 +193,33 @@ public class SuperAndes
 	/* ****************************************************************
 	 * 			Métodos para manejar las empresas  
 	 *****************************************************************/
-	
+	public Empresa adicionarempresa  (String nit , String direccion, long clientesCodigo)
+	{
+        Log.info ("Adicionando empresa: " + nit);
+       Empresa empresa = ps.adicionarEmpresa(nit, direccion, clientesCodigo);
+        Log.info ("Adicionando compra: " + nit );
+        return empresa;
+	}
 	/* ****************************************************************
 	 * 			Métodos para manejar los estantes
 	 *****************************************************************/
-	
+	public Estante adicionarestante  (double peso, double volumen,String sucursal, String categoria)
+	{
+        Log.info ("Adicionando estante a la sucursal: " + sucursal);
+       Estante estante = ps.adicionarEstante(peso, volumen, sucursal, categoria);
+        Log.info ("Adicionando  estante a la sucursal: " + sucursal );
+        return estante;
+	}
 	/* ****************************************************************
 	 * 			Métodos para manejar los pedidos 
 	 *****************************************************************/
-	
+	public Pedido adicionarpedido  (Date fecha,String  proveedorNit,Long  superMercadoId)
+	{
+        Log.info ("Adicionando al proveedor : " + proveedorNit);
+        Pedido pedidio =ps.adicionarPedido(fecha, proveedorNit, superMercadoId);
+        Log.info ("Adicionando  al proveedor : " + proveedorNit );
+        return pedidio ;
+	}
 	
 	/* ****************************************************************
 	 * 			Métodos para manejar las personas 
