@@ -414,13 +414,21 @@ public class PersistenciaSuperAndes
 	/* ****************************************************************
 	 * 			METODOS AUTOMATICOS
 	 *****************************************************************/
-	public long realizarPedido(PersistenceManager pm, String codigoDeBarras)
+	public long realizarPedido( String codigoDeBarras)
 	{
+		long ret=0;
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			
+		tx.begin();  
+
 		int nivel= sqlProducto.darNivelReoProducto(pm, codigoDeBarras);
 		
 		int cantidad= sqlProducto.darCantidadProducto(pm, codigoDeBarras);
 		
-		long ret=0;
 		if(cantidad<nivel)
 		{
 			Provee provee= sqlProvee.obtenerProveeProducto(pm, codigoDeBarras);
@@ -441,36 +449,81 @@ public class PersistenciaSuperAndes
 			long id=nextval();
 			List<Cliente> clientes= sqlCliente.darClientes(pm);
 			long superMercadoId=clientes.get(0).getSuperMercadoId();
+			
 			ret=(long) sqlPedido.adicionarPedido(pm, id, fecha,proveedor, superMercadoId);
+            tx.commit();
+            
+            log.trace("Pedido realizado de [: "+ codigoDeBarras +"] tuplas insertadas:"+ ret );
 
 		}
+		}
+		 catch(Exception e)
+	        {
+	        	log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+	        	return 0;
+	        }
+	        finally
+	        {
+	        	if(tx.isActive())
+	        	{
+	        		tx.rollback();
+	        	}
+	        	pm.close();
+	        }
+		
 		return ret;
 	}
 	
 	
-	public void realizarVenta(PersistenceManager pm,List<Producto> productos, long cliente)
+	public void realizarVenta(List<Producto> productos, long cliente)
 	{
-		Timestamp t= new Timestamp(System.currentTimeMillis());
-		int total=0;
-		String factura="SUPER ANDES 2018" +"\n";
-		LocalDateTime now= LocalDateTime.now();
-		SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd"); 
-		String f=dt.format(now);
-		factura+=f+"\n";
-		for(Producto p:productos)
-		{
-			total+=p.getPrecioVenta();
-			sqlProducto.venderProducto(pm, p.getCodigoBarras());
-			factura+=p.getNombre() + ".................."+ p.getPrecioVenta()+"\n";
-			
-		}
-		factura+="TOTAL:.................."+ "$" +total;
-		 for(Producto p:productos)
-		 {
-			 long id=nextval();
-			 sqlCompra.adicionarCompra(pm, p.getCodigoBarras(), cliente, factura, total,t,id );
-		 }
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();  
+            
+        	Timestamp t= new Timestamp(System.currentTimeMillis());
+    		int total=0;
+    		String factura="SUPER ANDES 2018" +"\n";
+    		LocalDateTime now= LocalDateTime.now();
+    		SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd"); 
+    		String f=dt.format(now);
+    		factura+=f+"\n";
+    		for(Producto p:productos)
+    		{
+    			total+=p.getPrecioVenta();
+    			sqlProducto.venderProducto(pm, p.getCodigoBarras());
+    			factura+=p.getNombre() + ".................."+ p.getPrecioVenta()+"\n";
+    			
+    		}
+    		factura+="TOTAL:.................."+ "$" +total;
+    		
+    		long tuplas=0;
+    		 for(Producto p:productos)
+    		 {
+    			 long id=nextval();
+    			 tuplas=sqlCompra.adicionarCompra(pm, p.getCodigoBarras(), cliente, factura, total,t,id );
+    		 }
+    		 
+            tx.commit();
+            log.trace("Venta realizada: "+productos.size()+ cliente + "tuplas insertadas:"+ tuplas);
+        }
+        catch(Exception e)
+        {
+        	log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+        }
+        finally
+        {
+        	if(tx.isActive())
+        	{
+        		tx.rollback();
+        	}
+        	pm.close();
+        }
+	
 	}
+	
 	
 	
 	/* ****************************************************************
@@ -704,6 +757,35 @@ public class PersistenciaSuperAndes
             }
             pm.close();
         }
+	}
+	
+	public List<Producto> darProductoPorNombre(String nombre)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        List<Producto> list=null;
+        try
+        {
+            tx.begin();
+           list= sqlProducto.darProductosPorNombre(pm, nombre);
+           tx.commit();
+
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+        return list;
 	}
 	/* ****************************************************************
 	 * 			Métodos para manejar las sucursales

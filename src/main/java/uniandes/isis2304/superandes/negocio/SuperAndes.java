@@ -228,7 +228,23 @@ public class SuperAndes
 	/* ****************************************************************
 	 * 			Métodos para manejar los producos 
 	 *****************************************************************/
-	
+	public List<Producto> darProductoPorNombre(String nombre)
+	{
+		Log.info("buscando producto");
+		
+		List<Producto> ls= ps.darProductoPorNombre(nombre);
+		
+		Log.info("se encontraron " + ls.size()+ " productos");
+		
+		return ls;
+	}
+	public void realizarVenta(List<Producto> productos, long cliente)
+	{
+		
+		Log.info("realizando venta de "+ productos.size() +"al cliente" +cliente );
+		ps.realizarVenta( productos, cliente);
+		Log.info("realizando venta de " +productos.size() +"al cliente" + cliente);
+	}
 	
 	/* ****************************************************************
 	 * 			Métodos para manejar los promocion proveedores 
