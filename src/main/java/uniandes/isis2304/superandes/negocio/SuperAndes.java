@@ -155,6 +155,14 @@ public class SuperAndes
         Log.info ("Adicionando producto: " + nombre );
         return producto;
 	}
+	public long eliminarProductoCodigoB (String id)
+	{
+        Log.info ("Eliminando cliente por id: " + id);
+        long resp = ps.eliminarProductoCodigo(id);
+        Log.info ("Eliminando cliente por nombre: " + resp + " tuplas eliminadas");
+        return resp;
+	}
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar los proveedor
 	 *****************************************************************/
@@ -189,6 +197,14 @@ public class SuperAndes
         Log.info ("Generando los VO de compras: " + voTipos.size() + " existentes");
         return voTipos;
 	}
+	public long eliminarCompraId (String id)
+	{
+        Log.info ("Eliminando cliente por id: " + id);
+        long resp = ps.eliminarCompraId(id);
+        Log.info ("Eliminando cliente por nombre: " + resp + " tuplas eliminadas");
+        return resp;
+	}
+	
 	
 	/* ****************************************************************
 	 * 			Métodos para manejar las empresas  
