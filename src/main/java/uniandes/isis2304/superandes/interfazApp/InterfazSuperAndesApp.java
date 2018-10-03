@@ -241,6 +241,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		try 
 		{
 			String pOe = JOptionPane.showInputDialog (this, "Empresa o Persona?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
+			long id=superAndes.darClientes().get(0).getSuperMercadoId();
 			if(pOe.equals("empresa"))
 			{
 				String nitEmpresa=JOptionPane.showInputDialog (this, "nit de la empresa?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
@@ -251,7 +252,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 				if (nombreCliente != null && correoCliente != null && codigoCliente != null && direccionEmpresa != null && nitEmpresa !=null )
 				{
 					Empresa em= superAndes.adicionarempresa(nitEmpresa, direccionEmpresa, Long.parseLong(codigoCliente));
-					VOCliente cl= superAndes.adicionarCliente(codigoCliente, correoCliente, nombreCliente, 0, id);
+					VOCliente cl= superAndes.adicionarCliente( Long.parseLong(codigoCliente), correoCliente, nombreCliente, 0, id);
 				}
 				else
 				{
@@ -260,12 +261,14 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			}
 			else if(pOe.equals("persona"))
 			{
+				
+				String cedulaPersona= JOptionPane.showInputDialog (this, "cedula del cliente?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
 				String nombreCliente = JOptionPane.showInputDialog (this, "Nombre del cliente?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
 				String correoCliente = JOptionPane.showInputDialog (this, "Nombre del cliente?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
 				String codigoCliente = JOptionPane.showInputDialog (this, "Nombre del cliente?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
-				if (nombreCliente != null)
+				if (nombreCliente != null && correoCliente != null && codigoCliente != null && cedulaPersona!=null)
 				{
-					VOCliente cl= superAndes.adicionarCliente(codigoCliente, correoCliente, nombreCliente, 0, id);
+					VOCliente cl= superAndes.adicionarCliente( Long.parseLong(codigoCliente), correoCliente, nombreCliente, 0, id);
 				}
 				else
 				{

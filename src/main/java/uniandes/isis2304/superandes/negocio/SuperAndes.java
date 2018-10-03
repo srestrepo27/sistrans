@@ -245,6 +245,13 @@ public class SuperAndes
 		ps.realizarVenta( productos, cliente);
 		Log.info("realizando venta de " +productos.size() +"al cliente" + cliente);
 	}
+	public long[] limpiarsuperAndes() 
+	{
+		Log.info ("Limpiando la BD de SuperAndes");
+        long [] borrados = ps.limpiarSuperAndes();	
+        Log.info ("Limpiando la BD de SuperAndes: Listo!");
+        return borrados;
+	}
 	
 	/* ****************************************************************
 	 * 			Métodos para manejar los promocion proveedores 

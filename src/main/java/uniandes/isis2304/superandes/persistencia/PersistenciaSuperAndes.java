@@ -766,7 +766,7 @@ public class PersistenciaSuperAndes
         List<Producto> list=null;
         try
         {
-            tx.begin();
+            tx.begin(); 
            list= sqlProducto.darProductosPorNombre(pm, nombre);
            tx.commit();
 
@@ -961,6 +961,35 @@ public class PersistenciaSuperAndes
 	 *****************************************************************/
 	
 	
+	 
+		public long [] limpiarSuperAndes ()
+		{
+			PersistenceManager pm = pmf.getPersistenceManager();
+	        Transaction tx=pm.currentTransaction();
+	        try
+	        {
+	            tx.begin();
+	            long [] resp = sqlUtil.limpiarSuperAndes(pm);
+	            tx.commit ();
+	            log.info ("Borrada la base de datos");
+	            return resp;
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return new long[] {-1, -1, -1, -1, -1, -1, -1};
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
+			
+		}
 	
 	
 	
