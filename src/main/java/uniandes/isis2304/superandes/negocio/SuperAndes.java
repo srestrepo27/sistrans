@@ -304,7 +304,10 @@ public class SuperAndes
 	 * 			REQUERIMIENTOS DE CONSULTA
 	 *  
 	 *****************************************************************/
-	
+	public List<Object[]> RFC2()
+	{
+		return ps.RFC2();
+	}
 	public List<Pedido> RFC5()
 	{
 		return ps.RFC5();

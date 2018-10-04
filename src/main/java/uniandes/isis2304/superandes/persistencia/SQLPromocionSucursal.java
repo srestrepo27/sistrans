@@ -75,4 +75,10 @@ class SQLPromocionSucursal
 			q.setParameters(sucursalNombre);
 			return(List<PromocionSucursal>) q.execute();
 		}
+		
+		public List<Object[]> RFC2(PersistenceManager pm)
+		{
+			Query q= pm.newQuery(SQL,"SELECT * FROM" + pp.darTablaPromocionSucursal() + "WHERE ROWNUM <=20 ORDER BY fechaLimite asc");
+			return q.executeList();
+		}
 }

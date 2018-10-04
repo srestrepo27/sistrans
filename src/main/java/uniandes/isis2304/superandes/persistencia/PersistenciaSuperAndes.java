@@ -603,7 +603,32 @@ public class PersistenciaSuperAndes
 		}
 
 	}
+	
+	public List<Object[]> RFC2()
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		List<Object[]> lista = null;
+		try
+		{
+			tx.begin(); 
+			lista= sqlPromocionSucursal.RFC2(pm);
 
+		}
+		catch(Exception e)
+		{
+			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return lista;
+	}
 
 
 	/* ****************************************************************

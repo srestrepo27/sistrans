@@ -560,7 +560,23 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 
 	public void RFC2()
 	{
+		try
+		{
+			String resultado="";
+			List<Object[]>lista= superAndes.RFC2();
+			for(Object p:lista)
+			{
+				resultado+=p.toString() +"\n";
+			}
+			panelDatos.actualizarInterfaz(resultado);
 
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+		
 	}
 
 	public void RFC3()
