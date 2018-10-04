@@ -40,18 +40,6 @@
 					"label": "Adicionar",
 					"event": "adicionarCliente"
 				},
-				{
-					"label": "Listar",
-					"event": "listarCliente"
-				},
-				{
-					"label": "Borrar",
-					"event": "eliminarClientePorId"
-				},
-				{
-					"label": "Buscar por cedula",
-					"event": "buscarClientePorCedula"
-				}
 			]
 		},
 		{ "menuTitle": "Proveedor",
@@ -60,19 +48,8 @@
 				{
 					"label": "Adicionar",
 					"event": "adicionarProveedor"
-				},
-				{
-					"label": "Listar",
-					"event": "listarProveedor"
-				},
-				{
-					"label": "Borrar",
-					"event": "eliminarProveedorPorId"
-				},
-				{
-					"label": "Buscar",
-					"event": "buscarProveedor"
 				}
+			
 			]
 		},
 		{ "menuTitle": "Producto",
@@ -83,16 +60,8 @@
 					"event": "adicionarProducto"
 				},
 				{
-					"label": "Listar",
-					"event": "listarProducto"
-				},
-				{
 					"label": "Borrar",
-					"event": "eliminarProductoPorId"
-				},
-				{
-					"label": "Buscar",
-					"event": "buscarProducto"
+					"event": "eliminarProducto"
 				}
 			]
 		},
@@ -114,11 +83,16 @@
 			[
 				{
 					"label": "Vender",
-					"event": "adicionarCompra"
-				},
+					"event": "vender"
+				}
+			]
+		},
+		{ "menuTitle": "Sucursal",
+		 	 "options":
+			[
 				{
-					"label": "Dar Ventas Cliente",
-					"event": "darComprasCliente"
+					"label": "Adicionar",
+					"event": "adicionarSucursal"
 				}
 			]
 		},

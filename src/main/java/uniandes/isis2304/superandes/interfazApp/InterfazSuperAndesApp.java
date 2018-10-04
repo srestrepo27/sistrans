@@ -222,7 +222,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		}        
 		setJMenuBar ( menu );	
 	}
-	
+
 
 	/* ****************************************************************
 	 * 			CRUD de Clientes
@@ -253,7 +253,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			}
 			else if(pOe.equals("persona"))
 			{
-				
+
 				String cedulaPersona= JOptionPane.showInputDialog (this, "cedula del cliente?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
 				String nombreCliente = JOptionPane.showInputDialog (this, "Nombre del cliente?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
 				String correoCliente = JOptionPane.showInputDialog (this, "Nombre del cliente?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
@@ -277,12 +277,16 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			String resultado= generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
-	
-		
+
+
 	}
-	
-	
-	public void realizarVenta()
+
+
+
+	/* ****************************************************************
+	 * 			VENDER
+	 *****************************************************************/
+	public void vender()
 	{
 		try 
 		{
@@ -295,25 +299,25 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			for(int i=0;i<num;i++)
 			{
 				String producto= JOptionPane.showInputDialog (this, "Nombre del producto?", "Realizar venta", JOptionPane.QUESTION_MESSAGE);
-				
+
 				Producto p=	superAndes.darProductoPorNombre(producto).get(0);
-				
+
 				lista.add(p);
 			}
-			
+
 			for(int i=0;i<lista.size();i++)
 			{
 				Producto p= lista.get(i);
-				
+
 				if(p.getCantidad()-1<0)
 				{
 					throw new Exception("unidades insuficientes");
 				}
 				superAndes.realizarPedido(p.getCodigoBarras());
 			}
-			
+
 			superAndes.realizarVenta(lista, id);
-			
+
 		}
 		catch(Exception e)
 		{
@@ -324,8 +328,126 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	/* ****************************************************************
 	 * 			CRUD de producto
 	 *****************************************************************/
-	
-	
+
+	public void adicionarProducto()
+	{
+		try
+		{
+			String codigo= JOptionPane.showInputDialog (this, "id producto?", "adicionar producto", JOptionPane.QUESTION_MESSAGE);
+			String unidad=JOptionPane.showInputDialog (this, "unidad producto?", "adicionar producto", JOptionPane.QUESTION_MESSAGE);
+			String nombre=JOptionPane.showInputDialog (this, "nombre producto?", "adicionar producto", JOptionPane.QUESTION_MESSAGE);
+
+			String marca=JOptionPane.showInputDialog (this, "marca producto?", "adicionar producto", JOptionPane.QUESTION_MESSAGE);
+			String precioVenta=JOptionPane.showInputDialog (this, "precio venta producto?", "adicionar producto", JOptionPane.QUESTION_MESSAGE);
+			String precioCompra=JOptionPane.showInputDialog (this, "precio Compra producto?", "adicionar producto", JOptionPane.QUESTION_MESSAGE);
+			String presentacion=JOptionPane.showInputDialog (this, "unidad producto?", "adicionar producto", JOptionPane.QUESTION_MESSAGE);
+			String precioXunidad=JOptionPane.showInputDialog (this, "precio por unidad producto?", "adicionar producto", JOptionPane.QUESTION_MESSAGE);
+			String cantidad=JOptionPane.showInputDialog (this, "cantidad producto?", "adicionar producto", JOptionPane.QUESTION_MESSAGE);
+			String empaque=JOptionPane.showInputDialog (this, "empaque producto?", "adicionar producto", JOptionPane.QUESTION_MESSAGE);
+			String perecedero=JOptionPane.showInputDialog (this, "perecedero producto?", "adicionar producto", JOptionPane.QUESTION_MESSAGE);
+			String categoria=JOptionPane.showInputDialog (this, "categoria producto?", "adicionar producto", JOptionPane.QUESTION_MESSAGE);
+			String nivelReo=JOptionPane.showInputDialog (this, "nivel reorden producto?", "adicionar producto", JOptionPane.QUESTION_MESSAGE);
+
+
+
+			if(codigo !=null && unidad!=null && nombre !=null && marca!=null && precioVenta !=null && precioCompra!=null && presentacion !=null && precioXunidad!=null && cantidad !=null && empaque!=null && perecedero !=null && categoria!=null && nivelReo!=null)
+			{
+				superAndes.adicionarproducto(codigo, unidad, nombre, marca, Double.parseDouble(precioVenta), Double.parseDouble(precioCompra), presentacion, Double.parseDouble(precioXunidad), Integer.parseInt(cantidad), empaque, Boolean.parseBoolean(perecedero), categoria, Integer.parseInt(nivelReo), (long)3, (long)2, (long)10);
+
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+			}
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	public void eliminarProducto()
+	{
+		try
+		{
+			String c=JOptionPane.showInputDialog (this, "id producto?", "Eliminar producto", JOptionPane.QUESTION_MESSAGE);
+			if(c!=null)
+			{
+				superAndes.eliminarProductoCodigoB(c);
+				panelDatos.actualizarInterfaz("se elimino el producto con id "+c);
+			}
+
+			else
+				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+		}
+
+
+
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+
+	}
+
+	/* ****************************************************************
+	 * 			CRUD de proveedor
+	 *****************************************************************/
+	public void adicionarProveedor()
+	{
+		try
+		{
+			String nit= JOptionPane.showInputDialog (this, "nit proveedor?", "adicionar proveedor", JOptionPane.QUESTION_MESSAGE);
+			String nombre=JOptionPane.showInputDialog (this, "nombre proveedor?", "adicionar proveedor", JOptionPane.QUESTION_MESSAGE);
+			if(nit!=null && nombre!=null)
+			{
+				superAndes.adicionarproveedor(nombre, nit);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+
+			}
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+
+	}
+
+	/* ****************************************************************
+	 * 			CRUD de sucursal
+	 *****************************************************************/
+	public void adicionarSucursal()
+	{
+		try
+		{
+			String nombre=JOptionPane.showInputDialog (this, "nombre sucursal?", "adicionar sucursal", JOptionPane.QUESTION_MESSAGE);
+			String direccion= JOptionPane.showInputDialog (this, "direccion proveedor?", "adicionar sucursal", JOptionPane.QUESTION_MESSAGE);
+			String ciudad= JOptionPane.showInputDialog (this, "ciudad proveedor?", "adicionar sucursal", JOptionPane.QUESTION_MESSAGE);
+			if(nombre!=null && direccion!=null && ciudad!=null)
+			{
+				superAndes.adicionarsucursal(nombre, direccion, ciudad);
+
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+
+			}
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+
+
 	/* ****************************************************************
 	 * 			Metodos de interaccion
 	 *****************************************************************/
@@ -336,7 +458,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		resultado += "\n\nRevise datanucleus.log y parranderos.log para más detalles";
 		return resultado;
 	}
-	
+
 	private String darDetalleException(Exception e) 
 	{
 		String resp = "";
@@ -347,16 +469,16 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		}
 		return resp;
 	}
-	
-	
-	 /**
+
+
+	/**
 	 * Muestra el log de superAndes
 	 */
 	public void mostrarLogSuperAndes()
 	{
 		mostrarArchivo ("superAndes.log");
 	}
-	
+
 	/**
 	 * Muestra el log de datanucleus
 	 */
@@ -364,8 +486,9 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	{
 		mostrarArchivo ("datanucleus.log");
 	}
-	
+
 	private void mostrarArchivo (String nombreArchivo)
+
 	{
 		try
 		{
@@ -377,9 +500,9 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Muestra el modelo conceptual de Parranderos
 	 */
@@ -387,7 +510,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	{
 		mostrarArchivo ("data/EsquemaConceptualSuperAndes.pdf");
 	}
-	
+
 	/**
 	 * Muestra el esquema de la base de datos de Parranderos
 	 */
@@ -395,7 +518,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	{
 		mostrarArchivo ("data/EsquemaBD.pdf");
 	}
-	
+
 	/**
 	 * Muestra el script de creación de la base de datos
 	 */
@@ -403,13 +526,13 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	{
 		mostrarArchivo ("data/EsquemaSuperAndes.sql");
 	}
-	
-	
-	
 
-	
+
+
+
+
 	public void acercaDe ()
-    {
+	{
 		String resultado = "\n\n ************************************\n\n";
 		resultado += " * Universidad	de	los	Andes	(Bogotá	- Colombia)\n";
 		resultado += " * Departamento	de	Ingeniería	de	Sistemas	y	Computación\n";
@@ -424,22 +547,22 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		resultado += "\n ************************************\n\n";
 
 		panelDatos.actualizarInterfaz(resultado);		
-    }
-	
+	}
+
 	/* ****************************************************************
 	 * 			REQUERIMIENTOS DE CONSULTA
 	 *****************************************************************/
-	
+
 	public void RFC1()
 	{
-		
+
 	}
-	
+
 	public void RFC2()
 	{
-		
+
 	}
-	
+
 	public void RFC3()
 	{
 		try
@@ -454,10 +577,10 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void RFC4()
 	{
-		
+
 	}
 	public void RFC5()
 	{
@@ -470,7 +593,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 				resultado+=p.toString() +"\n";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-		 
+
 		}
 		catch(Exception e)
 		{
@@ -478,7 +601,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void RFC6()
 	{
 		try
@@ -486,8 +609,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			String id=JOptionPane.showInputDialog (this, "id cliente?", "RFC6", JOptionPane.QUESTION_MESSAGE);
 			String f1=JOptionPane.showInputDialog (this, "fecha inicial?", "RFC6", JOptionPane.QUESTION_MESSAGE);
 			String f2=JOptionPane.showInputDialog (this, "fecha final?", "RFC6", JOptionPane.QUESTION_MESSAGE);
-			
-	
+
+
 			String resultado="";
 			List<Compra> lista= superAndes.RFC6(Long.parseLong(id), f1, f2);
 			for(Compra c:lista)
@@ -495,7 +618,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 				resultado+=c.toString() +"\n";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-		 
+
 		}
 		catch(Exception e)
 		{
@@ -503,7 +626,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -519,27 +642,27 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		} 
 
 	}
-	
+
 	/* ****************************************************************
 	 * 			Programa principal
 	 *****************************************************************/
-    /**
-     * Este método ejecuta la aplicación, creando una nueva interfaz
-     * @param args Arreglo de argumentos que se recibe por línea de comandos
-     */
-    public static void main( String[] args )
-    {
-        try
-        {
-        	
-            // Unifica la interfaz para Mac y para Windows.
-            UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
-            InterfazSuperAndesApp interfaz = new InterfazSuperAndesApp( );
-            interfaz.setVisible( true );
-        }
-        catch( Exception e )
-        {
-            e.printStackTrace( );
-        }
-    }
+	/**
+	 * Este método ejecuta la aplicación, creando una nueva interfaz
+	 * @param args Arreglo de argumentos que se recibe por línea de comandos
+	 */
+	public static void main( String[] args )
+	{
+		try
+		{
+
+			// Unifica la interfaz para Mac y para Windows.
+			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
+			InterfazSuperAndesApp interfaz = new InterfazSuperAndesApp( );
+			interfaz.setVisible( true );
+		}
+		catch( Exception e )
+		{
+			e.printStackTrace( );
+		}
+	}
 }

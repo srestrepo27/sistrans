@@ -11,6 +11,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +37,7 @@ import com.google.gson.stream.JsonReader;
 
 
 import uniandes.isis2304.superandes.negocio.Cliente;
+import uniandes.isis2304.superandes.negocio.Pedido;
 import uniandes.isis2304.superandes.negocio.Producto;
 import uniandes.isis2304.superandes.negocio.SuperAndes;
 import uniandes.isis2304.superandes.negocio.VOCliente;
@@ -332,8 +336,97 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener
 	    }
 	    
 	    /* ****************************************************************
+  		 * 			Demos de RF3
+  		 *****************************************************************/
+	    public void demoRFC3()
+	    {
+	    	try
+	    	{
+	    		boolean error=false;
+	    		long id=100;
+	    		VOProducto producto1= superAndes.adicionarproducto("HHH", "cm", "galleta", "oreo", 44.4, 30.4, "paquete", 2.3, 5, "paquete", false, "empaquetados", 5, id, id, id);
+	    		if(producto1==null)
+	    		{
+	    			error=true;
+	    		}
+	    		String resultado= "Demo de creacion y listado de Compra \n";
+	  			resultado+="\n\n *************Generando datos de prueba *********** \n";
+	    		if(error)
+	  			{
+	  				resultado+= "*** Exception creando compra \n";
+	  				resultado+= "*** Es probable que el cliente ya exista\n";
+	  				resultado+= "*** Revise el log de superandes para mas detalles";
+	  			}
+	    		resultado+= superAndes.RFC3();
+	    		resultado+= "\n\n *******Ejecutando la demo ******* \n";
+	  			resultado+="\n\n **********Limpiando base de datos*********\n";
+	  			resultado+= "\n Demo terminada";
+	  			panelDatos.actualizarInterfaz(resultado);
+	  			
+	    	}
+	    	catch (Exception e) 
+			{
+//				e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}
+	    }
+	    
+	    
+	    /* ****************************************************************
 	  		 * 			Demos de RF5
 	  		 *****************************************************************/
+	    public void demoRFC5()
+	    {
+	    	try
+	    	{
+	    		boolean error=false;
+	    		String f= "2018-04-03";
+	    		String pattern = "yyyy-MM-dd";
+	    	    SimpleDateFormat format = new SimpleDateFormat(pattern);
+	    		Date fecha= (Date) format.parse(f);
+	    		superAndes.adicionarproveedor("a","aaaaa");
+	    		Pedido p=superAndes.adicionarpedido(fecha, "aaaaa", (long) 0);
+	    		List<Pedido> lista= superAndes.RFC5();
+	    		if(p==null)
+	    		{
+	    			error=true;
+	    		}
+	    		
+	    		String resultado= "Demo del requerimiento funcional 5\n";
+	  			resultado+="\n\n *************Generando datos de prueba *********** \n";
+	    		if(error)
+	  			{
+	  				resultado+= "*** Exception creando compra \n";
+	  				resultado+= "*** Es probable que el pedido ya exista\n";
+	  				resultado+= "*** Revise el log de superandes para mas detalles";
+	  			}
+	    		
+	    		resultado+= "\n\n *******Ejecutando la demo ******* \n";
+	  			resultado+="\n\n **********Limpiando base de datos*********\n";
+	  			resultado+= listarPedido(lista);
+	  			resultado+= "\n Demo terminada";
+	  			panelDatos.actualizarInterfaz(resultado);
+	    	}
+	    	catch (Exception e) 
+			{
+//				e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}
+	    }
+	    
+	    /* ****************************************************************
+  		 * 			Demos de RF6
+  		 *****************************************************************/
+	    
+	    public void demoRFC6()
+	    {
+	    
+	    }
+	    
+	  
+	    
 	    private String listarClientes(List<VOCliente> lista) 
 	    {
 	    	String resp = "Los clientes son:\n";
@@ -361,6 +454,17 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener
 	    	String resp = "Los productos son:\n";
 	    	int i = 1;
 	        for (VOCompra tb : lista)
+	        {
+	        	resp += i++ + ". " + tb.toString() + "\n";
+	        }
+	        return resp;
+		}
+	    
+	    private String listarPedido(List<Pedido> lista) 
+	    {
+	    	String resp = "Los productos son:\n";
+	    	int i = 1;
+	        for (Pedido tb : lista)
 	        {
 	        	resp += i++ + ". " + tb.toString() + "\n";
 	        }
