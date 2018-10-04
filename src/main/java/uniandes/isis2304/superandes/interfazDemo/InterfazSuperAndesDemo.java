@@ -300,9 +300,8 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener
 	    		superAndes.realizarVenta(lista, cliente.getCodigo());
 	    		List<VOCompra> listaCompra= superAndes.darVOCompra();
 	    		
-	    		long productosEliminados= superAndes.eliminarProducto();
+	    		long productosEliminados= superAndes.eliminarProductoCodigoB("HHH");
 	    		long clientesEliminados=superAndes.eliminarClienteId(1);
-	    		long comprasEliminadas= superAndes.eliminarCompra();
 	    		String resultado= "Demo de creacion y listado de Compra \n";
 	  			resultado+="\n\n *************Generando datos de prueba *********** \n";
 	    		if(error)
@@ -318,7 +317,6 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener
 	    		resultado+= "\n\n *******Ejecutando la demo ******* \n";
 	  			resultado+="\n\n **********Limpiando base de datos*********\n";
 	  			resultado+= clientesEliminados + "Clientes eliminados\n";
-	  			resultado+= comprasEliminadas + "Compras eliminadas\n";
 
 	  			resultado+= productosEliminados + "Productos eliminados\n";
 
@@ -333,6 +331,9 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener
 			}
 	    }
 	    
+	    /* ****************************************************************
+	  		 * 			Demos de RF5
+	  		 *****************************************************************/
 	    private String listarClientes(List<VOCliente> lista) 
 	    {
 	    	String resp = "Los clientes son:\n";
@@ -435,6 +436,21 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener
 	        {
 				e.printStackTrace();
 			} 
+		}
+	    /**
+		 * Muestra el log de superAndes
+		 */
+		public void mostrarLogSuperAndes()
+		{
+			mostrarArchivo ("superAndes.log");
+		}
+		
+		/**
+		 * Muestra el log de datanucleus
+		 */
+		public void mostrarLogDatanuecleus ()
+		{
+			mostrarArchivo ("datanucleus.log");
 		}
 		
 		/* ****************************************************************

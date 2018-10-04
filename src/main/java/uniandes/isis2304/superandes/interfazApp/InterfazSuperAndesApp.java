@@ -2,9 +2,12 @@ package uniandes.isis2304.superandes.interfazApp;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +20,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 import org.apache.log4j.Logger;
 
@@ -27,7 +31,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.superandes.negocio.Cliente;
+import uniandes.isis2304.superandes.negocio.Compra;
 import uniandes.isis2304.superandes.negocio.Empresa;
+import uniandes.isis2304.superandes.negocio.Pedido;
 import uniandes.isis2304.superandes.negocio.Producto;
 import uniandes.isis2304.superandes.negocio.SuperAndes;
 import uniandes.isis2304.superandes.negocio.VOCliente;
@@ -216,21 +222,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		}        
 		setJMenuBar ( menu );	
 	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		String evento = e.getActionCommand( );		
-		try 
-		{
-			Method req = InterfazSuperAndesApp.class.getMethod ( evento );			
-			req.invoke ( this );
-		} 
-		catch (Exception ex) 
-		{
-			ex.printStackTrace();
-		} 
-
-	}
+	
 
 	/* ****************************************************************
 	 * 			CRUD de Clientes
@@ -333,6 +325,10 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	 * 			CRUD de producto
 	 *****************************************************************/
 	
+	
+	/* ****************************************************************
+	 * 			Metodos de interaccion
+	 *****************************************************************/
 	private String generarMensajeError(Exception e) 
 	{
 		String resultado = "************ Error en la ejecución\n";
@@ -351,4 +347,199 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		}
 		return resp;
 	}
+	
+	
+	 /**
+	 * Muestra el log de superAndes
+	 */
+	public void mostrarLogSuperAndes()
+	{
+		mostrarArchivo ("superAndes.log");
+	}
+	
+	/**
+	 * Muestra el log de datanucleus
+	 */
+	public void mostrarLogDatanuecleus ()
+	{
+		mostrarArchivo ("datanucleus.log");
+	}
+	
+	private void mostrarArchivo (String nombreArchivo)
+	{
+		try
+		{
+			Desktop.getDesktop().open(new File(nombreArchivo));
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	/**
+	 * Muestra el modelo conceptual de Parranderos
+	 */
+	public void mostrarModeloConceptual ()
+	{
+		mostrarArchivo ("data/EsquemaConceptualSuperAndes.pdf");
+	}
+	
+	/**
+	 * Muestra el esquema de la base de datos de Parranderos
+	 */
+	public void mostrarEsquemaBD ()
+	{
+		mostrarArchivo ("data/EsquemaBD.pdf");
+	}
+	
+	/**
+	 * Muestra el script de creación de la base de datos
+	 */
+	public void mostrarScriptBD ()
+	{
+		mostrarArchivo ("data/EsquemaSuperAndes.sql");
+	}
+	
+	
+	
+
+	
+	public void acercaDe ()
+    {
+		String resultado = "\n\n ************************************\n\n";
+		resultado += " * Universidad	de	los	Andes	(Bogotá	- Colombia)\n";
+		resultado += " * Departamento	de	Ingeniería	de	Sistemas	y	Computación\n";
+		resultado += " * Licenciado	bajo	el	esquema	Academic Free License versión 2.1\n";
+		resultado += " * \n";		
+		resultado += " * Curso: isis2304 - Sistemas Transaccionales\n";
+		resultado += " * Proyecto: SuperAndes Uniandes\n";
+		resultado += " * @version 1.0\n";
+		resultado += " * @author Santiago Restrepo, Ixtli Barbosa \n";
+		resultado += " * Octubre 3 de 2018\n";
+		resultado += " * \n";
+		resultado += "\n ************************************\n\n";
+
+		panelDatos.actualizarInterfaz(resultado);		
+    }
+	
+	/* ****************************************************************
+	 * 			REQUERIMIENTOS DE CONSULTA
+	 *****************************************************************/
+	
+	public void RFC1()
+	{
+		
+	}
+	
+	public void RFC2()
+	{
+		
+	}
+	
+	public void RFC3()
+	{
+		try
+		{
+			String resultado="";
+			resultado= superAndes.RFC3();
+			panelDatos.actualizarInterfaz(resultado);
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void RFC4()
+	{
+		
+	}
+	public void RFC5()
+	{
+		try
+		{
+			String resultado="";
+			List<Pedido> lista= superAndes.RFC5();
+			for(Pedido p:lista)
+			{
+				resultado+=p.toString() +"\n";
+			}
+			panelDatos.actualizarInterfaz(resultado);
+		 
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void RFC6()
+	{
+		try
+		{
+			String id=JOptionPane.showInputDialog (this, "id cliente?", "RFC6", JOptionPane.QUESTION_MESSAGE);
+			String f1=JOptionPane.showInputDialog (this, "fecha inicial?", "RFC6", JOptionPane.QUESTION_MESSAGE);
+			String f2=JOptionPane.showInputDialog (this, "fecha final?", "RFC6", JOptionPane.QUESTION_MESSAGE);
+			
+	
+			String resultado="";
+			List<Compra> lista= superAndes.RFC6(Long.parseLong(id), f1, f2);
+			for(Compra c:lista)
+			{
+				resultado+=c.toString() +"\n";
+			}
+			panelDatos.actualizarInterfaz(resultado);
+		 
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		String evento = e.getActionCommand( );		
+		try 
+		{
+			Method req = InterfazSuperAndesApp.class.getMethod ( evento );			
+			req.invoke ( this );
+		} 
+		catch (Exception ex) 
+		{
+			ex.printStackTrace();
+		} 
+
+	}
+	
+	/* ****************************************************************
+	 * 			Programa principal
+	 *****************************************************************/
+    /**
+     * Este método ejecuta la aplicación, creando una nueva interfaz
+     * @param args Arreglo de argumentos que se recibe por línea de comandos
+     */
+    public static void main( String[] args )
+    {
+        try
+        {
+        	
+            // Unifica la interfaz para Mac y para Windows.
+            UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
+            InterfazSuperAndesApp interfaz = new InterfazSuperAndesApp( );
+            interfaz.setVisible( true );
+        }
+        catch( Exception e )
+        {
+            e.printStackTrace( );
+        }
+    }
 }

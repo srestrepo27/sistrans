@@ -300,10 +300,26 @@ public class SuperAndes
 	 *  
 	 *****************************************************************/
 	
+	/* ****************************************************************
+	 * 			REQUERIMIENTOS DE CONSULTA
+	 *  
+	 *****************************************************************/
+	
+	public List<Pedido> RFC5()
+	{
+		return ps.RFC5();
+	}
 	
 	
+	public List<Compra> RFC6(long cedula, String fecha1, String fecha2)
+	{
+		return ps.RFC6(cedula, fecha1, fecha2);
+	}
 	
-	
+	public String RFC3()
+	{
+		return "Estantes:"+ "\n"+ ps.ocupacionEstantes() + "\n"+ "Bodegas: " + "\n"+ ps.ocupacionBodegas();
+	}
 	
 	
 	

@@ -4,6 +4,35 @@
 	"bannerPath": "./src/main/resources/config/logo.png",
 	"menu":
 	[
+	{ "menuTitle": "Requerimientos"
+		  "options":
+			[
+				{
+					"label": "1",
+					"event": "RFC1"
+				},
+				{
+					"label": "2",
+					"event": "RFC2"
+				},
+				{
+					"label": "3",
+					"event": "RFC3"
+				},
+				{
+					"label": "4",
+					"event": "RFC4"
+				},
+				{
+					"label": "5",
+					"event": "RFC5"
+				}
+{
+					"label": "6",
+					"event": "RFC6"
+				}
+			]
+		},
 		{ "menuTitle": "Cliente",
 		  "options":
 			[
@@ -121,10 +150,7 @@
 		{ "menuTitle": "Documentación",
 		  "options":
 			[
-				{
-					"label": "Presentación general",
-					"event": "mostrarPresentacionGeneral"
-				},
+				
 				{
 					"label": "Modelo conceptual",
 					"event": "mostrarModeloConceptual"
@@ -137,14 +163,7 @@
 					"label": "Script creación de la BD",
 					"event": "mostrarScriptBD"
 				},
-				{
-					"label": "Arquitectura de referencia",
-					"event": "mostrarArqRef"
-				},
-				{
-					"label": "Javadoc SuperAndes",
-					"event": "mostrarJavadoc"
-				}
+				
 			]
 		},		
 		{ "menuTitle": "Acerca de ...",
