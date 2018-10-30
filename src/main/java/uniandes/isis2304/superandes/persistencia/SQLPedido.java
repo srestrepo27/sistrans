@@ -40,10 +40,10 @@ class SQLPedido
 			this.pp = pp;
 		}
 		
-		public long adicionarPedido(PersistenceManager pm, long id, Date fecha, String proveedorNit, long superMercadoId)
+		public long adicionarPedido(PersistenceManager pm, long id, Date fecha, String proveedorNit,  String nombreSucursal)
 		{
-			Query q= pm.newQuery(SQL,"INSERT INTO "+ pp.darTablaPedido()+ " (id,fecha,proveedorNit,superMercadoId) values (?,?,?,?)");
-			q.setParameters(id,fecha,proveedorNit,superMercadoId);
+			Query q= pm.newQuery(SQL,"INSERT INTO "+ pp.darTablaPedido()+ " (id,fecha,proveedorNit,nombreSucursal) values (?,?,?,?)");
+			q.setParameters(id,fecha,proveedorNit,nombreSucursal);
 			
 			return (long) q.executeUnique();
 		}
@@ -62,10 +62,10 @@ class SQLPedido
 			return (long) q.executeUnique();
 		}
 		
-		public List<Pedido> darPedidosSuperMercado(PersistenceManager pm, long superMercadoId)
+		public List<Pedido> darPedidosSuperMercado(PersistenceManager pm, String nombreSucursal)
 		{
-			Query q= pm.newQuery(SQL,"SELECT * FROM "+ pp.darTablaPedido()+ " WHERE superMercadoId=?");
-			q.setParameters(superMercadoId);
+			Query q= pm.newQuery(SQL,"SELECT * FROM "+ pp.darTablaPedido()+ " WHERE nombreSucursal=?");
+			q.setParameters(nombreSucursal);
 			q.setResultClass(Pedido.class);
 			return (List<Pedido>) q.execute();
 		}
@@ -85,4 +85,6 @@ class SQLPedido
 			q.setResultClass(Pedido.class);
 			return(List<Pedido>) q.execute();
 		}
+		
+		
 }

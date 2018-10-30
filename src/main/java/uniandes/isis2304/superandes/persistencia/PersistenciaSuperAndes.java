@@ -73,6 +73,8 @@ public class PersistenciaSuperAndes
 	private SQLBodega sqlBodega;
 
 	private SQLCliente sqlCliente;
+	
+	private SQLCarrito sqlCarrito;
 
 	private SQLCompra sqlCompra;
 
@@ -95,8 +97,9 @@ public class PersistenciaSuperAndes
 	private SQLProveedor sqlProveedor;
 
 	private SQLSucursal sqlSucursal;
+	
+	private SQLContiene sqlContiene;
 
-	private SQLSuperMercado sqlSuperMercado;
 
 	/**
 	 * Crea los atributos de clases de apoyo SQL
@@ -106,6 +109,8 @@ public class PersistenciaSuperAndes
 		sqlBodega= new SQLBodega(this);
 		sqlCliente= new SQLCliente(this);
 		sqlCompra= new SQLCompra(this);
+		sqlCarrito= new SQLCarrito(this);
+		sqlContiene= new SQLContiene(this);
 		sqlEmpresa= new SQLEmpresa(this);
 		sqlEstante= new SQLEstante(this);
 		sqlPedido= new SQLPedido(this);
@@ -116,7 +121,6 @@ public class PersistenciaSuperAndes
 		sqlProvee= new SQLProvee(this);
 		sqlProveedor= new SQLProveedor(this);
 		sqlSucursal = new SQLSucursal(this);
-		sqlSuperMercado = new  SQLSuperMercado(this);
 	}
 
 	/**
@@ -137,7 +141,6 @@ public class PersistenciaSuperAndes
 		tablas.add ("PROVEEDOR");
 		tablas.add ("PEDIDO");
 		tablas.add ("SUCURSAL");
-
 		tablas.add ("PROMOCION_SUCURSAL");
 		tablas.add ("ESTANTE");
 		tablas.add ("BODEGA");
@@ -145,6 +148,8 @@ public class PersistenciaSuperAndes
 		tablas.add ("COMPRA");
 		tablas.add ("PROVEE");
 		tablas.add ("PROMOCION_PROVEEDOR");
+		tablas.add("CARRITO");
+		tablas.add("CONTIENE");
 	}
 
 	/**
@@ -283,7 +288,15 @@ public class PersistenciaSuperAndes
 	{
 		return tablas.get(14);
 	}
-
+	public String darTablaCarrito()
+	{
+		return tablas.get(15);
+	}
+	
+	public String darTablaContiene()
+	{
+		return tablas.get(16);
+	}
 	/**
 	 * Extrae el mensaje de la exception JDODataStoreException embebido en la Exception e, que da el detalle específico del problema encontrado
 	 * @param e - La excepción que ocurrio
@@ -490,11 +503,62 @@ public class PersistenciaSuperAndes
 		}
 		return ret;
 	}
+	
+	public double RFC1(String fechai, String fechaf )
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		double ret=0;
+		try
+		{
+			tx.begin();  
+			ret=sqlCompra.RFC1(pm, fechai, fechaf);
+	}
+		catch(Exception e)
+		{
+			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return ret;
+	}
+	
+	public List<String> RFC9()
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		List<String> ret = null;
+		try
+		{
+			tx.begin();  
+			 ret= sqlCompra.RFC9(pm);
+		}
+		catch(Exception e)
+		{
+			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return ret;
+	}
+	 
 
 	/* ****************************************************************
 	 * 			METODOS AUTOMATICOS
 	 *****************************************************************/
-	public long realizarPedido( String codigoDeBarras)
+	public long realizarPedido( String codigoDeBarras, String nombreSucursal)
 	{
 		long ret=0;
 
@@ -528,9 +592,8 @@ public class PersistenciaSuperAndes
 
 				long id=nextval();
 				List<Cliente> clientes= sqlCliente.darClientes(pm);
-				long superMercadoId=clientes.get(0).getSuperMercadoId();
 
-				ret=(long) sqlPedido.adicionarPedido(pm, id, fecha,proveedor, superMercadoId);
+				ret=(long) sqlPedido.adicionarPedido(pm, id, fecha,proveedor, nombreSucursal);
 				tx.commit();
 
 				log.trace("Pedido realizado de [: "+ codigoDeBarras +"] tuplas insertadas:"+ ret );
@@ -634,7 +697,7 @@ public class PersistenciaSuperAndes
 	/* ****************************************************************
 	 * 			Métodos para manejar los clientes 
 	 *****************************************************************/
-	public Cliente adicionarcliente ( String pCorreo, String pNombre, int pPuntos, long id)
+	public Cliente adicionarcliente ( String pCorreo, String pNombre, int pPuntos,  String nombreSucursal)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -642,11 +705,11 @@ public class PersistenciaSuperAndes
 		{
 			tx.begin();            
 			long idcliente = nextval ();
-			long tuplasInsertadas = sqlCliente.adicionarCliente(pm,idcliente, pNombre, pCorreo, pPuntos, id);
+			long tuplasInsertadas = sqlCliente.adicionarCliente(pm,idcliente, pNombre, pCorreo, pPuntos, nombreSucursal);
 			tx.commit();
 
 			log.trace ("Inserción del cliente: " + idcliente + ": " + tuplasInsertadas + " tuplas insertadas");
-			return new Cliente(idcliente, pCorreo, pNombre, pPuntos, id);
+			return new Cliente(idcliente, pCorreo, pNombre, pPuntos, nombreSucursal);
 		}
 		catch (Exception e)
 		{
@@ -1055,7 +1118,7 @@ public class PersistenciaSuperAndes
 	/* ****************************************************************
 	 * 			Métodos para manejar los pedidos 
 	 *****************************************************************/
-	public Pedido adicionarPedido (Date fecha , String proveedorNit, long superMercadoId)
+	public Pedido adicionarPedido (Date fecha , String proveedorNit, String nombreSucursal)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -1063,12 +1126,12 @@ public class PersistenciaSuperAndes
 		{
 			tx.begin();
 			long id = nextval ();
-			long tuplasInsertadas = sqlPedido.adicionarPedido(pm, id, fecha, proveedorNit, superMercadoId);
+			long tuplasInsertadas = sqlPedido.adicionarPedido(pm, id, fecha, proveedorNit, nombreSucursal);
 			tx.commit();
 
 			log.trace ("Inserción de pedido: [" + id + "]. " + tuplasInsertadas + " tuplas insertadas");
 			String fe =  fecha.toString(); 
-			return new Pedido(id, fe, proveedorNit, superMercadoId);
+			return new Pedido(id, fe, proveedorNit, nombreSucursal);
 		}
 		catch (Exception e)
 		{

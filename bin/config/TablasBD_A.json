@@ -1,0 +1,22 @@
+{
+	"title": "Nombres de las tablas de SuperAndes Uniandes para la aplicación A",
+	"unidadPersistencia": "SuperAndes",
+	"tablas":
+	[
+		"SUPERANDES_sequence",
+		"A_SUPERMERCADO",
+		"A_CLIENTE",
+		"A_PERSONA",
+		"A_EMPRESA",
+		"A_PROVEEDOR",
+		"A_PEDIDO",
+		"A_SUCURSAL",
+		"A_PROMOCION_SUCURSAL",
+		"A_ESTANTE",
+		"A_BODEGA",
+		"A_PRODUCTO",
+		"A_COMPRA",
+		"A_PROVEE",
+		"A_PROMOCION_PROVEEDOR"
+	]
+}

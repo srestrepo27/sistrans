@@ -8,6 +8,8 @@ public interface VOPedido
 
 	public String getProveedorNit() ;
 	
-	public long getSuperMercadoId();
+	public String getNombreSucursal() ;
+	
+	public void setNombreSucursal(String nombreSucursal);
 
 }

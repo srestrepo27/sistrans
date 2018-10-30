@@ -39,10 +39,10 @@ class SQLCliente
 		this.pp = pp;
 	}
 	
-	public long adicionarCliente(PersistenceManager pm,long id, String nombre, String correo, int puntos, long supermercadoId)
+	public long adicionarCliente(PersistenceManager pm,long id, String nombre, String correo, int puntos,String nombreSucursal)
 	{
-		Query q= pm.newQuery(SQL,"INSERT INTO" + pp.darTablaCliente()+"(id, nombre, correo, puntos, supermercadoId) values (?,?,?,?,?)");
-		q.setParameters(id,nombre,correo,puntos,supermercadoId);
+		Query q= pm.newQuery(SQL,"INSERT INTO" + pp.darTablaCliente()+"(id, nombre, correo, puntos, nombreSucursal) values (?,?,?,?,?)");
+		q.setParameters(id,nombre,correo,puntos,nombreSucursal);
 		return (long) q.executeUnique();
 	}
 	
@@ -90,6 +90,7 @@ class SQLCliente
 		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCliente() + " SET correo = ? WHERE id = ?");
 		 q.setParameters(id,correo);
 		 return(long)q.executeUnique();
-
 	}
+	
+	
 }

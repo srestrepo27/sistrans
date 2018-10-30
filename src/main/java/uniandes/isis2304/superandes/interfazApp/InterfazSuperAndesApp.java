@@ -72,7 +72,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	 */
 	private SuperAndes superAndes;
 
-
+	private String nombreSucursal;
 
 	/* ****************************************************************
 	 * 			Atributos de interfaz
@@ -120,7 +120,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 
 		setLayout (new BorderLayout());
 		add (new JLabel (new ImageIcon (path)), BorderLayout.NORTH );          
-		add( panelDatos, BorderLayout.CENTER );        
+		add( panelDatos, BorderLayout.CENTER ); 
+		iniciar();
 	}
 
 	/* ****************************************************************
@@ -223,7 +224,11 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		setJMenuBar ( menu );	
 	}
 
-
+	public void iniciar()
+	{
+		String n=JOptionPane.showInputDialog (this, "ingrese el nombre de la sucursal", " ¿Sucursal?", JOptionPane.QUESTION_MESSAGE);
+		nombreSucursal=n;
+	}
 	/* ****************************************************************
 	 * 			CRUD de Clientes
 	 *****************************************************************/
@@ -232,8 +237,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
+			
 			String pOe = JOptionPane.showInputDialog (this, "Empresa o Persona?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
-			long id=superAndes.darClientes().get(0).getSuperMercadoId();
 			if(pOe.equals("empresa"))
 			{
 				String nitEmpresa=JOptionPane.showInputDialog (this, "nit de la empresa?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
@@ -244,7 +249,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 				if (nombreCliente != null && correoCliente != null && codigoCliente != null && direccionEmpresa != null && nitEmpresa !=null )
 				{
 					Empresa em= superAndes.adicionarempresa(nitEmpresa, direccionEmpresa, Long.parseLong(codigoCliente));
-					VOCliente cl= superAndes.adicionarCliente( Long.parseLong(codigoCliente), correoCliente, nombreCliente, 0, id);
+					VOCliente cl= superAndes.adicionarCliente( Long.parseLong(codigoCliente), correoCliente, nombreCliente, 0, nombreSucursal);
 				}
 				else
 				{
@@ -260,7 +265,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 				String codigoCliente = JOptionPane.showInputDialog (this, "Nombre del cliente?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
 				if (nombreCliente != null && correoCliente != null && codigoCliente != null && cedulaPersona!=null)
 				{
-					VOCliente cl= superAndes.adicionarCliente( Long.parseLong(codigoCliente), correoCliente, nombreCliente, 0, id);
+					VOCliente cl= superAndes.adicionarCliente( Long.parseLong(codigoCliente), correoCliente, nombreCliente, 0, nombreSucursal);
 				}
 				else
 				{
@@ -313,7 +318,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 				{
 					throw new Exception("unidades insuficientes");
 				}
-				superAndes.realizarPedido(p.getCodigoBarras());
+				superAndes.realizarPedido(p.getCodigoBarras(),nombreSucursal);
 			}
 
 			superAndes.realizarVenta(lista, id);
@@ -555,7 +560,21 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 
 	public void RFC1()
 	{
+		try
+		{
+			String resultado="";
+			
+			String f1=JOptionPane.showInputDialog (this, "fecha inicial?", "RFC1", JOptionPane.QUESTION_MESSAGE);
+			String f2=JOptionPane.showInputDialog (this, "fecha final?", "RFC1", JOptionPane.QUESTION_MESSAGE);
+			resultado+= superAndes.RFC1(f1, f2);
+			panelDatos.actualizarInterfaz(resultado);
 
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
 	}
 
 	public void RFC2()

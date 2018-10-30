@@ -12,7 +12,8 @@ public class Cliente implements VOCliente
 	
 	private int puntos;
 	
-	private long superMercadoId;
+
+	private String nombreSucursal;
 	
 	public Cliente()
 	{
@@ -20,17 +21,15 @@ public class Cliente implements VOCliente
 		this.correo="";
 		this.nombre="";
 		this.puntos=0;
-		this.superMercadoId=0;
-		
+		this.nombreSucursal="";
 	}
-	public Cliente(long pCodigo, String pCorreo, String pNombre, int pPuntos, long id)
+	public Cliente(long pCodigo, String pCorreo, String pNombre, int pPuntos,String nombreSucursal)
 	{
 		this.codigo=pCodigo;
 		this.correo=pCorreo;
 		this.nombre=pNombre;
 		this.puntos=pPuntos;
-		this.superMercadoId=id;
-		
+		this.nombreSucursal=nombreSucursal;
 	}
 	
 	public long getCodigo()
@@ -65,13 +64,11 @@ public class Cliente implements VOCliente
 	{
 		this.puntos = puntos;
 	}
-	public long getSuperMercadoId()
-	{
-		return superMercadoId;
+	public String getNombreSucursal() {
+		return nombreSucursal;
 	}
-	public void setSuperMercadoId(long superMercadoId)
-	{
-		this.superMercadoId = superMercadoId;
+	public void setNombreSucursal(String nombreSucursal) {
+		this.nombreSucursal = nombreSucursal;
 	}
 	
 }

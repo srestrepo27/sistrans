@@ -76,7 +76,7 @@ public class ClienteTest
   			String nombre="John";
   			String correo="john@gmail.com";
   			int puntos=0;
-  			long s=0;
+  			String s="uniandes";
   			VOCliente cliente1= superandes.adicionarCliente(codigo, correo, nombre, puntos, s);
   			lista= superandes.darVOCLiente();
   			assertEquals("Debe haber un cliente creado",1,lista.size());
@@ -146,7 +146,7 @@ public class ClienteTest
   			String nombre="John";
   			String correo="john@gmail.com";
   			int puntos=0;
-  			long s=0;
+  			String s="uniandes";
   			VOCliente cliente1= superandes.adicionarCliente(codigo, correo, nombre, puntos, s);
   			lista= superandes.darVOCLiente();
   			

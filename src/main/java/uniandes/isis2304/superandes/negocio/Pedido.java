@@ -8,22 +8,24 @@ public class Pedido implements VOPedido
 	
 	private String proveedorNit;
 	
-	private long superMercadoId;
-	
+	private String nombreSucursal;
+
 	public Pedido()
 	{
 		this.id=0;
 		this.fecha="";
 		this.proveedorNit="";
-		this.superMercadoId=0;
+		this.nombreSucursal="";
+
 	}
 	
-	public Pedido(long id, String fecha, String proveedorNit, long superMercadoId)
+	public Pedido(long id, String fecha, String proveedorNit,String nombreSucursal)
 	{
 		this.id=id;
 		this.fecha=fecha;
 		this.proveedorNit=proveedorNit;
-		this.superMercadoId=superMercadoId;
+		this.nombreSucursal=nombreSucursal;
+
 	}
 	
 	public long getId() {
@@ -49,12 +51,11 @@ public class Pedido implements VOPedido
 	public void setProveedorNit(String proveedorNit) {
 		this.proveedorNit = proveedorNit;
 	}
-
-	public long getSuperMercadoId() {
-		return superMercadoId;
+	public String getNombreSucursal() {
+		return nombreSucursal;
 	}
-
-	public void setSuperMercadoId(long superMercadoId) {
-		this.superMercadoId = superMercadoId;
+	public void setNombreSucursal(String nombreSucursal) {
+		this.nombreSucursal = nombreSucursal;
 	}
+	
 }

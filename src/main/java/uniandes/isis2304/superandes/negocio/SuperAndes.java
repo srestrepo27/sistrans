@@ -71,11 +71,11 @@ public class SuperAndes
 	/* ****************************************************************
 	 * 			Métodos para manejar los clientes 
 	 *****************************************************************/
-	public Cliente  adicionarCliente (long pCodigo, String pCorreo, String pNombre, int pPuntos, long id)
+	public Cliente  adicionarCliente (long pCodigo, String pCorreo, String pNombre, int pPuntos, String nombreSucursal)
 	{
-		Log.info("Adicionando cliente "+ id);
-		Cliente cliente = ps.adicionarcliente( pCorreo, pNombre, pPuntos, id);
-		Log.info("Adicionando cliente "+ id);
+		Log.info("Adicionando cliente a la sucursal"+ nombreSucursal);
+		Cliente cliente = ps.adicionarcliente( pCorreo, pNombre, pPuntos, nombreSucursal);
+		Log.info("Adicionando cliente a la sucursal"+ nombreSucursal);
         return cliente ;
 	}
 	public long eliminarClienteId (long id)
@@ -229,10 +229,10 @@ public class SuperAndes
 	/* ****************************************************************
 	 * 			Métodos para manejar los pedidos 
 	 *****************************************************************/
-	public Pedido adicionarpedido  (Date fecha,String  proveedorNit,Long  superMercadoId)
+	public Pedido adicionarpedido  (Date fecha,String  proveedorNit,String  nombreSucursal)
 	{
         Log.info ("Adicionando al proveedor : " + proveedorNit);
-        Pedido pedidio =ps.adicionarPedido(fecha, proveedorNit, superMercadoId);
+        Pedido pedidio =ps.adicionarPedido(fecha, proveedorNit, nombreSucursal);
         Log.info ("Adicionando  al proveedor : " + proveedorNit );
         return pedidio ;
 	}
@@ -262,10 +262,10 @@ public class SuperAndes
 		Log.info("realizando venta de " +productos.size() +"al cliente" + cliente);
 	}
 	
-	public void realizarPedido(String codigoBarras)
+	public void realizarPedido(String codigoBarras, String nombreSucursal)
 	{
 		Log.info("realizando verificacion si se necesita pedido");
-		ps.realizarPedido(codigoBarras);
+		ps.realizarPedido(codigoBarras, nombreSucursal);
 		Log.info("realizando pedido de"+ codigoBarras);
 		
 	}
@@ -304,6 +304,10 @@ public class SuperAndes
 	 * 			REQUERIMIENTOS DE CONSULTA
 	 *  
 	 *****************************************************************/
+	public double RFC1(String fechai, String fechaf )
+	{
+		return ps.RFC1(fechai, fechaf);
+	}
 	public List<Object[]> RFC2()
 	{
 		return ps.RFC2();

@@ -12,24 +12,12 @@
 					"event": "RFC1"
 				},
 				{
-					"label": "asignar carrito",
-					"event": "RFC12"
-				},
-				{
-					"label": "adicionar producto",
-					"event": "RFC13"
-				},
-				{
-					"label": devolver producto",
-					"event": "RFC14"
-				},
-				{
 					"label": "2",
 					"event": "RFC2"
 				},
 				{
 					"label": "3",
-					"event": "RFC3"
+					"event": "demoRFC3"
 				},
 				{
 					"label": "4",
@@ -37,15 +25,14 @@
 				},
 				{
 					"label": "5",
-					"event": "RFC5"
-				},
-				{
+					"event": "demoRFC5"
+				}
+{
 					"label": "6",
-					"event": "RFC6"
+					"event": "demoRFC6"
 				}
 			]
 		},
-		
 		{ "menuTitle": "Cliente",
 		  "options":
 			[
@@ -55,60 +42,19 @@
 				},
 			]
 		},
-		{ "menuTitle": "Proveedor",
-		 	 "options":
-			[
-				{
-					"label": "Adicionar",
-					"event": "adicionarProveedor"
-				}
-			
-			]
-		},
-		{ "menuTitle": "Producto",
-		 	 "options":
-			[
-				{
-					"label": "Adicionar",
-					"event": "adicionarProducto"
-				},
-				{
-					"label": "Borrar",
-					"event": "eliminarProducto"
-				}
-			]
-		},
-		{ "menuTitle": "Promocion",
-		 	 "options":
-			[
-				{
-					"label": "Adicionar Promocion Sucursal",
-					"event": "adicionarPromocionSucursal"
-				},
-				{
-					"label": "Adicionar Promocion Proveedor",
-					"event": "adicionarPromocionProveedor"
-				}
-			]
-		},
+		
+		
+		
 		{ "menuTitle": "Ventas",
 		 	 "options":
 			[
 				{
 					"label": "Vender",
-					"event": "vender"
+					"event": "demoVender"
 				}
 			]
 		},
-		{ "menuTitle": "Sucursal",
-		 	 "options":
-			[
-				{
-					"label": "Adicionar",
-					"event": "adicionarSucursal"
-				}
-			]
-		},
+		
 		{ "menuTitle": "Mantenimiento",
 		  "options":
 			[

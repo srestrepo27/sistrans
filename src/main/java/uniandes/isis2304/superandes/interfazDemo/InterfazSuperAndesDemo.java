@@ -238,7 +238,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener
 	  			String nombre="John";
 	  			String correo="john@gmail.com";
 	  			int puntos=0;
-	  			long s=0;
+	  			String s="uniandes";
 	  			boolean error=false;
 	  			
 	  			VOCliente cliente= superAndes.adicionarCliente(codigo, correo, nombre, puntos, s);
@@ -289,7 +289,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener
 	    	try
 	    	{
 	    		boolean error=false;
-	    		VOCliente cliente= superAndes.adicionarCliente(1, "correo@gmail.com", "juan", 0, 0);
+	    		VOCliente cliente= superAndes.adicionarCliente(1, "correo@gmail.com", "juan", 0, "uniandes");
 	    		if(cliente==null)
 	    		{
 	    			error=true;
@@ -386,7 +386,7 @@ public class InterfazSuperAndesDemo extends JFrame implements ActionListener
 	    	    SimpleDateFormat format = new SimpleDateFormat(pattern);
 	    		Date fecha= (Date) format.parse(f);
 	    		superAndes.adicionarproveedor("a","aaaaa");
-	    		Pedido p=superAndes.adicionarpedido(fecha, "aaaaa", (long) 0);
+	    		Pedido p=superAndes.adicionarpedido(fecha, "aaaaa", "uniandes");
 	    		List<Pedido> lista= superAndes.RFC5();
 	    		if(p==null)
 	    		{

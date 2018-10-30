@@ -12,18 +12,6 @@
 					"event": "RFC1"
 				},
 				{
-					"label": "asignar carrito",
-					"event": "RFC12"
-				},
-				{
-					"label": "adicionar producto",
-					"event": "RFC13"
-				},
-				{
-					"label": devolver producto",
-					"event": "RFC14"
-				},
-				{
 					"label": "2",
 					"event": "RFC2"
 				},
@@ -38,14 +26,13 @@
 				{
 					"label": "5",
 					"event": "RFC5"
-				},
-				{
+				}
+{
 					"label": "6",
 					"event": "RFC6"
 				}
 			]
 		},
-		
 		{ "menuTitle": "Cliente",
 		  "options":
 			[
