@@ -331,6 +331,23 @@ public class SuperAndes
 	
 	
 	
+	// ITERACION 2
+	
+	//Carrito y sus metodos
+	
+//	public void asignarCarrito(String idCliente)
+//	{
+//		Log.info("Asignando carrito al cliente con id: "+ idCliente);
+//		 ps.asignarCarrito(idCliente);
+//	}
+	
+//	public void abandonarCarrito(String idCliente)
+//	{
+//		Log.info("Abandonando carrito del cliente" + idCliente);
+//		ps.abandonarCarrito(idCliente);
+//	}
+	
+	
 	
 	
 	
