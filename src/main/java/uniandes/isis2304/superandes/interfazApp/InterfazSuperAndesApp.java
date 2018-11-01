@@ -13,14 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.JDODataStoreException;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
+import javax.swing.*;
 
 import org.apache.log4j.Logger;
 
@@ -39,6 +32,7 @@ import uniandes.isis2304.superandes.negocio.SuperAndes;
 import uniandes.isis2304.superandes.negocio.VOCliente;
 
 
+@SuppressWarnings("serial")
 public class InterfazSuperAndesApp extends JFrame implements ActionListener
 {
 	/* ****************************************************************
@@ -81,7 +75,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	/**
 	 * Objeto JSON con la configuración de interfaz de la app.
 	 */
-	private JsonObject guiConfig;
+	private JsonObject geyConfig;
 
 	/**
 	 * Panel de despliegue de interacción para los requerimientos
@@ -102,22 +96,24 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	 */
 	public InterfazSuperAndesApp( )
 	{
-		
+		menu = new JMenuBar(); 
 
-		// Carga la configuración de la interfaz desde un archivo JSON
-		guiConfig = openConfig ("Interfaz", CONFIG_INTERFAZ);
+		// Carga lx configuración de lx interfaz desde un archivo JSON
+		geyConfig = openConfig ("Interfaz", CONFIG_INTERFAZ);
 
 		// Configura la apariencia del frame que contiene la interfaz gráfica
 		configurarFrame ( );
-		if (guiConfig != null) 	   
+		if (geyConfig != null) 	   
 		{
-			crearMenu( guiConfig.getAsJsonArray("menuBar") );
+			crearMenu( geyConfig.getAsJsonArray("menuBar") );
 		}
+
+		setJMenuBar ( menu );
 
 		tableConfig = openConfig ("Tablas BD", CONFIG_TABLAS);
 		superAndes = new SuperAndes (tableConfig);
 
-		String path = guiConfig.get("bannerPath").getAsString();
+		String path = geyConfig.get("bannerPath").getAsString();
 		panelDatos = new PanelDatos ( );
 
 		setLayout (new BorderLayout());
@@ -125,7 +121,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		add( panelDatos, BorderLayout.CENTER );  
 		iniciar();
 	}
-private JsonObject openConfig (String tipo, String archConfig)
+	private JsonObject openConfig (String tipo, String archConfig)
 	{
 		JsonObject config = null;
 		try 
@@ -152,7 +148,7 @@ private JsonObject openConfig (String tipo, String archConfig)
 		int ancho = 0;
 		String titulo = "";	
 
-		if ( guiConfig == null )
+		if ( geyConfig == null )
 		{
 			log.info ( "Se aplica configuración por defecto" );			
 			titulo = "Superandes APP Default";
@@ -162,9 +158,9 @@ private JsonObject openConfig (String tipo, String archConfig)
 		else
 		{
 			log.info ( "Se aplica configuración indicada en el archivo de configuración" );
-			titulo = guiConfig.get("title").getAsString();
-			alto= guiConfig.get("frameH").getAsInt();
-			ancho = guiConfig.get("frameW").getAsInt();
+			titulo = geyConfig.get("title").getAsString();
+			alto= geyConfig.get("frameH").getAsInt();
+			ancho = geyConfig.get("frameW").getAsInt();
 		}
 
 		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -183,17 +179,17 @@ private JsonObject openConfig (String tipo, String archConfig)
 	 */
 	private void crearMenu(  JsonArray jsonMenu )
 	{    	
-		// Creación de la barra de menús
-		menu = new JMenuBar();       
+		// Creación de la barra de menú      
 		for (JsonElement men : jsonMenu)
 		{
 			// Creación de cada uno de los menús
+
 			JsonObject jom = men.getAsJsonObject(); 
-
+			System.out.println(jom);       
 			String menuTitle = jom.get("menuTitle").getAsString();        	
-			JsonArray opciones = jom.getAsJsonArray("options");
+			JsonArray opciones = jom.getAsJsonArray("opciones");
 
-			JMenu menu = new JMenu( menuTitle);
+			JMenu menu2 = new JMenu( menuTitle);
 
 			for (JsonElement op : opciones)
 			{       	
@@ -206,11 +202,10 @@ private JsonObject openConfig (String tipo, String archConfig)
 				mItem.addActionListener( this );
 				mItem.setActionCommand(event);
 
-				menu.add(mItem);
+				menu2.add(mItem);
 			}       
-			menu.add( menu );
-		}        
-		setJMenuBar ( menu );	
+			menu.add( menu2 );
+		}        	
 	}
 
 	public void iniciar()
@@ -226,7 +221,7 @@ private JsonObject openConfig (String tipo, String archConfig)
 	{
 		try 
 		{
-			
+
 			String pOe = JOptionPane.showInputDialog (this, "Empresa o Persona?", "Adicionar cliente", JOptionPane.QUESTION_MESSAGE);
 			if(pOe.equals("empresa"))
 			{
@@ -552,7 +547,7 @@ private JsonObject openConfig (String tipo, String archConfig)
 		try
 		{
 			String resultado="";
-			
+
 			String f1=JOptionPane.showInputDialog (this, "fecha inicial?", "RFC1", JOptionPane.QUESTION_MESSAGE);
 			String f2=JOptionPane.showInputDialog (this, "fecha final?", "RFC1", JOptionPane.QUESTION_MESSAGE);
 			resultado+= superAndes.RFC1(f1, f2);
@@ -584,7 +579,7 @@ private JsonObject openConfig (String tipo, String archConfig)
 			String resultado= generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
-		
+
 	}
 
 	public void RFC3()
