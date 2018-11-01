@@ -102,6 +102,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	 */
 	public InterfazSuperAndesApp( )
 	{
+		
+
 		// Carga la configuración de la interfaz desde un archivo JSON
 		guiConfig = openConfig ("Interfaz", CONFIG_INTERFAZ);
 
@@ -120,21 +122,10 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 
 		setLayout (new BorderLayout());
 		add (new JLabel (new ImageIcon (path)), BorderLayout.NORTH );          
-		add( panelDatos, BorderLayout.CENTER ); 
+		add( panelDatos, BorderLayout.CENTER );  
 		iniciar();
 	}
-
-	/* ****************************************************************
-	 * 			Métodos de configuración de la interfaz
-	 *****************************************************************/
-	/**
-	 * Lee datos de configuración para la aplicació, a partir de un archivo JSON o con valores por defecto si hay errores.
-	 * @param tipo - El tipo de configuración deseada
-	 * @param archConfig - Archivo Json que contiene la configuración
-	 * @return Un objeto JSON con la configuración del tipo especificado
-	 * 			NULL si hay un error en el archivo.
-	 */
-	private JsonObject openConfig (String tipo, String archConfig)
+private JsonObject openConfig (String tipo, String archConfig)
 	{
 		JsonObject config = null;
 		try 
@@ -147,16 +138,14 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		} 
 		catch (Exception e)
 		{
-			//				e.printStackTrace ();
+			//			e.printStackTrace ();
 			log.info ("NO se encontró un archivo de configuración válido");			
 			JOptionPane.showMessageDialog(null, "No se encontró un archivo de configuración de interfaz válido: " + tipo, "SuperAndes App", JOptionPane.ERROR_MESSAGE);
 		}	
 		return config;
 	}
 
-	/**
-	 * Método para configurar el frame principal de la aplicación
-	 */
+	/** Método para configurar el frame principal de la aplicación */
 	private void configurarFrame(  )
 	{
 		int alto = 0;
@@ -166,7 +155,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		if ( guiConfig == null )
 		{
 			log.info ( "Se aplica configuración por defecto" );			
-			titulo = "Parranderos APP Default";
+			titulo = "Superandes APP Default";
 			alto = 300;
 			ancho = 500;
 		}
@@ -188,9 +177,9 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	}
 
 	/**
-	 * Método para crear el menú de la aplicación con base em el objeto JSON leído
+	 * Método para crear el menú de la aplicación con base en el objeto JSON leído
 	 * Genera una barra de menú y los menús con sus respectivas opciones
-	 * @param jsonMenu - Arreglo Json con los menùs deseados
+	 * @param jsonMenu - Arreglo Json con los menús deseados
 	 */
 	private void crearMenu(  JsonArray jsonMenu )
 	{    	

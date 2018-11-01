@@ -1,111 +1,108 @@
-"title": "Aplicación transaccional de SuperAndes Uniandes",
+{
+	"title": "Aplicación transaccional de Superandes Uniandes",
 	"frameH": 600,
 	"frameW": 800,
 	"bannerPath": "./src/main/resources/config/logo.png",
-	"menu":
+	"menuBar":
 	[
-	{ "menuTitle": "Requerimientos"
+		{ "menuTitle": "Carrito",
 		  "options":
 			[
 				{
-					"label": "1",
-					"event": "RFC1"
+					"label": "Solicitar carrito",
+					"event": "solicitarCarrito"
 				},
 				{
-					"label": "asignar carrito",
-					"event": "RFC12"
+					"label": "Añadir producto",
+					"event": "aniadirProducto"
 				},
 				{
-					"label": "adicionar producto",
-					"event": "RFC13"
+					"label": "Devolver producto",
+					"event": "devolverProducto"
 				},
 				{
-					"label": devolver producto",
-					"event": "RFC14"
+					"label": "Registrar para pago",
+					"event": "pagarCarrito"
 				},
 				{
-					"label": "2",
-					"event": "RFC2"
+					"label": "Abandonar carrito",
+					"event": "abandonarCarrito"
 				},
 				{
-					"label": "3",
-					"event": "RFC3"
+					"label": "Abandonar carrito elegantemente",
+					"event": "abandonarCarritoBien"
 				},
 				{
-					"label": "4",
-					"event": "RFC4"
+					"label": "Recolectar carritos",
+					"event": "recolectarCarritos"
 				},
 				{
-					"label": "5",
-					"event": "RFC5"
-				},
-				{
-					"label": "6",
-					"event": "RFC6"
+					"label": "Añadir nuevo carrito",
+					"event": "aniadirCarrito"
 				}
 			]
 		},
-		
-		{ "menuTitle": "Cliente",
+		{ "menuTitle": "Promoción",
 		  "options":
 			[
 				{
-					"label": "Adicionar",
-					"event": "adicionarCliente"
+					"label": "Registrar Promocion",
+					"event": "adicionarPromocion"
 				},
+				{
+					"label": "Finalizar Promocion",
+					"event": "finalizarPromoPorDescripcion"
+				}
 			]
 		},
-		{ "menuTitle": "Proveedor",
-		 	 "options":
+		{ "menuTitle": "Pedido",
+		  "options":
 			[
 				{
-					"label": "Adicionar",
-					"event": "adicionarProveedor"
+					"label": "Registrar",
+					"event": "registrarPedido"
 				}
-			
 			]
 		},
 		{ "menuTitle": "Producto",
-		 	 "options":
+		  "options":
 			[
 				{
-					"label": "Adicionar",
-					"event": "adicionarProducto"
+					"label": "Registrar Llegada",
+					"event": "registrarProducto"
 				},
 				{
-					"label": "Borrar",
-					"event": "eliminarProducto"
+					"label": "Registrar Venta",
+					"event": "registrarFactura"
 				}
 			]
 		},
-		{ "menuTitle": "Promocion",
-		 	 "options":
+		{ "menuTitle": "Consultas iteracion 1",
+		  "options":
 			[
 				{
-					"label": "Adicionar Promocion Sucursal",
-					"event": "adicionarPromocionSucursal"
+					"label": "Conslta RFC1",
+					"event": "RFC1"
 				},
 				{
-					"label": "Adicionar Promocion Proveedor",
-					"event": "adicionarPromocionProveedor"
-				}
-			]
-		},
-		{ "menuTitle": "Ventas",
-		 	 "options":
-			[
+					"label": "Conslta RFC2",
+					"event": "RFC2"
+				},
 				{
-					"label": "Vender",
-					"event": "vender"
-				}
-			]
-		},
-		{ "menuTitle": "Sucursal",
-		 	 "options":
-			[
+					"label": "Conslta RFC3",
+					"event": "RFC3"
+				},
 				{
-					"label": "Adicionar",
-					"event": "adicionarSucursal"
+					"label": "Conslta RFC4",
+					"event": "RFC4"
+				},
+				{
+					"label": "Conslta RFC5",
+					"event": "RFC5"
+				},
+				{
+					"label": "Conslta RFC6",
+					"event": "RFC6"
 				}
 			]
 		},
@@ -114,15 +111,15 @@
 			[
 				{
 					"label": "Mostrar log SuperAndes",
-					"event": "mostrarLogSuperAndes"
+					"event": "mostrarLogSuperandes"
 				},
 				{
 					"label": "Mostrar log datanucleus",
 					"event": "mostrarLogDatanuecleus"
 				},
 				{
-					"label": "Limpiar log de superAndes",
-					"event": "limpiarLogSuperAndes"
+					"label": "Limpiar log de superandes",
+					"event": "limpiarLogSuperandes"
 				},
 				{
 					"label": "Limpiar log de datanucleus",
@@ -137,7 +134,6 @@
 		{ "menuTitle": "Documentación",
 		  "options":
 			[
-				
 				{
 					"label": "Modelo conceptual",
 					"event": "mostrarModeloConceptual"
@@ -150,7 +146,10 @@
 					"label": "Script creación de la BD",
 					"event": "mostrarScriptBD"
 				},
-				
+				{
+					"label": "Javadoc SuperAndes",
+					"event": "mostrarJavadoc"
+				}
 			]
 		},		
 		{ "menuTitle": "Acerca de ...",
@@ -159,9 +158,14 @@
 				{
 					"label": "Acerca de ...",
 					"event": "acercaDe"
+				},
+				{
+					"label": "PRUEBAS",
+					"event": "PRUEBA"
 				}
 			]
 		}		
 		
 	]
 }
+	
