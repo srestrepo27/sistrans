@@ -23,6 +23,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import uniandes.isis2304.superandes.negocio.Bodega;
+import uniandes.isis2304.superandes.negocio.Carrito;
 import uniandes.isis2304.superandes.negocio.Cliente;
 import uniandes.isis2304.superandes.negocio.Compra;
 import uniandes.isis2304.superandes.negocio.Empresa;
@@ -1172,11 +1173,72 @@ public class PersistenciaSuperAndes
 	 *****************************************************************/
 
 	/* ****************************************************************
-	 * 			Métodos para manejar los proveedores
+	 * 			Métodos para manejar los carritos
 	 *  
 	 *****************************************************************/
+	public Carrito  asignarCarrito( long idCliente)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		int cantCarritos= sqlCarrito.darCarritosLibres(pm).size();
+		// no se si se va al cath cuando elegido no existe 
+			try
+			{
+				tx.begin(); 
+				Carrito elegido= sqlCarrito.darCarritosLibres(pm).get(1);
+				long idCarrito = elegido.getIdCarrito();
+				long tuplasInsertadas = sqlCarrito.asignarClienteAlCarrito(pm, idCliente, idCarrito);
+				tx.commit();
 
+				log.trace ("asignacion de carrito a cliente  : " + idCliente + ": " + tuplasInsertadas + " tuplas insertadas");
+				return elegido;
+			}
+			catch (Exception e)
+			{
+				//        	e.printStackTrace();
+				log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+				return null;
+			}
+	
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+	public long abandonarCarrito (long idCliente)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlCarrito.devolverCarrito(pm, idCliente);
+			tx.commit();
+			
 
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar los supermercados
 	 *  

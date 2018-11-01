@@ -46,9 +46,9 @@ public class SQLCarrito
 		return(long) q.executeUnique();
 	}
 	
-	public long asignarClienteAlCarrito(PersistenceManager pm,long clienteId)
+	public long asignarClienteAlCarrito(PersistenceManager pm,long clienteId,long carritoId )
 	{
-		Query q= pm.newQuery(SQL,"UPDATE " + pp.darTablaCarrito() + " SET clienteId= ?");
+		Query q= pm.newQuery(SQL,"UPDATE " + pp.darTablaCarrito() + " SET clienteId= ? WHERE carritoId= ?");
 		q.setParameters(clienteId);
 		return (long) q.executeUnique();
 	
