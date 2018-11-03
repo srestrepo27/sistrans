@@ -379,6 +379,12 @@ public class SuperAndes
 		ps.terminarCompra(carritoId);
 	}
 	
+	public void devolverPorAbandono()
+	{
+		Log.info("Devolviendo productos de carritos abandonados");
+		ps.devolverTodoPorAbandono();
+	}
+	
 	
 	
 	

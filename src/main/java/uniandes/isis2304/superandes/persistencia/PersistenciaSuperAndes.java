@@ -74,7 +74,7 @@ public class PersistenciaSuperAndes
 	private SQLBodega sqlBodega;
 
 	private SQLCliente sqlCliente;
-	
+
 	private SQLCarrito sqlCarrito;
 
 	private SQLCompra sqlCompra;
@@ -98,7 +98,7 @@ public class PersistenciaSuperAndes
 	private SQLProveedor sqlProveedor;
 
 	private SQLSucursal sqlSucursal;
-	
+
 	private SQLContiene sqlContiene;
 
 
@@ -293,7 +293,7 @@ public class PersistenciaSuperAndes
 	{
 		return tablas.get(15);
 	}
-	
+
 	public String darTablaContiene()
 	{
 		return tablas.get(16);
@@ -435,9 +435,9 @@ public class PersistenciaSuperAndes
 		try
 		{
 			tx.begin(); 
-		Query q= pm.newQuery(SQL,"SELECT count(bodegasId) FROM PRODUCTO GROUPBY bodegasId");
-		q.setResultClass(Integer.class);
-		ret= (String) q.execute();
+			Query q= pm.newQuery(SQL,"SELECT count(bodegasId) FROM PRODUCTO GROUPBY bodegasId");
+			q.setResultClass(Integer.class);
+			ret= (String) q.execute();
 		}
 		catch(Exception e)
 		{
@@ -504,7 +504,7 @@ public class PersistenciaSuperAndes
 		}
 		return ret;
 	}
-	
+
 	public double RFC1(String fechai, String fechaf )
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -514,7 +514,7 @@ public class PersistenciaSuperAndes
 		{
 			tx.begin();  
 			ret=sqlCompra.RFC1(pm, fechai, fechaf);
-	}
+		}
 		catch(Exception e)
 		{
 			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
@@ -537,7 +537,7 @@ public class PersistenciaSuperAndes
 		try
 		{
 			tx.begin();  
-			 ret= sqlCompra.RFC8(pm);
+			ret= sqlCompra.RFC8(pm);
 		}
 		catch(Exception e)
 		{
@@ -553,7 +553,7 @@ public class PersistenciaSuperAndes
 		}
 		return ret;
 	}
-	
+
 	public List<String> RFC9()
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -562,7 +562,7 @@ public class PersistenciaSuperAndes
 		try
 		{
 			tx.begin();  
-			 ret= sqlCompra.RFC9(pm);
+			ret= sqlCompra.RFC9(pm);
 		}
 		catch(Exception e)
 		{
@@ -578,7 +578,7 @@ public class PersistenciaSuperAndes
 		}
 		return ret;
 	}
-	 
+
 
 	/* ****************************************************************
 	 * 			METODOS AUTOMATICOS
@@ -691,7 +691,7 @@ public class PersistenciaSuperAndes
 		}
 
 	}
-	
+
 	public List<Object[]> RFC2()
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -717,7 +717,7 @@ public class PersistenciaSuperAndes
 		}
 		return lista;
 	}
-	
+
 	public void devolverProductosPorAbandono(long carritoId)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -739,7 +739,7 @@ public class PersistenciaSuperAndes
 			}
 			pm.close();
 		}
-		
+
 	}
 
 	/* ****************************************************************
@@ -1114,7 +1114,7 @@ public class PersistenciaSuperAndes
 			pm.close();
 		}
 	}
-	
+
 	public void terminarCompra(long carritoId)
 	{
 		PersistenceManager pm= pmf.getPersistenceManager();
@@ -1277,24 +1277,24 @@ public class PersistenciaSuperAndes
 		Transaction tx=pm.currentTransaction();
 		int cantCarritos= sqlCarrito.darCarritosLibres(pm).size();
 		// no se si se va al cath cuando elegido no existe 
-			try
-			{
-				tx.begin(); 
-				Carrito elegido= darCarritosLibres().get(0);
-				long idCarrito = elegido.getIdCarrito();
-				long tuplasInsertadas = sqlCarrito.asignarClienteAlCarrito(pm, idCliente, idCarrito);
-				tx.commit();
+		try
+		{
+			tx.begin(); 
+			Carrito elegido= darCarritosLibres().get(0);
+			long idCarrito = elegido.getIdCarrito();
+			long tuplasInsertadas = sqlCarrito.asignarClienteAlCarrito(pm, idCliente, idCarrito);
+			tx.commit();
 
-				log.trace ("asignacion de carrito a cliente  : " + idCliente + ": " + tuplasInsertadas + " tuplas insertadas");
-				return elegido;
-			}
-			catch (Exception e)
-			{
-				//        	e.printStackTrace();
-				log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-				return null;
-			}
-	
+			log.trace ("asignacion de carrito a cliente  : " + idCliente + ": " + tuplasInsertadas + " tuplas insertadas");
+			return elegido;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+
 		finally
 		{
 			if (tx.isActive())
@@ -1303,12 +1303,12 @@ public class PersistenciaSuperAndes
 			}
 			pm.close();
 		}
-		
+
 	}
-	
+
 	public List<Carrito> darCarritosLibres()
 	{
-		
+
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
@@ -1332,7 +1332,7 @@ public class PersistenciaSuperAndes
 			}
 			pm.close();
 		}
-		
+
 	}
 	public long abandonarCarrito (long idCliente)
 	{
@@ -1343,7 +1343,7 @@ public class PersistenciaSuperAndes
 			tx.begin();
 			long resp = sqlCarrito.devolverCarrito(pm, idCliente);
 			tx.commit();
-			
+
 
 			return resp;
 		}
@@ -1362,7 +1362,7 @@ public class PersistenciaSuperAndes
 			pm.close();
 		}
 	}
-	
+
 	public List<Producto> mostrarProductosEnElCarrito(long carritoId)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1388,7 +1388,85 @@ public class PersistenciaSuperAndes
 			pm.close();
 		}
 	}
+
+	public List<String> darCarritosAbandonados()
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			List<String> enContiene= sqlContiene.darCarritosEnContiene(pm);
+			List<Carrito> libres= sqlCarrito.darCarritosLibres(pm);
+			List<String> abandonados= new ArrayList<String>();
+			if(!libres.isEmpty() && !enContiene.isEmpty())
+			{
+				for(String s: enContiene)
+				{
+					for(Carrito c: libres)
+					{
+						if(s.equals(c.getIdCarrito()))
+						{
+							abandonados.add(s);
+						}
+					}
+				}
+			}
+			tx.commit();
+			return abandonados;
+		}
+		catch(Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}
 	
+	
+	public void devolverTodoPorAbandono()
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			List<String> lista= darCarritosAbandonados();
+			if(lista!=null)
+			{
+				if(!lista.isEmpty())
+				{
+					for(String s: lista)
+					{
+						long carritoId= Long.parseLong(s);
+						sqlContiene.devolverTodoPorCarritoAbandonado(pm, carritoId);
+					}
+				}
+			}
+			tx.commit();
+		}
+		catch(Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));	
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}
 	/* ****************************************************************
 	 * 			Métodos para manejar los supermercados
 	 *  

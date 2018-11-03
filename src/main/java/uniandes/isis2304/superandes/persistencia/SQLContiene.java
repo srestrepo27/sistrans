@@ -5,6 +5,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.superandes.negocio.Carrito;
 import uniandes.isis2304.superandes.negocio.Producto;
 
 public class SQLContiene 
@@ -75,4 +76,11 @@ public class SQLContiene
 	}
 	
 	//SI EL CARRITO TIENE PRODUCTOS Y ESTA ABANDONADO SE DEVUELVE TOdO
+	
+	public List<String> darCarritosEnContiene(PersistenceManager pm)
+	{
+		Query q= pm.newQuery(SQL,"SELECT idcarrito FROM "+ pp.darTablaContiene());
+		q.setResultClass(String.class);
+		return (List<String>) q.execute();
+	}
 }

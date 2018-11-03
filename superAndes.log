@@ -194,3 +194,11 @@ ORA-00923: palabra clave FROM no encontrada donde se esperaba
 ORA-00923: palabra clave FROM no encontrada donde se esperaba
 
 21:53:29,613 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: 
+10:29:40,649 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+10:29:40,649 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+10:29:40,661 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+10:29:44,711 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: 
+10:29:45,384 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT * FROMA_SUCURSALWHERE nombre=?".
+ORA-00923: palabra clave FROM no encontrada donde se esperaba
+
+10:29:45,427 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: 
