@@ -328,17 +328,27 @@ public class SuperAndes
 		return "Estantes:"+ "\n"+ ps.ocupacionEstantes() + "\n"+ "Bodegas: " + "\n"+ ps.ocupacionBodegas();
 	}
 	
+	public List<String> RFC8()
+	{
+		Log.info("ejecutando requerimiento de consulta 8");
+		return ps.RFC8();
+	}
 	
+	public List<String> RFC9()
+	{
+		Log.info("ejecutando requerimiento de consulta 9");
+		return ps.RFC9();
+	}
 	
 	
 	// ITERACION 2
 	
 	//Carrito y sus metodos
 	
-	public void asignarCarrito(long idCliente)
+	public Carrito asignarCarrito(long idCliente)
 	{
 		Log.info("Asignando carrito al cliente con id: "+ idCliente);
-		 ps.asignarCarrito(idCliente);
+		 return ps.asignarCarrito(idCliente);
 	}
 	
 	public void abandonarCarrito(long idCliente)
@@ -347,10 +357,27 @@ public class SuperAndes
 		ps.abandonarCarrito(idCliente);
 	}
 	
+	public Sucursal obtenerSucursalPorNombre(String nombre)
+	{
+		Log.info("Obteniendo sucursal con nombre: "+ nombre);
+		Sucursal resp=ps.obtenerSucursalPorNombre(nombre);
+		Log.info("Obteniendo sucursal con nombre: "+ nombre);
+		return resp;
+	}
+	
+	public List<Producto> productosEnElCarrito(long carritoId)
+	{
+		Log.info("Mostrando productos en el carrito del cliente " + carritoId);
+		List<Producto> resp= ps.mostrarProductosEnElCarrito(carritoId);
+		return resp;
+	}
 	
 	
-	
-	
+	public void terminarCompra(long carritoId)
+	{
+		Log.info("Terminando compra del cliente "+ carritoId);
+		ps.terminarCompra(carritoId);
+	}
 	
 	
 	

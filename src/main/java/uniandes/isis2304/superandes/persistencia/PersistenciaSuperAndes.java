@@ -529,6 +529,30 @@ public class PersistenciaSuperAndes
 		}
 		return ret;
 	}
+	public List<String> RFC8()
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		List<String> ret = null;
+		try
+		{
+			tx.begin();  
+			 ret= sqlCompra.RFC8(pm);
+		}
+		catch(Exception e)
+		{
+			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return ret;
+	}
 	
 	public List<String> RFC9()
 	{
@@ -693,7 +717,30 @@ public class PersistenciaSuperAndes
 		}
 		return lista;
 	}
-
+	
+	public void devolverProductosPorAbandono(long carritoId)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin(); 
+			sqlContiene.devolverTodoPorCarritoAbandonado(pm, carritoId);
+		}
+		catch(Exception e)
+		{
+			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
 
 	/* ****************************************************************
 	 * 			Métodos para manejar los clientes 
@@ -1042,6 +1089,54 @@ public class PersistenciaSuperAndes
 			pm.close();
 		}
 	}
+	public Sucursal obtenerSucursalPorNombre(String nombre)
+	{
+		PersistenceManager pm= pmf.getPersistenceManager();
+		Transaction tx= pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			Sucursal resp= sqlSucursal.obtenerSucursalPorNombre(pm, nombre);
+			tx.commit();
+			return resp;
+		}
+		catch(Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;	
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	public void terminarCompra(long carritoId)
+	{
+		PersistenceManager pm= pmf.getPersistenceManager();
+		Transaction tx= pm.currentTransaction();
+		try
+		{
+			sqlContiene.terminarCompra(pm, carritoId); 
+		}
+		catch(Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
 	/* ****************************************************************
 	 * 			Métodos para manejar los estates 
 	 *****************************************************************/
@@ -1185,7 +1280,7 @@ public class PersistenciaSuperAndes
 			try
 			{
 				tx.begin(); 
-				Carrito elegido= sqlCarrito.darCarritosLibres(pm).get(1);
+				Carrito elegido= darCarritosLibres().get(0);
 				long idCarrito = elegido.getIdCarrito();
 				long tuplasInsertadas = sqlCarrito.asignarClienteAlCarrito(pm, idCliente, idCarrito);
 				tx.commit();
@@ -1200,6 +1295,35 @@ public class PersistenciaSuperAndes
 				return null;
 			}
 	
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+	
+	public List<Carrito> darCarritosLibres()
+	{
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			tx.setIsolationLevel("READ ONLY");
+			List<Carrito> ret= sqlCarrito.darCarritosLibres(pm);
+			tx.commit();
+			return ret;
+		}
+		catch(Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
 		finally
 		{
 			if (tx.isActive())
@@ -1228,6 +1352,32 @@ public class PersistenciaSuperAndes
 			//        	e.printStackTrace();
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	public List<Producto> mostrarProductosEnElCarrito(long carritoId)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			List<Producto> resp= sqlContiene.darProductosEnElCarrito(pm, carritoId);
+			tx.commit();
+			return resp;
+		}
+		catch(Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
 		}
 		finally
 		{

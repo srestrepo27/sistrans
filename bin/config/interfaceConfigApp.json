@@ -5,7 +5,7 @@
 	"bannerPath": "./src/main/resources/config/logo.png",
 	"menuBar":
 	[
-	{ "menuTitle": "Requerimientos",
+	{ "menuTitle": "Requerimientos de consulta",
 		  "opciones":
 			[
 				{
@@ -28,10 +28,53 @@
 					"label": "5",
 					"event": "RFC5"
 				},
-{
+				{
 					"label": "6",
 					"event": "RFC6"
+				},
+				{
+					"label": "7",
+					"event": "RFC7"
+				},
+				{
+					"label": "8",
+					"event": "RFC8"
+				},
+				{
+					"label": "9",
+					"event": "RFC9"
 				}
+		
+			]
+		},
+		{ "menuTitle": "Carrito",
+		"opciones": 
+			[
+				{
+					"label": "Adicionar producto",
+					"event": "RF13"	
+				},
+				{
+					"label": "Devolver producto",
+					"event": "RF14"	
+				},
+				{
+					"label": "Solicitar carrito",
+					"event": "RF12"	
+				},
+				{
+					"label": "Abandonar carrito",
+					"event": "RF16"	
+				},
+				{
+					"label": "Mostrar productos en el carro",
+					"event": "mostrarProductos"
+				},
+				{
+					"label": "Terminar compra",
+					"event": "RF15"
+				}
+
 			]
 		},
 		{ "menuTitle": "Cliente",
@@ -41,16 +84,6 @@
 					"label": "Adicionar",
 					"event": "adicionarCliente"
 				}
-			]
-		},
-		{ "menuTitle": "Proveedor",
-		 	 "opciones":
-			[
-				{
-					"label": "Adicionar",
-					"event": "adicionarProveedor"
-				}
-			
 			]
 		},
 		{ "menuTitle": "Producto",
@@ -79,24 +112,7 @@
 				}
 			]
 		},
-		{ "menuTitle": "Ventas",
-		 	 "opciones":
-			[
-				{
-					"label": "Vender",
-					"event": "vender"
-				}
-			]
-		},
-		{ "menuTitle": "Sucursal",
-		 	 "opciones":
-			[
-				{
-					"label": "Adicionar",
-					"event": "adicionarSucursal"
-				}
-			]
-		},
+		
 		{ "menuTitle": "Mantenimiento",
 		  "opciones":
 			[

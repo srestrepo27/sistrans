@@ -133,7 +133,7 @@ public List<String> RFC8(PersistenceManager pm)
 	Query q= pm.newQuery(SQL,sql);
 	q.setResultClass(String.class);
 	
-	return q.executeList();
+	return (List<String>) q.executeList();
 	
 }
 
@@ -143,7 +143,7 @@ public List<String> RFC9(PersistenceManager pm)
 	Query q= pm.newQuery(SQL,sql) ;
 	q.setResultClass(String.class);
 	
-	return q.executeList();
+	return (List<String>) q.executeList();
 }
 		
 }

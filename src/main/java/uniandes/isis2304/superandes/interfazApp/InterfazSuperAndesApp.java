@@ -23,6 +23,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
+import uniandes.isis2304.superandes.negocio.Carrito;
 import uniandes.isis2304.superandes.negocio.Cliente;
 import uniandes.isis2304.superandes.negocio.Compra;
 import uniandes.isis2304.superandes.negocio.Empresa;
@@ -67,7 +68,10 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	private SuperAndes superAndes;
 
 	private String nombreSucursal;
-
+	
+	private Carrito carrito;
+	
+	private long cliente;
 	/* ****************************************************************
 	 * 			Atributos de interfaz
 	 *****************************************************************/
@@ -185,7 +189,6 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			// Creación de cada uno de los menús
 
 			JsonObject jom = men.getAsJsonObject(); 
-			System.out.println(jom);       
 			String menuTitle = jom.get("menuTitle").getAsString();        	
 			JsonArray opciones = jom.getAsJsonArray("opciones");
 
@@ -211,7 +214,16 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	public void iniciar()
 	{
 		String n=JOptionPane.showInputDialog (this, "ingrese el nombre de la sucursal", " ¿Sucursal?", JOptionPane.QUESTION_MESSAGE);
-		nombreSucursal=n;
+		if(superAndes.obtenerSucursalPorNombre(n)!=null)
+		{
+			nombreSucursal=n;
+			
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(this, "Error, la sucursal no existe");
+		}
+
 	}
 	/* ****************************************************************
 	 * 			CRUD de Clientes
@@ -279,21 +291,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			String c=JOptionPane.showInputDialog (this, "id cliente?", "Realizar venta", JOptionPane.QUESTION_MESSAGE);
-			Cliente cliente= superAndes.darClietePorId(Long.parseLong(c));
-			long id= cliente.getCodigo();
-			String numero = JOptionPane.showInputDialog (this, "Cuantos productos va a comprar?", "Realizar venta", JOptionPane.QUESTION_MESSAGE);
-			int num= Integer.parseInt(numero);
-			List<Producto> lista= new ArrayList<Producto>();
-			for(int i=0;i<num;i++)
-			{
-				String producto= JOptionPane.showInputDialog (this, "Nombre del producto?", "Realizar venta", JOptionPane.QUESTION_MESSAGE);
-
-				Producto p=	superAndes.darProductoPorNombre(producto).get(0);
-
-				lista.add(p);
-			}
-
+			List<Producto> lista= superAndes.productosEnElCarrito(cliente);
+		
 			for(int i=0;i<lista.size();i++)
 			{
 				Producto p= lista.get(i);
@@ -305,7 +304,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 				superAndes.realizarPedido(p.getCodigoBarras(),nombreSucursal);
 			}
 
-			superAndes.realizarVenta(lista, id);
+			superAndes.realizarVenta(lista, cliente);
 
 		}
 		catch(Exception e)
@@ -531,7 +530,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		resultado += " * Proyecto: SuperAndes Uniandes\n";
 		resultado += " * @version 1.0\n";
 		resultado += " * @author Santiago Restrepo, Ixtli Barbosa \n";
-		resultado += " * Octubre 3 de 2018\n";
+		resultado += " * Noviembre 4 de 2018\n";
 		resultado += " * \n";
 		resultado += "\n ************************************\n\n";
 
@@ -645,6 +644,147 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+	
+	public void RFC7()// analisis de operacion INCOMPLETO
+	{
+		try
+		{
+			String respuesta= "";
+		
+			panelDatos.actualizarInterfaz(respuesta);
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void RFC8()//clientes frecuentes
+	{
+		try
+		{
+			List<String> lista= superAndes.RFC8();
+			String respuesta= "Los clientes frecuentes son: \n";
+			for(String s: lista)
+			{
+				respuesta+= " "+s +" \n";
+			}
+			panelDatos.actualizarInterfaz(respuesta);
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void RFC9()//productos con poca demanda
+	{
+		try
+		{
+			List<String> lista= superAndes.RFC9();
+			String respuesta= "Los productos con poca demanda son: \n";
+			for(String s: lista)
+			{
+				respuesta+= " "+s +" \n";
+			}
+			panelDatos.actualizarInterfaz(respuesta);
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	//-----------------------------------------------------------------------------------------------------------------------------------------------------------
+	//REQUERIMIENTOS DE MODIFICACION
+	//------------------------------------------------------------------------------------------------------------------------------------
+	public void RF12()//Solicitar carrito
+	{
+		try
+		{
+			String id=JOptionPane.showInputDialog (this, "id cliente?", "obtener carrito", JOptionPane.QUESTION_MESSAGE);
+			
+			long i=Long.parseLong(id);
+			cliente=i;
+			carrito= superAndes.asignarCarrito(cliente);
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void RF13()//Adicionar al carrito
+	{
+		try
+		{
+			String codigo=JOptionPane.showInputDialog (this, "codigo de barras del producto?", "Adicionar producto", JOptionPane.QUESTION_MESSAGE);
+			
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void RF14()//devolver producto
+	{
+		
+	}
+	
+	
+	public void mostrarProductos()//mostrar los productos en el carrito
+	{
+		try
+		{
+			List<Producto> lista= superAndes.productosEnElCarrito(cliente);
+			String resp="Productos en el carrito: " + "\n";
+			for(Producto s:lista)
+			{
+				resp+= s.getNombre();
+			}
+			panelDatos.actualizarInterfaz(resp);
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void RF15()//pagar la compra, editar el metodo vender
+	{
+		try
+		{
+			vender();
+			superAndes.terminarCompra(cliente);
+			cliente=0;
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void RF16()//abandonar carrito de compras
+	{
+		try
+		{
+			superAndes.abandonarCarrito(cliente);
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

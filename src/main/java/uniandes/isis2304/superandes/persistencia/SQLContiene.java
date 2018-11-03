@@ -5,6 +5,8 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.superandes.negocio.Producto;
+
 public class SQLContiene 
 {
 	/* ****************************************************************
@@ -43,12 +45,12 @@ public class SQLContiene
 		return (long) q.execute();
 	}
 	
-	public List<String> darProductosEnElCarrito(PersistenceManager pm,long carritoId)
+	public List<Producto> darProductosEnElCarrito(PersistenceManager pm,long carritoId)
 	{
 		Query q= pm.newQuery(SQL,"SELECT codigoProducto FROM " + pp.darTablaContiene() + "WHERE idCarrito= ?");	
 		q.setParameters(carritoId);
-		q.setResultClass(String.class);
-		return (List<String>) q.execute();
+		q.setResultClass(Producto.class);
+		return (List<Producto>) q.execute();
 	}
 	
 	public long devolverProducto(PersistenceManager pm, String codigoProducto)
@@ -67,7 +69,7 @@ public class SQLContiene
 	
 	public long devolverTodoPorCarritoAbandonado(PersistenceManager pm, long carritoId)
 	{
-		Query q= pm.newQuery(SQL,"DELETE  codigoProducto FROM " + pp.darTablaContiene() + " WHERE carritoId= ?");	
+		Query q= pm.newQuery(SQL,"DELETE * FROM " + pp.darTablaContiene() + " WHERE carritoId= ?");	
 		q.setParameters(carritoId);
 		return (long) q.executeUnique();
 	}
