@@ -649,9 +649,12 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	{
 		try
 		{
-			String respuesta= "";
+			String f1=JOptionPane.showInputDialog (this, "fecha inicial?", "RFC6", JOptionPane.QUESTION_MESSAGE);
+			String f2=JOptionPane.showInputDialog (this, "fecha final?", "RFC6", JOptionPane.QUESTION_MESSAGE);
+
 		
-			panelDatos.actualizarInterfaz(respuesta);
+			
+
 		}
 		catch(Exception e)
 		{

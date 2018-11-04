@@ -14,9 +14,9 @@
 			<property name="javax.jdo.option.ConnectionDriverName"
 				value="oracle.jdbc.driver.OracleDriver" />
 			<property name="javax.jdo.option.ConnectionUserName"
-				value="ISIS2304A251820" />
+				value="ISIS2304A021820" />
 			<property name="javax.jdo.option.ConnectionPassword"
-				value="ygo9QMT2GJ" />
+				value="tVVewl9uZX" />
 			<property name="javax.jdo.option.Mapping" value="oracle" />
 
 			<property name="datanucleus.schema.autoCreateAll"
