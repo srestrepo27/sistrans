@@ -1089,14 +1089,14 @@ public class PersistenciaSuperAndes
 			pm.close();
 		}
 	}
-	public Sucursal obtenerSucursalPorNombre(String nombre)
+	public String obtenerSucursalPorNombre(String nombre)
 	{
 		PersistenceManager pm= pmf.getPersistenceManager();
 		Transaction tx= pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			Sucursal resp= sqlSucursal.obtenerSucursalPorNombre(pm, nombre);
+			String resp= sqlSucursal.obtenerSucursalPorNombre(pm, nombre);
 			tx.commit();
 			return resp;
 		}

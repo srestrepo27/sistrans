@@ -59,12 +59,12 @@ class SQLSucursal
 			return (long) q.executeUnique();
 		}
 		
-		public Sucursal obtenerSucursalPorNombre(PersistenceManager pm,  String nombre)
+		public String obtenerSucursalPorNombre(PersistenceManager pm,  String nombre)
 		{
-			Query q= pm.newQuery(SQL, "SELECT * FROM" + pp.darTablaSucursal() + "WHERE nombre=?");
-			q.setResultClass(Sucursal.class);
+			Query q= pm.newQuery(SQL, "SELECT nombre FROM" + pp.darTablaSucursal() + "WHERE nombre=?");
+			q.setResultClass(String.class);
 			q.setParameters(nombre);
-			return (Sucursal) q.executeUnique();
+			return (String) q.executeUnique();
 		}
 		
 		public List<Sucursal> obtenerSucursalesPorCiudad(PersistenceManager pm,  String ciudad)

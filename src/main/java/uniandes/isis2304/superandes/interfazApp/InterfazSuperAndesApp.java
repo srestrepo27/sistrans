@@ -214,7 +214,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	public void iniciar()
 	{
 		String n=JOptionPane.showInputDialog (this, "ingrese el nombre de la sucursal", " ¿Sucursal?", JOptionPane.QUESTION_MESSAGE);
-		if(superAndes.obtenerSucursalPorNombre(n)!=null)
+		String sucursal=superAndes.obtenerSucursalPorNombre(n);
+		if(sucursal!=null && sucursal!="")
 		{
 			nombreSucursal=n;
 			
