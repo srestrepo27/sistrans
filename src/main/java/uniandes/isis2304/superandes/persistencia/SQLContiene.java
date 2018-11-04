@@ -54,10 +54,10 @@ public class SQLContiene
 		return (List<Producto>) q.execute();
 	}
 	
-	public long devolverProducto(PersistenceManager pm, String codigoProducto)
+	public long devolverProducto(PersistenceManager pm, String codigoProducto, long carritoId)
 	{
-		Query q= pm.newQuery(SQL,"DELETE * FROM " + pp.darTablaContiene() + " WHERE codigoProducto= ?");	
-		q.setParameters(codigoProducto);
+		Query q= pm.newQuery(SQL,"DELETE * FROM " + pp.darTablaContiene() + " WHERE codigoProducto= ? AND carritoId= ?");	
+		q.setParameters(codigoProducto,carritoId);
 		return (long) q.executeUnique();
 	}
 	

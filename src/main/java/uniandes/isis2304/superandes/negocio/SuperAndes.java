@@ -344,7 +344,16 @@ public class SuperAndes
 	// ITERACION 2
 	
 	//Carrito y sus metodos
-	
+	public long adicionarProductoAlCarrito(long carritoId, String codigoProducto)
+	{
+		Log.info("Adicionando el producto: " + codigoProducto +"en el carrito: "+ carritoId);
+		return ps.adicionarProductoAlCarrito(carritoId, codigoProducto);
+	}
+	public long devolverProductoDelCarrito(long carritoId, String codigoProducto)
+	{
+		Log.info("Devolviendo el producto: " + codigoProducto +"en el carrito: "+ carritoId);
+		return ps.devolverProductoDelCarrito(carritoId, codigoProducto);
+	}
 	public Carrito asignarCarrito(long idCliente)
 	{
 		Log.info("Asignando carrito al cliente con id: "+ idCliente);

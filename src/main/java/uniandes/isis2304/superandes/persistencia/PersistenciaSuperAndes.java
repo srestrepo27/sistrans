@@ -1271,6 +1271,63 @@ public class PersistenciaSuperAndes
 	 * 			Métodos para manejar los carritos
 	 *  
 	 *****************************************************************/
+	public long adicionarProductoAlCarrito(long carritoId, String codigoProducto)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin(); 
+			long resp= sqlContiene.adicionarProductoAlCarrito(pm, carritoId, codigoProducto);
+			
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return (Long) null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		
+	}
+	
+	public long devolverProductoDelCarrito(long carritoId, String codigoProducto)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin(); 
+			long resp= sqlContiene.devolverProducto(pm, codigoProducto, carritoId);
+			
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return (Long) null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
 	public Carrito  asignarCarrito( long idCliente)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1280,6 +1337,7 @@ public class PersistenciaSuperAndes
 		try
 		{
 			tx.begin(); 
+			tx.setIsolationLevel("SERIALIZABLE");
 			Carrito elegido= darCarritosLibres().get(0);
 			long idCarrito = elegido.getIdCarrito();
 			long tuplasInsertadas = sqlCarrito.asignarClienteAlCarrito(pm, idCliente, idCarrito);
@@ -1292,6 +1350,7 @@ public class PersistenciaSuperAndes
 		{
 			//        	e.printStackTrace();
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			asignarCarrito(idCliente);
 			return null;
 		}
 

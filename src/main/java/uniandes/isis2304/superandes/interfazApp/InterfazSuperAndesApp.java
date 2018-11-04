@@ -722,7 +722,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		try
 		{
 			String codigo=JOptionPane.showInputDialog (this, "codigo de barras del producto?", "Adicionar producto", JOptionPane.QUESTION_MESSAGE);
-			
+			long i=superAndes.adicionarProductoAlCarrito(carrito.getIdCarrito(), codigo);
+			panelDatos.actualizarInterfaz("producto adicionado: "+ i);
 		}
 		catch(Exception e)
 		{
@@ -733,7 +734,17 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	
 	public void RF14()//devolver producto
 	{
-		
+		try
+		{
+			String codigo=JOptionPane.showInputDialog (this, "codigo de barras del producto?", "Devolver producto", JOptionPane.QUESTION_MESSAGE);
+			long i=superAndes.devolverProductoDelCarrito(carrito.getIdCarrito(), codigo);
+			panelDatos.actualizarInterfaz("producto devuelto: "+ i);
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
 	}
 	
 	
