@@ -366,10 +366,11 @@ public class SuperAndes
 		ps.abandonarCarrito(idCliente);
 	}
 	
-	public String obtenerSucursalPorNombre(String nombre)
+	public Sucursal obtenerSucursalPorNombre(String nombre)
 	{
 		Log.info("Obteniendo sucursal con nombre: "+ nombre);
-		String resp=ps.obtenerSucursalPorNombre(nombre);
+		Sucursal resp=ps.obtenerSucursalPorNombre(nombre);
+		
 		Log.info("Obteniendo sucursal con nombre: "+ nombre);
 		return resp;
 	}

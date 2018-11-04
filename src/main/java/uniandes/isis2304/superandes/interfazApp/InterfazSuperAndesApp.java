@@ -29,6 +29,7 @@ import uniandes.isis2304.superandes.negocio.Compra;
 import uniandes.isis2304.superandes.negocio.Empresa;
 import uniandes.isis2304.superandes.negocio.Pedido;
 import uniandes.isis2304.superandes.negocio.Producto;
+import uniandes.isis2304.superandes.negocio.Sucursal;
 import uniandes.isis2304.superandes.negocio.SuperAndes;
 import uniandes.isis2304.superandes.negocio.VOCliente;
 
@@ -100,6 +101,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	 */
 	public InterfazSuperAndesApp( )
 	{
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menu = new JMenuBar(); 
 
 		// Carga lx configuración de lx interfaz desde un archivo JSON
@@ -214,8 +216,10 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	public void iniciar()
 	{
 		String n=JOptionPane.showInputDialog (this, "ingrese el nombre de la sucursal", " ¿Sucursal?", JOptionPane.QUESTION_MESSAGE);
-		String sucursal=superAndes.obtenerSucursalPorNombre(n);
-		if(sucursal!=null && sucursal!="")
+		Sucursal sucursal=superAndes.obtenerSucursalPorNombre(n);
+		System.out.println(n);
+		System.out.println(sucursal.getNombre());
+		if(sucursal != null)
 		{
 			nombreSucursal=n;
 			

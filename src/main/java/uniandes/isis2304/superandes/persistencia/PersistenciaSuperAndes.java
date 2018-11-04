@@ -141,7 +141,7 @@ public class PersistenciaSuperAndes
 		tablas.add ("EMPRESA");
 		tablas.add ("PROVEEDOR");
 		tablas.add ("PEDIDO");
-		tablas.add ("SUCURSAL");
+		tablas.add ("A_SUCURSAL");
 		tablas.add ("PROMOCION_SUCURSAL");
 		tablas.add ("ESTANTE");
 		tablas.add ("BODEGA");
@@ -257,6 +257,7 @@ public class PersistenciaSuperAndes
 
 	public String darTablaSucursal()
 	{
+		System.out.println(tablas.get(7));
 		return tablas.get(7);
 	}
 
@@ -1089,20 +1090,21 @@ public class PersistenciaSuperAndes
 			pm.close();
 		}
 	}
-	public String obtenerSucursalPorNombre(String nombre)
+	public Sucursal obtenerSucursalPorNombre(String nombre)
 	{
 		PersistenceManager pm= pmf.getPersistenceManager();
 		Transaction tx= pm.currentTransaction();
 		try
 		{
 			tx.begin();
-			String resp= sqlSucursal.obtenerSucursalPorNombre(pm, nombre);
+			Sucursal resp= sqlSucursal.obtenerSucursalPorNombre(pm, nombre);
 			tx.commit();
 			return resp;
 		}
 		catch(Exception e)
 		{
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return null;	
 		}
 		finally

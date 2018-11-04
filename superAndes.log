@@ -269,3 +269,175 @@ ORA-00923: palabra clave FROM no encontrada donde se esperaba
 11:50:58,303 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
 11:50:58,304 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
 11:50:58,316 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:00:16,379 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:00:16,380 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:00:16,403 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:00:23,981 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:00:24,658 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT nombre FROMA_SUCURSALWHERE nombre=?".
+ORA-00923: palabra clave FROM no encontrada donde se esperaba
+
+12:00:24,711 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:01:09,474 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:01:09,475 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:01:09,499 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:01:19,947 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:01:20,594 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT nombre FROMA_SUCURSALWHERE nombre=?".
+ORA-00923: palabra clave FROM no encontrada donde se esperaba
+
+12:01:20,647 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:01:46,758 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:01:46,759 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:01:46,853 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:01:57,831 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: El Limonar
+12:01:58,473 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT nombre FROMA_SUCURSALWHERE nombre=?".
+ORA-00923: palabra clave FROM no encontrada donde se esperaba
+
+12:01:58,528 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: El Limonar
+12:15:06,180 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:15:06,181 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:15:06,197 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:15:13,735 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:15:14,399 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT * FROMA_SUCURSALWHERE nombre=?".
+ORA-00923: palabra clave FROM no encontrada donde se esperaba
+
+12:17:13,383 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:17:13,383 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:17:13,399 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:17:21,398 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:17:22,036 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT * FROMA_SUCURSALWHERE nombre=?".
+ORA-00923: palabra clave FROM no encontrada donde se esperaba
+
+12:17:22,097 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:18:28,241 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:18:28,242 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:18:28,258 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:18:39,758 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:18:40,433 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT * FROMA_SUCURSALWHERE nombre=?".
+ORA-00923: palabra clave FROM no encontrada donde se esperaba
+
+12:18:40,487 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:19:41,628 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:19:41,629 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:19:41,652 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:19:48,758 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:19:49,431 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT * FROMA_SUCURSALWHERE nombre=?".
+ORA-00923: palabra clave FROM no encontrada donde se esperaba
+
+12:19:49,489 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:21:15,155 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:21:15,156 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:21:15,172 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:21:23,551 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:21:24,245 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT * FROMA_SUCURSALWHERE nombre=?".
+ORA-00923: palabra clave FROM no encontrada donde se esperaba
+
+12:21:24,305 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:25:32,320 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:25:32,321 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:25:32,345 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:25:41,191 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:25:41,901 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT * FROMA_SUCURSALWHERE nombre=?".
+ORA-00923: palabra clave FROM no encontrada donde se esperaba
+
+12:25:41,952 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:31:20,205 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:31:20,206 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:31:20,221 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:31:31,400 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:31:32,076 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT * FROMA_PROMOCION_SUCURSALWHERE nombre=?".
+ORA-00923: palabra clave FROM no encontrada donde se esperaba
+
+12:31:32,129 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:34:11,999 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:34:12,000 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:34:12,024 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:34:19,873 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:34:20,579 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT * FROMA_SUCURSALWHERE nombre=?".
+ORA-00923: palabra clave FROM no encontrada donde se esperaba
+
+12:34:20,632 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:35:26,286 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:35:26,287 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:35:26,311 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:35:34,994 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:35:35,741 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT * FROMA_SUCURSALWHERE nombre=?".
+ORA-00923: palabra clave FROM no encontrada donde se esperaba
+
+12:35:35,793 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:38:45,755 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:38:45,756 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:38:45,772 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:38:54,660 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:38:55,344 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT * FROMA_SUCURSALWHERE nombre=?".
+ORA-00923: palabra clave FROM no encontrada donde se esperaba
+
+12:38:55,400 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:45:24,921 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:45:24,922 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:45:24,938 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:45:32,413 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:45:33,108 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT * FROMA_SUCURSALWHERE nombre=?".
+ORA-00923: palabra clave FROM no encontrada donde se esperaba
+
+12:45:33,163 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:51:30,404 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:51:30,404 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:51:30,420 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:51:43,777 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:51:44,463 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT * FROMA_SUCURSALWHERE nombre=?".
+ORA-00923: palabra clave FROM no encontrada donde se esperaba
+
+12:51:44,550 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:52:18,130 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:52:18,131 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:52:18,146 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:52:26,148 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:52:26,801 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "SELECT * FROM A_SUCURSALWHERE nombre=?".
+ORA-00933: comando SQL no terminado correctamente
+
+12:52:26,870 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:52:52,574 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:52:52,575 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:52:52,594 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:53:04,491 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:53:05,059 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : ORA-02391: exceeded simultaneous SESSIONS_PER_USER limit
+
+ORA-02391: exceeded simultaneous SESSIONS_PER_USER limit
+
+12:53:05,063 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:58:01,529 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+12:58:01,530 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+12:58:01,546 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+12:58:09,606 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+12:58:10,102 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : ORA-02391: exceeded simultaneous SESSIONS_PER_USER limit
+
+ORA-02391: exceeded simultaneous SESSIONS_PER_USER limit
+
+12:58:10,106 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+13:05:53,293 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:05:53,294 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:05:53,309 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:06:02,773 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+13:06:03,286 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : ORA-02391: exceeded simultaneous SESSIONS_PER_USER limit
+
+ORA-02391: exceeded simultaneous SESSIONS_PER_USER limit
+
+13:06:03,291 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+13:28:17,894 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:28:17,895 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:28:17,911 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:28:26,898 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+13:28:27,410 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : ORA-02391: exceeded simultaneous SESSIONS_PER_USER limit
+
+ORA-02391: exceeded simultaneous SESSIONS_PER_USER limit
+
+13:28:27,413 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+13:29:09,919 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:29:09,920 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:29:09,936 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:29:25,254 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+13:29:25,757 (main) ERROR [uniandes.isis2304.superandes.persistencia.PersistenciaSuperAndes] - Exception : ORA-02391: exceeded simultaneous SESSIONS_PER_USER limit
+
+ORA-02391: exceeded simultaneous SESSIONS_PER_USER limit
+
+13:29:25,760 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
