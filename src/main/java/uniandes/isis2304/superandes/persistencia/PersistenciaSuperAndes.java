@@ -555,6 +555,30 @@ public class PersistenciaSuperAndes
 		return ret;
 	}
 
+	public List<String> RFC7(String producto)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		List<String> ret = null;
+		try
+		{
+			tx.begin();  
+			ret= sqlCompra.RFC7(pm,producto);
+		}
+		catch(Exception e)
+		{
+			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return ret;
+	}
 	public List<String> RFC9()
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1104,7 +1128,7 @@ public class PersistenciaSuperAndes
 		catch(Exception e)
 		{
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			System.out.println("nohay");
 			return null;	
 		}
 		finally

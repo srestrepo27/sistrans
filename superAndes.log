@@ -441,3 +441,13 @@ ORA-02391: exceeded simultaneous SESSIONS_PER_USER limit
 ORA-02391: exceeded simultaneous SESSIONS_PER_USER limit
 
 13:29:25,760 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+20:55:41,039 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+20:55:41,039 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+20:55:41,059 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+20:55:53,671 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+20:55:54,920 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: Centro
+20:57:30,709 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+20:57:30,710 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+20:57:30,726 (main) INFO  [uniandes.isis2304.superandes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+20:57:37,589 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: sss
+20:57:38,511 (main) INFO  [uniandes.isis2304.superandes.negocio.SuperAndes] - Obteniendo sucursal con nombre: sss

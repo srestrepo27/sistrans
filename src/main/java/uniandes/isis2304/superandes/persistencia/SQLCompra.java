@@ -120,7 +120,7 @@ class SQLCompra
 public double RFC1(PersistenceManager pm, String fechai, String fechaf  )
 		
 		{
-			String sql = "SELECT SUM ( total ) FROM "+ pp.darTablaCompra()+ "WHERE fecha BETWEEN ? AND ? "; 
+			String sql = "SELECT SUM ( total ) FROM "+ pp.darTablaCompra()+ " WHERE fecha BETWEEN ? AND ? "; 
 			Query q= pm.newQuery(SQL,sql);
 			q.setParameters(fechai, fechaf );
 			return  (double) q.executeUnique();
@@ -136,7 +136,15 @@ public List<String> RFC8(PersistenceManager pm)
 	return (List<String>) q.executeList();
 	
 }
-
+public List<String> RFC7(PersistenceManager pm, String producto)
+{
+	String sql= "SELECT cliente, count (cliente) FROM " + pp.darTablaContiene()+" inner join "+pp.darTablaCompra()+ " on "+ pp.darTablaContiene()+"." ;
+	Query q= pm.newQuery(SQL,sql);
+	q.setResultClass(String.class);
+	
+	return (List<String>) q.executeList();
+	
+}
 public List<String> RFC9(PersistenceManager pm)
 {
 	String sql="SELECT nombre FROM ( SELECT Producto_CodigoDeBarras FROM (((SELECT Proveedor_nit from "+ pp.darTablaPedido()+" WHERE EXTRACT(month from fecha)>2) natural join (SELECT nit as Proveedor_nit FROM " + pp.darTablaProveedor()+" )) NATURAL JOIN (select proveedor_nit, Producto_CodigoDeBarras FROM "+pp.darTablaProvee()+" )) INNER JOIN (SELECT codigoDeBarras, nombre from "+pp.darTablaProducto()+") ON Producto_CodigoDeBarras= codigoDeBarras)";

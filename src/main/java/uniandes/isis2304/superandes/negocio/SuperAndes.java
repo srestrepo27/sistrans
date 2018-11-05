@@ -333,7 +333,11 @@ public class SuperAndes
 		Log.info("ejecutando requerimiento de consulta 8");
 		return ps.RFC8();
 	}
-	
+	public List<String> RFC7(String producto)
+	{
+		Log.info("ejecutando requerimiento de consulta 7");
+		return ps.RFC7(producto);
+	}
 	public List<String> RFC9()
 	{
 		Log.info("ejecutando requerimiento de consulta 9");
