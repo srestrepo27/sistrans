@@ -1,0 +1,1 @@
+SELECT cliente, count (cliente) FROM " + pp.darTablaContiene()+" inner join "+pp.darTablaCompra()+ " on "+ pp.darTablaContiene()+"."

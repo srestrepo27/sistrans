@@ -1,0 +1,1 @@
+SELECT idCliente FROM COMPRA WHERE ( SELECT idCliente, count(clienteId) FROM COMPRA WHERE EXTRACT(MONTH FROM fecha) GROUPBY idCliente >= 2)" ;
