@@ -42,7 +42,7 @@ class SQLPedido
 		
 		public long adicionarPedido(PersistenceManager pm, long id, Date fecha, String proveedorNit,  String nombreSucursal)
 		{
-			Query q= pm.newQuery(SQL,"INSERT INTO "+ pp.darTablaPedido()+ " (id,fecha,proveedorNit,nombreSucursal) values (?,?,?,?)");
+			Query q= pm.newQuery(SQL,"INSERT INTO "+ pp.darTablaPedido()+ " (id,fecha,proveedorNit, Sucursal) values (?,?,?,?)");
 			q.setParameters(id,fecha,proveedorNit,nombreSucursal);
 			
 			return (long) q.executeUnique();
@@ -64,7 +64,7 @@ class SQLPedido
 		
 		public List<Pedido> darPedidosSuperMercado(PersistenceManager pm, String nombreSucursal)
 		{
-			Query q= pm.newQuery(SQL,"SELECT * FROM "+ pp.darTablaPedido()+ " WHERE nombreSucursal=?");
+			Query q= pm.newQuery(SQL,"SELECT * FROM "+ pp.darTablaPedido()+ " WHERE Sucursal=?");
 			q.setParameters(nombreSucursal);
 			q.setResultClass(Pedido.class);
 			return (List<Pedido>) q.execute();

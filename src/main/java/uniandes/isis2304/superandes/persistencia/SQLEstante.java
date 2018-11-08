@@ -39,7 +39,7 @@ class SQLEstante
 		
 		public long adicionarEstante(PersistenceManager pm, long id, double capacidadPeso, double capacidadVolumen, String nombreSucursal,String categoria)
 		{
-			Query q= pm.newQuery(SQL,"INSERT INTO" + pp.darTablaEstante() + "(id,capacidadPeso,capacidadVolumen,sucursalNombre,categoria) values (?,?,?,?,?)");
+			Query q= pm.newQuery(SQL,"INSERT INTO " + pp.darTablaEstante() + " (id,capacidadPeso,capacidadVolumen,sucursalNombre,categoria) values (?,?,?,?,?)");
 			q.setParameters(id,capacidadPeso,capacidadVolumen,nombreSucursal,categoria);
 			return (long) q.executeUnique();
 			
@@ -47,14 +47,14 @@ class SQLEstante
 		
 		public long eliminarEstante(PersistenceManager pm, long id)
 		{
-			Query q= pm.newQuery(SQL,"DELET FROM" + pp.darTablaEstante() + "WHERE id = ?");
+			Query q= pm.newQuery(SQL,"DELET FROM " + pp.darTablaEstante() + " WHERE id = ?");
 			q.setParameters(id);
 			return (long) q.executeUnique();
 		}
 		
 		public Estante darEstantePorId(PersistenceManager pm, long id)
 		{
-			Query q= pm.newQuery(SQL,"SELECT * FROM" + pp.darTablaEstante() + "WHERE id = ?");
+			Query q= pm.newQuery(SQL,"SELECT * FROM " + pp.darTablaEstante() + " WHERE id = ?");
 			q.setResultClass(Estante.class);
 			q.setParameters(id);
 			return (Estante) q.executeUnique();

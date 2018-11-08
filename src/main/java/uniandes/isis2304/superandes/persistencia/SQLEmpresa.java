@@ -39,35 +39,35 @@ class SQLEmpresa
 		
 		public long adicionarEmpresa(PersistenceManager pm,String nit, String direccion,long clientesCodigo)
 		{
-			Query q= pm.newQuery(SQL,"INSERT INTO" + pp.darTablaEmpresa()+ " (nit,direccion,clienteCodigo) values (?,?,?)");
+			Query q= pm.newQuery(SQL,"INSERT INTO " + pp.darTablaEmpresa()+ " (nit,direccion,clientesCodigo) values (?,?,?)");
 			q.setParameters(nit,direccion,clientesCodigo);
 			return (long) q.executeUnique();
 		}
 		
 		public long eliminarEmpresaPorClienteCodigo(PersistenceManager pm, long clienteCodigo)
 		{
-			Query q= pm.newQuery(SQL,"DELETE FROM" + pp.darTablaEmpresa() +"WHERE clienteCodigo=?");
+			Query q= pm.newQuery(SQL,"DELETE FROM " + pp.darTablaEmpresa() +" WHERE clientesCodigo=?");
 			q.setParameters(clienteCodigo);
 			return (long) q.executeUnique();
 		}
 		
 		public long eliminarEmpresaPorClienteCodigo(PersistenceManager pm, String nit)
 		{
-			Query q= pm.newQuery(SQL,"DELETE FROM" + pp.darTablaEmpresa() +"WHERE nit=?");
+			Query q= pm.newQuery(SQL,"DELETE FROM " + pp.darTablaEmpresa() +" WHERE nit=?");
 			q.setParameters(nit);
 			return (long) q.executeUnique();
 		}
 		
 		public long cambiarDireccionEmpresa(PersistenceManager pm, String direccion)
 		{
-			Query q= pm.newQuery(SQL,"UPDATE" + pp.darTablaEmpresa() + "SET direccion=?");
+			Query q= pm.newQuery(SQL,"UPDATE " + pp.darTablaEmpresa() + " SET direccion=?");
 			q.setParameters(direccion);
 			return (long) q.executeUnique();
 		}
 		
 		public Empresa darEmpresaPorNit(PersistenceManager pm, String nit)
 		{
-			Query q= pm.newQuery(SQL,"SELECT * FROM" + pp.darTablaEmpresa() + "WHERE nit= ?");
+			Query q= pm.newQuery(SQL,"SELECT * FROM " + pp.darTablaEmpresa() + " WHERE nit= ?");
 			q.setResultClass(Empresa.class);
 			q.setParameters(nit);
 			return (Empresa) q.executeUnique();

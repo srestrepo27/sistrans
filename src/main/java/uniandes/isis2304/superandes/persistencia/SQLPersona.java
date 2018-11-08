@@ -40,7 +40,7 @@ class SQLPersona
 		
 		public long adicionarPersona(PersistenceManager pm,long cedula,long clientesCodigo)
 		{
-			Query q= pm.newQuery(SQL,"INSERT INTO" + pp.darTablaPersona()+ " (cedula,clienteCodigo) values (?,?)");
+			Query q= pm.newQuery(SQL,"INSERT INTO " + pp.darTablaPersona()+ " (cedula,clientesCodigo) values (?,?)");
 			q.setParameters(cedula,clientesCodigo);
 			return (long) q.executeUnique();
 		}
@@ -63,7 +63,7 @@ class SQLPersona
 		
 		public Cliente darClientePorCedula(PersistenceManager pm,long cedula)
 		{
-			Query q= pm.newQuery(SQL,"SELECT * FROM" + pp.darTablaPersona() + "WHERE cedula= ?");
+			Query q= pm.newQuery(SQL,"SELECT * FROM " + pp.darTablaPersona() + "WHERE cedula= ?");
 			q.setResultClass(Cliente.class);
 			q.setParameters(cedula);
 			return (Cliente) q.executeUnique();

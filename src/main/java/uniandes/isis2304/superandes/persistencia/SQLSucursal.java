@@ -41,20 +41,20 @@ class SQLSucursal
 		
 		public long adicionarSucursal(PersistenceManager pm,  String nombre,String direccion,String ciudad)
 		{
-			Query q= pm.newQuery(SQL, "INSERT INTO" + pp.darTablaSucursal() + "(nombre,direccion,ciudad) values (?,?,?)");
+			Query q= pm.newQuery(SQL, "INSERT INTO " + pp.darTablaSucursal() + " (nombre,direccion,ciudad) values (?,?,?)");
 			q.setParameters(nombre,direccion,ciudad);
 			return (long) q.executeUnique();
 		}
 		public long eliminarSucursalPorNombre(PersistenceManager pm,  String nombre)
 		{
-			Query q= pm.newQuery(SQL, "DELETE FROM" + pp.darTablaSucursal() + "WHERE nombre=?");
+			Query q= pm.newQuery(SQL, "DELETE FROM " + pp.darTablaSucursal() + " WHERE nombre=?");
 			q.setParameters(nombre);
 			return (long) q.executeUnique();
 		}
 		
 		public long eliminarSucursalPorNombreCiudad(PersistenceManager pm,  String nombre,String ciudad)
 		{
-			Query q= pm.newQuery(SQL, "DELETE FROM" + pp.darTablaSucursal() + "WHERE nombre=? AND ciudad=?");
+			Query q= pm.newQuery(SQL, "DELETE FROM " + pp.darTablaSucursal() + " WHERE nombre=? AND ciudad=?");
 			q.setParameters(nombre,ciudad);
 			return (long) q.executeUnique();
 		}
@@ -70,7 +70,7 @@ class SQLSucursal
 		
 		public List<Sucursal> obtenerSucursalesPorCiudad(PersistenceManager pm,  String ciudad)
 		{
-			Query q= pm.newQuery(SQL, "SELECT * FROM" + pp.darTablaSucursal() + "WHERE ciudad=?");
+			Query q= pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaSucursal() + " WHERE ciudad=?");
 			q.setResultClass(Sucursal.class);
 			q.setParameters(ciudad);
 			return (List<Sucursal>) q.execute();
@@ -78,7 +78,7 @@ class SQLSucursal
 		
 		public long cambiarDireccionSucursal(PersistenceManager pm,  String nombre, String direccion)
 		{
-			Query q= pm.newQuery(SQL, "UPDATE" + pp.darTablaSucursal() + "SET direccion =? WHERE nombre=?");
+			Query q= pm.newQuery(SQL, "UPDATE " + pp.darTablaSucursal() + " SET direccion =? WHERE nombre=?");
 			q.setParameters(direccion,nombre);
 			return (long) q.executeUnique();
 		}

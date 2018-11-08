@@ -41,14 +41,14 @@ public class SQLContiene
 	
 	public long adicionarProductoAlCarrito(PersistenceManager pm, long carritoId, String codigoProducto)
 	{
-		Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 INSERT INTO" + pp.darTablaContiene() + "(carritoId,codigoProducto) values (?,?)");	
+		Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 INSERT INTO " + pp.darTablaContiene() + "(carrito,Producto) values (?,?)");	
 		q.setParameters(carritoId,codigoProducto);
 		return (long) q.execute();
 	}
 	
 	public List<Producto> darProductosEnElCarrito(PersistenceManager pm,long carritoId)
 	{
-		Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 SELECT codigoProducto FROM " + pp.darTablaContiene() + "WHERE idCarrito= ?");	
+		Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 SELECT Producto FROM " + pp.darTablaContiene() + " WHERE Carrito= ?");	
 		q.setParameters(carritoId);
 		q.setResultClass(Producto.class);
 		return (List<Producto>) q.execute();
@@ -56,21 +56,21 @@ public class SQLContiene
 	
 	public long devolverProducto(PersistenceManager pm, String codigoProducto, long carritoId)
 	{
-		Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 DELETE * FROM " + pp.darTablaContiene() + " WHERE codigoProducto= ? AND carritoId= ?");	
+		Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 DELETE * FROM " + pp.darTablaContiene() + " WHERE Producto= ? AND carrito= ?");	
 		q.setParameters(codigoProducto,carritoId);
 		return (long) q.executeUnique();
 	}
 	
 	public long terminarCompra(PersistenceManager pm, long carritoId)
 	{
-		Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 DELETE * FROM " + pp.darTablaContiene() + " WHERE carritoId= ?");	
+		Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 DELETE * FROM " + pp.darTablaContiene() + " WHERE carrito= ?");	
 		q.setParameters(carritoId);
 		return (long) q.executeUnique();
 	}
 	
 	public long devolverTodoPorCarritoAbandonado(PersistenceManager pm, long carritoId)
 	{
-		Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 DELETE * FROM " + pp.darTablaContiene() + " WHERE carritoId= ?");	
+		Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 DELETE * FROM " + pp.darTablaContiene() + " WHERE carrito= ?");	
 		q.setParameters(carritoId);
 		return (long) q.executeUnique();
 	}
@@ -79,7 +79,7 @@ public class SQLContiene
 	
 	public List<String> darCarritosEnContiene(PersistenceManager pm)
 	{
-		Query q= pm.newQuery(SQL," SET AUTOCOMMIT 0 SELECT idcarrito FROM "+ pp.darTablaContiene());
+		Query q= pm.newQuery(SQL," SET AUTOCOMMIT 0 SELECT carrito FROM "+ pp.darTablaContiene());
 		q.setResultClass(String.class);
 		return (List<String>) q.execute();
 	}

@@ -41,7 +41,7 @@ class SQLProducto
 	
 	public long adicionarProducto(PersistenceManager pm,String codigoDeBarras, String unidadMedida,String nombre, String marca, double precioVenta, double precioCompra,String presentacion,double precioXunidad,int cantidad, String empaque,boolean perecedero,int nivelReo, long estantesId,long bodegasId, long pedidoId)
 	{
-		Query q= pm.newQuery(SQL,"INSERT INTO" + pp.darTablaProducto()+ "( codigoDeBarras,  unidadMedida, nombre,  marca,  precioVenta,  precioCompra, presentacion, precioXunidad, cantidad,empaque,perecedero, nivelReo,  estantesId, bodegasId,  pedidoId) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		Query q= pm.newQuery(SQL,"INSERT INTO " + pp.darTablaProducto()+ " ( codigoDeBarras,  unidadMedida, nombre,  marca,  precioVenta,  precioCompra, presentacion, precioXunidad, cantidad,empaque,perecedero, nivelReo,  estantesId, bodegasId,  pedidoId) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 		q.setParameters(codigoDeBarras,  unidadMedida, nombre,  marca,  precioVenta,  precioCompra, presentacion, precioXunidad, cantidad,empaque,perecedero, nivelReo,  estantesId, bodegasId,  pedidoId);
 		return (long) q.executeUnique();
 	}
@@ -55,7 +55,7 @@ class SQLProducto
 	
 	public long venderProducto(PersistenceManager pm,String codigoDeBarras)
 	{
-		Query q= pm.newQuery(SQL,"UPDATE" +pp.darTablaProducto()+ "SET cantidad=cantidad-1 WHERE codigoDeBarras=?");
+		Query q= pm.newQuery(SQL,"UPDATE " +pp.darTablaProducto()+ " SET cantidad=cantidad-1 WHERE codigoDeBarras=?");
 		q.setParameters(codigoDeBarras);
 		return (long) q.executeUnique();
 
@@ -86,7 +86,7 @@ class SQLProducto
 	
 	public int darCantidadProducto(PersistenceManager pm, String codigoDeBarras)
 	{
-		Query q= pm.newQuery(SQL,"SELECT cantidad FROM " +pp.darTablaProducto()+ "WHERE codigoDeBarras=?");
+		Query q= pm.newQuery(SQL,"SELECT cantidad FROM " +pp.darTablaProducto()+ " WHERE codigoDeBarras=?");
 		q.setParameters(codigoDeBarras);
 		q.setResultClass(Integer.class);
 		return ( int) q.executeUnique();
@@ -94,7 +94,7 @@ class SQLProducto
 	
 	public int darNivelReoProducto(PersistenceManager pm, String codigoDeBarras)
 	{
-		Query q= pm.newQuery(SQL,"SELECT nivelReo FROM " +pp.darTablaProducto()+ "WHERE codigoDeBarras=?");
+		Query q= pm.newQuery(SQL,"SELECT nivelReo FROM " +pp.darTablaProducto()+ " WHERE codigoDeBarras=?");
 		q.setParameters(codigoDeBarras);
 		q.setResultClass(Integer.class);
 		return ( int) q.executeUnique();

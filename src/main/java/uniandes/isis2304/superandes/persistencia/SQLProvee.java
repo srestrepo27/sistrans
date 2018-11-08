@@ -42,21 +42,21 @@ class SQLProvee
 		
 		public long adicionarProvee(PersistenceManager pm, String proveedor, String producto)
 		{
-			Query q= pm.newQuery(SQL, "INSERT INTO" + pp.darTablaProvee() + "(proveedor,producto) values (?,?)");
-			q.setParameters(proveedor,producto);
+			Query q= pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProvee() + " (proveedor,producto) values (?,?)");
+			q.setParameters(proveedor,producto); 
 			return (long) q.executeUnique();
 		}
 		
 		public long eliminarProvee(PersistenceManager pm, String proveedor, String producto)
 		{
-			Query q= pm.newQuery(SQL, "DELETE FROM" + pp.darTablaProvee() + "WHERE proveedor=? AND producto=?");
+			Query q= pm.newQuery(SQL, "DELETE FROM " + pp.darTablaProvee() + " WHERE proveedor=? AND producto=?");
 			q.setParameters(proveedor,producto);
 			return (long) q.executeUnique();
 		}
 		
 		public Provee obtenerProvee(PersistenceManager pm, String proveedor, String producto)
 		{
-			Query q= pm.newQuery(SQL, "SELECT * FROM" + pp.darTablaProvee() + "WHERE proveedor=? AND producto=?");
+			Query q= pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaProvee() + " WHERE proveedor=? AND producto=?");
 			q.setResultClass(Provee.class);
 			q.setParameters(proveedor,producto);
 			return (Provee) q.executeUnique();
@@ -64,7 +64,7 @@ class SQLProvee
 		
 		public List<Provee> obtenerProveeProveedor(PersistenceManager pm, String proveedor)
 		{
-			Query q= pm.newQuery(SQL, "SELECT * FROM" + pp.darTablaProvee() + "WHERE proveedor=? ");
+			Query q= pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaProvee() + " WHERE proveedor=? ");
 			q.setResultClass(Provee.class);
 			q.setParameters(proveedor);
 			return (List<Provee>) q.execute();
@@ -72,7 +72,7 @@ class SQLProvee
 		
 		public Provee obtenerProveeProducto(PersistenceManager pm, String producto)
 		{
-			Query q= pm.newQuery(SQL, "SELECT * FROM" + pp.darTablaProvee() + "WHERE producto=?");
+			Query q= pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaProvee() + " WHERE producto=?");
 			q.setResultClass(Provee.class);
 			q.setParameters(producto);
 			return (Provee) q.executeUnique();

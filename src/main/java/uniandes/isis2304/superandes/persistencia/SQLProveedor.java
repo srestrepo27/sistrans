@@ -42,21 +42,21 @@ class SQLProveedor
 		
 		public long adicionarProveedor(PersistenceManager pm, String nit, String nombre)
 		{
-			Query q= pm.newQuery(SQL, "INSERT INTO" + pp.darTablaProveedor() + "(nit,nombre) values (?,?)");
+			Query q= pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProveedor() + " (nit,nombre) values (?,?)");
 			q.setParameters(nit,nombre);
 			return (long) q.executeUnique();
 		}
 		
 		public long eliminarProveedorPorNit(PersistenceManager pm, String nit)
 		{
-			Query q= pm.newQuery(SQL, "DELETE FROM" + pp.darTablaProveedor() + "WHERE nit=?");
+			Query q= pm.newQuery(SQL, "DELETE FROM " + pp.darTablaProveedor() + " WHERE nit=?");
 			q.setParameters(nit);
 			return (long) q.executeUnique();
 		}
 		
 		public Proveedor obtenerProveedorPorNit(PersistenceManager pm, String nit)
 		{
-			Query q= pm.newQuery(SQL, "SELECT * FROM" + pp.darTablaProveedor() + "WHERE nit=?");
+			Query q= pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaProveedor() + " WHERE nit=?");
 			q.setResultClass(Proveedor.class);
 			q.setParameters(nit);
 			return (Proveedor) q.executeUnique();
@@ -64,7 +64,7 @@ class SQLProveedor
 		
 		public List<Proveedor> obtenerProveedoresPorNombre(PersistenceManager pm, String nombre)
 		{
-			Query q= pm.newQuery(SQL, "SELECT * FROM" + pp.darTablaProveedor() + "WHERE nombre=?");
+			Query q= pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaProveedor() +  " WHERE nombre=?");
 			q.setResultClass(Proveedor.class);
 
 			q.setParameters(nombre);

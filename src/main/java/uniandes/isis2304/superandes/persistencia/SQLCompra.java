@@ -45,42 +45,42 @@ class SQLCompra
 		
 		public long adicionarCompra(PersistenceManager pm, String productoCodigo,long clienteId, String factura,double total, Timestamp fecha,long id )
 		{
-			Query q= pm.newQuery(SQL, "SET AUTOCOMMIT 0 INSERT INTO" + pp.darTablaCompra() + "(productoCodigo,clienteId,factura,total) values (?,?,?,?)");
+			Query q= pm.newQuery(SQL, "SET AUTOCOMMIT 0 INSERT INTO " + pp.darTablaCompra() + " (productoCodigo,clienteId,factura,total) values (?,?,?,?)");
 			q.setParameters(productoCodigo,clienteId,factura,total,fecha,id);
 			return (long) q.executeUnique();
 		}
 		
 		public long eliminarCompra(PersistenceManager pm, String id )
 		{
-			Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 DELET FROM" + pp.darTablaCompra()+ "WHERE productoCodigo= ? AND clienteId=?)" );
+			Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 DELET FROM " + pp.darTablaCompra()+ " WHERE productoCodigo= ? AND clienteId=?)" );
 			q.setParameters( id);
 			return (long) q.executeUnique();
 		
 		}
 		public Compra darCompra(PersistenceManager pm, String id)
 		{
-			Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 SELECT * FROM" +pp.darTablaCompra()+"WHERE factura=?");
+			Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 SELECT * FROM " +pp.darTablaCompra()+" WHERE factura=?");
 			q.setParameters(id);
 			q.setResultClass(Compra.class);
 			return(Compra)q.executeUnique();
 		}
 		public long eliminarCompraPorClienteId(PersistenceManager pm, long clienteId)
 		{
-			Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 DELET FROM" + pp.darTablaCompra()+ "WHERE clienteId=?)" );
+			Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 DELET FROM " + pp.darTablaCompra()+ " WHERE clienteId=?)" );
 			q.setParameters(clienteId);
 			return (long) q.executeUnique();	
 		}
 		
 		public List<Compra> darCompras(PersistenceManager pm)
 		{
-			Query q= pm.newQuery(SQL," SET AUTOCOMMIT 0 SELECT * FROM" + pp.darTablaCompra());
+			Query q= pm.newQuery(SQL," SET AUTOCOMMIT 0 SELECT * FROM " + pp.darTablaCompra());
 			q.setResultClass(Compra.class);
 			return (List<Compra>) q.execute();
 		}
 		
 		public List<Compra> darComprasProducto(PersistenceManager pm, String productoCodigo)
 		{
-			Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 SELECT * FROM" + pp.darTablaCompra()+ "WHERE productoCodigo= ?)");
+			Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 SELECT * FROM " + pp.darTablaCompra()+ " WHERE productoCodigo= ?)");
 			q.setParameters(productoCodigo);
 			q.setResultClass(Compra.class);
 			return (List<Compra>) q.execute();
@@ -88,7 +88,7 @@ class SQLCompra
 		
 		public List<Compra> darComprasCliente(PersistenceManager pm, long clienteId)
 		{
-			Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 SELECT * FROM" + pp.darTablaCompra()+ "WHERE clienteId= ?)");
+			Query q= pm.newQuery(SQL,"SET AUTOCOMMIT 0 SELECT * FROM " + pp.darTablaCompra()+  " WHERE clienteId= ?)");
 			q.setParameters(clienteId);
 			q.setResultClass(Compra.class);
 			return (List<Compra>) q.execute();

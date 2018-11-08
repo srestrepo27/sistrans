@@ -41,21 +41,21 @@ class SQLCliente
 	
 	public long adicionarCliente(PersistenceManager pm,long id, String nombre, String correo, int puntos,String nombreSucursal)
 	{
-		Query q= pm.newQuery(SQL,"INSERT INTO" + pp.darTablaCliente()+"(id, nombre, correo, puntos, nombreSucursal) values (?,?,?,?,?)");
+		Query q= pm.newQuery(SQL," INSERT INTO " + pp.darTablaCliente()+" (codigo, nombre, correo, puntos, Sucursalid) values (?,?,?,?,?)");
 		q.setParameters(id,nombre,correo,puntos,nombreSucursal);
 		return (long) q.executeUnique();
 	}
 	
 	public long eliminarClientePorId(PersistenceManager pm,long id)
 	{
-		Query q= pm.newQuery(SQL,"DELETE FROM" + pp.darTablaCliente() + "WHERE id= ?");
+		Query q= pm.newQuery(SQL," DELETE FROM " + pp.darTablaCliente() + " WHERE codigo= ?");
 		q.setParameters(id);
 		return (long) q.executeUnique();
 	}
 	
 	public long eliminarClientePorNombre(PersistenceManager pm,String nombre)
 	{
-		Query q= pm.newQuery(SQL,"DELETE FROM" + pp.darTablaCliente() + "WHERE nombre= ?");
+		Query q= pm.newQuery(SQL," DELETE FROM " + pp.darTablaCliente() + " WHERE nombre= ?");
 		q.setParameters(nombre);
 		return (long) q.executeUnique();
 	}
@@ -63,7 +63,7 @@ class SQLCliente
 	public Cliente darClientePorId(PersistenceManager pm,long id)
 	{
 
-		Query q= pm.newQuery(SQL,"SELECT * FROM" + pp.darTablaCliente() + "WHERE id= ?");
+		Query q= pm.newQuery(SQL,"SELECT * FROM " + pp.darTablaCliente() + " WHERE codigo= ?");
 		q.setResultClass(Cliente.class);
 		q.setParameters(id);
 		return (Cliente) q.executeUnique();
@@ -72,7 +72,7 @@ class SQLCliente
 	public List<Cliente> darClientesPorNombre(PersistenceManager pm,String nombre)
 	{
 
-		Query q= pm.newQuery(SQL,"SELECT * FROM" + pp.darTablaCliente() + "WHERE nombre= ?");
+		Query q= pm.newQuery(SQL,"SELECT * FROM " + pp.darTablaCliente() + " WHERE nombre= ?");
 		q.setResultClass(Cliente.class);
 		q.setParameters(nombre);
 		return (List<Cliente>) q.execute();
@@ -80,14 +80,14 @@ class SQLCliente
 	
 	public List<Cliente> darClientes(PersistenceManager pm)
 	{
-		Query q= pm.newQuery(SQL,"SELECT * FROM" + pp.darTablaCliente());
+		Query q= pm.newQuery(SQL," SELECT * FROM " + pp.darTablaCliente());
 		q.setResultClass(Cliente.class);
 		return (List<Cliente>) q.execute();
 	}
 	
 	public long cambiarCorreoCliente(PersistenceManager pm, long id, String correo)
 	{
-		 Query q = pm.newQuery(SQL, "UPDATE " + pp.darTablaCliente() + " SET correo = ? WHERE id = ?");
+		 Query q = pm.newQuery(SQL, " UPDATE " + pp.darTablaCliente() + " SET correo = ? WHERE codigo = ?");
 		 q.setParameters(id,correo);
 		 return(long)q.executeUnique();
 	}
