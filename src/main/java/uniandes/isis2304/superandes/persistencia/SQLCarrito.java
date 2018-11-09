@@ -57,10 +57,8 @@ public class SQLCarrito
 	
 	public List<Carrito> darCarritosLibres(PersistenceManager pm)
 	{
-		System.out.println("3.1");
-		System.out.println(" SELECT * FROM " + pp.darTablaCarrito());
+
 		Query q= pm.newQuery(SQL," SELECT * FROM " + pp.darTablaCarrito() + " WHERE cliente IS NULL");
-		System.out.println(" SELECT * FROM " + pp.darTablaCarrito());
 		q.setResultClass(Carrito.class);
 		return (List<Carrito>) q.execute();
 	}

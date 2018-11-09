@@ -292,7 +292,7 @@ public class PersistenciaSuperAndes
 	}
 	public String darTablaCarrito()
 	{
-		return tablas.get(15);
+		return "a_carrito";
 	}
 
 	public String darTablaContiene()
@@ -1362,11 +1362,12 @@ public class PersistenciaSuperAndes
 		Transaction tx=pm.currentTransaction();
 		System.out.println("2");
 		int cantCarritos= sqlCarrito.darCarritosLibres(pm).size();
-		System.out.println("3");
+		System.out.println(cantCarritos);
 		// no se si se va al cath cuando elegido no existe 
 		try
 		{
 			tx.begin(); 
+			
 			tx.setIsolationLevel("SERIALIZABLE");
 			Carrito elegido= darCarritosLibres().get(0);
 			long idCarrito = elegido.getIdCarrito();
