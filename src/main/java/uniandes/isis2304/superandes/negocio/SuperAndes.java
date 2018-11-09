@@ -360,6 +360,7 @@ public class SuperAndes
 	}
 	public Carrito asignarCarrito(long idCliente)
 	{
+		System.out.println("superndes");
 		Log.info("Asignando carrito al cliente con id: "+ idCliente);
 		 return ps.asignarCarrito(idCliente);
 	}

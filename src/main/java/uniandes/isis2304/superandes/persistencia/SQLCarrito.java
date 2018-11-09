@@ -48,6 +48,7 @@ public class SQLCarrito
 	
 	public long asignarClienteAlCarrito(PersistenceManager pm,long clienteId,long carritoId )
 	{
+		System.out.println("sql ");
 		Query q= pm.newQuery(SQL," SET AUTOCOMMIT 0 UPDATE " + pp.darTablaCarrito() + " SET cliente= ? WHERE Id= ?");
 		q.setParameters(clienteId);
 		return (long) q.executeUnique();
@@ -56,7 +57,10 @@ public class SQLCarrito
 	
 	public List<Carrito> darCarritosLibres(PersistenceManager pm)
 	{
-		Query q= pm.newQuery(SQL," SET AUTOCOMMIT 0 SELECT * FROM " + pp.darTablaCarrito() + " WHERE cliente = null");
+		System.out.println("3.1");
+		System.out.println(" SELECT * FROM " + pp.darTablaCarrito());
+		Query q= pm.newQuery(SQL," SELECT * FROM " + pp.darTablaCarrito() + " WHERE cliente IS NULL");
+		System.out.println(" SELECT * FROM " + pp.darTablaCarrito());
 		q.setResultClass(Carrito.class);
 		return (List<Carrito>) q.execute();
 	}

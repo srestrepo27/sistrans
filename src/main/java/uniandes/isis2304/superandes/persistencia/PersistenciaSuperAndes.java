@@ -1356,9 +1356,13 @@ public class PersistenciaSuperAndes
 	
 	public Carrito  asignarCarrito( long idCliente)
 	{
+		System.out.println("persi");
 		PersistenceManager pm = pmf.getPersistenceManager();
+		System.out.println("1");
 		Transaction tx=pm.currentTransaction();
+		System.out.println("2");
 		int cantCarritos= sqlCarrito.darCarritosLibres(pm).size();
+		System.out.println("3");
 		// no se si se va al cath cuando elegido no existe 
 		try
 		{
@@ -1373,10 +1377,12 @@ public class PersistenciaSuperAndes
 			return elegido;
 		}
 		catch (Exception e)
+		
 		{
 			//        	e.printStackTrace();
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			asignarCarrito(idCliente);
+			System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return null;
 		}
 
