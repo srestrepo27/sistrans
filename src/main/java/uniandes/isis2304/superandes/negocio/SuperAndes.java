@@ -358,7 +358,7 @@ public class SuperAndes
 		Log.info("Devolviendo el producto: " + codigoProducto +"en el carrito: "+ carritoId);
 		return ps.devolverProductoDelCarrito(carritoId, codigoProducto);
 	}
-	public Carrito asignarCarrito(long idCliente)
+	public String asignarCarrito(long idCliente)
 	{
 		System.out.println("superndes");
 		Log.info("Asignando carrito al cliente con id: "+ idCliente);
@@ -388,10 +388,10 @@ public class SuperAndes
 	}
 	
 	
-	public void terminarCompra(long carritoId)
+	public void terminarCompra(long carritoId, long clienteId)
 	{
 		Log.info("Terminando compra del cliente "+ carritoId);
-		ps.terminarCompra(carritoId);
+		ps.terminarCompra(carritoId, clienteId);
 	}
 	
 	public void devolverPorAbandono()

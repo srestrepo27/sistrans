@@ -70,7 +70,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 
 	private String nombreSucursal;
 	
-	private Carrito carrito;
+	private String carrito;
 	
 	private long cliente;
 	/* ****************************************************************
@@ -731,7 +731,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		try
 		{
 			String codigo=JOptionPane.showInputDialog (this, "codigo de barras del producto?", "Adicionar producto", JOptionPane.QUESTION_MESSAGE);
-			long i=superAndes.adicionarProductoAlCarrito(carrito.getIdCarrito(), codigo);
+			long i=superAndes.adicionarProductoAlCarrito(Long.parseLong(carrito), codigo);
 			panelDatos.actualizarInterfaz("producto adicionado: "+ i);
 			superAndes.devolverPorAbandono();
 
@@ -748,7 +748,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		try
 		{
 			String codigo=JOptionPane.showInputDialog (this, "codigo de barras del producto?", "Devolver producto", JOptionPane.QUESTION_MESSAGE);
-			long i=superAndes.devolverProductoDelCarrito(carrito.getIdCarrito(), codigo);
+			long i=superAndes.devolverProductoDelCarrito(Long.parseLong(carrito), codigo);
 			panelDatos.actualizarInterfaz("producto devuelto: "+ i);
 			superAndes.devolverPorAbandono();
 
@@ -787,7 +787,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		try
 		{
 			vender();
-			superAndes.terminarCompra(cliente);
+			superAndes.terminarCompra(Long.parseLong(carrito),cliente);
 			cliente=0;
 			superAndes.devolverPorAbandono();
 

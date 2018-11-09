@@ -1140,13 +1140,14 @@ public class PersistenciaSuperAndes
 		}
 	}
 
-	public void terminarCompra(long carritoId)
+	public void terminarCompra(long carritoId,long clienteId)
 	{
 		PersistenceManager pm= pmf.getPersistenceManager();
 		Transaction tx= pm.currentTransaction();
 		try
 		{
 			sqlContiene.terminarCompra(pm, carritoId); 
+			sqlCarrito.devolverCarrito(pm, clienteId);
 		}
 		catch(Exception e)
 		{
@@ -1505,11 +1506,11 @@ public class PersistenciaSuperAndes
 			{
 				for(String s: enContiene)
 				{
-					for(Carrito c: libres)
+					for(String c: libres)
 						
 						
 					{
-						if(s.equals(c.getIdCarrito()))
+						if(s.equals(c))
 						{
 							abandonados.add(s);
 						}
