@@ -55,12 +55,12 @@ public class SQLCarrito
 	
 	}
 	
-	public List<Carrito> darCarritosLibres(PersistenceManager pm)
+	public List<String> darCarritosLibres(PersistenceManager pm)
 	{
 
-		Query q= pm.newQuery(SQL," SELECT * FROM " + pp.darTablaCarrito() + " WHERE cliente IS NULL");
-		q.setResultClass(Carrito.class);
-		return (List<Carrito>) q.execute();
+		Query q= pm.newQuery(SQL," SELECT id FROM " + pp.darTablaCarrito() + " WHERE cliente IS NULL");
+		q.setResultClass(String.class);
+		return (List<String>) q.execute();
 	}
 	//NO SE COMO LLAMARLO, DEVOLVER O ABANDONAR 
 	public long devolverCarrito(PersistenceManager pm, long clienteId)

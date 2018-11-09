@@ -222,73 +222,72 @@ public class PersistenciaSuperAndes
 
 	public String darSeqSuperAndes()
 	{
-		return tablas.get(0);
+		return "SUPERANDES_SEQUENCE";
 	}
 
 	public String darTablaSuperMercado()
 	{
-		return tablas.get(1);
+		return "A_SUPERMERCADO";
 	}
 
 	public String darTablaCliente()
 	{
-		return tablas.get(2);
+		return "A_CLIENTE";
 	}
 
 	public String darTablaPersona()
 	{
-		return tablas.get(3);
+		return "A_PERSONA";
 	}
 
 	public String darTablaEmpresa()
 	{
-		return tablas.get(4);
+		return "A_EMPRESA";
 	}
 
 	public String darTablaProveedor()
 	{
-		return tablas.get(5);
+		return "A_PROVEEDOR";
 	}
 
 	public String darTablaPedido()
 	{
-		return tablas.get(6);
+		return "A_PEDIDO";
 	}
 
 	public String darTablaSucursal()
 	{
-		System.out.println(tablas.get(7));
-		return tablas.get(7);
+		return "A_SUCURSAL";
 	}
 
 	public String darTablaPromocionSucursal()
 	{
-		return tablas.get(8);
+		return "A_PROMOCION_SUCURSAL";
 	}
 	public String darTablaEstante()
 	{
-		return tablas.get(9);
+		return "A_ESTANTES";
 	}
 	public String darTablaBodega()
 	{
-		return tablas.get(10);
+		return "A_BODEGA";
 	}
 	public String darTablaProducto()
 	{
-		return tablas.get(11);
+		return "A_PRODUCTO";
 	}
 	public String darTablaCompra()
 	{
-		return tablas.get(12);
+		return "A_COMPRA";
 	}
 	public String darTablaProvee()
 	{
-		return tablas.get(13);
+		return "A_PROVEEDOR";
 	}
 
 	public String darTablaPromocionProveedor()
 	{
-		return tablas.get(14);
+		return "A_PROMOCION_PROVEEDOR";
 	}
 	public String darTablaCarrito()
 	{
@@ -297,7 +296,7 @@ public class PersistenciaSuperAndes
 
 	public String darTablaContiene()
 	{
-		return tablas.get(16);
+		return "A_CONTIENE";
 	}
 	/**
 	 * Extrae el mensaje de la exception JDODataStoreException embebido en la Exception e, que da el detalle específico del problema encontrado
@@ -1354,7 +1353,7 @@ public class PersistenciaSuperAndes
 		}
 	}
 	
-	public Carrito  asignarCarrito( long idCliente)
+	public String  asignarCarrito( long idCliente)
 	{
 		System.out.println("persi");
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1362,17 +1361,22 @@ public class PersistenciaSuperAndes
 		Transaction tx=pm.currentTransaction();
 		System.out.println("2");
 		int cantCarritos= sqlCarrito.darCarritosLibres(pm).size();
-		System.out.println(cantCarritos);
+		System.out.println("3");
 		// no se si se va al cath cuando elegido no existe 
 		try
 		{
-			tx.begin(); 
 			
-			tx.setIsolationLevel("SERIALIZABLE");
-			Carrito elegido= darCarritosLibres().get(0);
-			long idCarrito = elegido.getIdCarrito();
-			long tuplasInsertadas = sqlCarrito.asignarClienteAlCarrito(pm, idCliente, idCarrito);
+			System.out.println("4");
+			tx.begin(); 
+			System.out.println("5");
+			String elegido= darCarritosLibres().get(0);
+			System.out.println("6");
+	
+			System.out.println("7");
+			long tuplasInsertadas = sqlCarrito.asignarClienteAlCarrito(pm, idCliente, elegido);
+			System.out.println("8");
 			tx.commit();
+			System.out.println("9");
 
 			log.trace ("asignacion de carrito a cliente  : " + idCliente + ": " + tuplasInsertadas + " tuplas insertadas");
 			return elegido;
@@ -1382,7 +1386,7 @@ public class PersistenciaSuperAndes
 		{
 			//        	e.printStackTrace();
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-			asignarCarrito(idCliente);
+
 			System.out.println("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return null;
 		}
@@ -1398,7 +1402,7 @@ public class PersistenciaSuperAndes
 
 	}
 
-	public List<Carrito> darCarritosLibres()
+	public List<String> darCarritosLibres()
 	{
 
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1406,13 +1410,19 @@ public class PersistenciaSuperAndes
 		try
 		{
 			tx.begin();
-			tx.setIsolationLevel("READ ONLY");
-			List<Carrito> ret= sqlCarrito.darCarritosLibres(pm);
+			System.out.println("5.1");
+			
+			System.out.println("5.2");
+			List<String> ret= sqlCarrito.darCarritosLibres(pm);
+			System.out.println("5.3");
 			tx.commit();
+			System.out.println("5.4");
+			System.out.println(ret.size());
 			return ret;
 		}
 		catch(Exception e)
 		{
+			System.out.println("5.55");
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return null;
 		}
