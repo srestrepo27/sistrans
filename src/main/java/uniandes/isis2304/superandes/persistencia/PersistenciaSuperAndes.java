@@ -1373,7 +1373,7 @@ public class PersistenciaSuperAndes
 			System.out.println("6");
 	
 			System.out.println("7");
-			long tuplasInsertadas = sqlCarrito.asignarClienteAlCarrito(pm, idCliente, elegido);
+			long tuplasInsertadas = sqlCarrito.asignarClienteAlCarrito(pm, idCliente,Long.parseLong(elegido) );
 			System.out.println("8");
 			tx.commit();
 			System.out.println("9");
@@ -1499,13 +1499,15 @@ public class PersistenciaSuperAndes
 		{
 			tx.begin();
 			List<String> enContiene= sqlContiene.darCarritosEnContiene(pm);
-			List<Carrito> libres= sqlCarrito.darCarritosLibres(pm);
+			List<String> libres= sqlCarrito.darCarritosLibres(pm);
 			List<String> abandonados= new ArrayList<String>();
 			if(!libres.isEmpty() && !enContiene.isEmpty())
 			{
 				for(String s: enContiene)
 				{
 					for(Carrito c: libres)
+						
+						
 					{
 						if(s.equals(c.getIdCarrito()))
 						{
