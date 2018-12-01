@@ -9,6 +9,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.superandes.negocio.Cliente;
 import uniandes.isis2304.superandes.negocio.Compra;
 
 class SQLCompra 
@@ -152,6 +153,94 @@ public List<String> RFC9(PersistenceManager pm)
 	q.setResultClass(String.class);
 	
 	return (List<String>) q.executeList();
+}
+public List<Cliente> RFC10Admin(PersistenceManager pm,String producto, String fecha1, String fecha2, String criterio)
+{
+	Query q= pm.newQuery(SQL,"SELECT * FROM A_COMPRA WHERE PRODUCTOCODIGO ==? AND fecha BETWEEN ? AND ? AND A_CLIENTE.CODIGO= A_COMPRA.CLIENTEID " );
+	SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd"); 
+	Date date1=null;
+	try {
+		 date1 = (Date) dt.parse(fecha1);
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+	Date date2=null;
+	try {
+		 date2 = (Date) dt.parse(fecha2);
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+	q.setParameters(producto,date1,date2);
+	q.setResultClass(Compra.class);
+	return(List<Cliente>) q.execute();
+}
+public List<Cliente> RFC10Usuario(PersistenceManager pm,String producto, String fecha1, String fecha2, String criterio, String clienteId)
+{
+	Query q= pm.newQuery(SQL,"SELECT * FROM A_COMPRA WHERE PRODUCTOCODIGO ==? AND fecha BETWEEN ? AND ?AND A_CLIENTE.CODIGO=? AND A_CLIENTE.CODIGO= A_COMPRA.CLIENTEID " );
+	SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd"); 
+	Date date1=null;
+	try {
+		 date1 = (Date) dt.parse(fecha1);
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+	Date date2=null;
+	try {
+		 date2 = (Date) dt.parse(fecha2);
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+	q.setParameters(producto,date1,date2,clienteId);
+	q.setResultClass(Compra.class);
+	return(List<Cliente>) q.execute();
+}
+public List<Compra> RFC11(PersistenceManager pm, String fecha1, String fecha2)
+{
+	Query q= pm.newQuery(SQL,"SELECT * FROM A_CLIENTE, A_COMPRA WHERE FECHA <= ? AND FECHA > ?;" );
+	SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd"); 
+	Date date1=null;
+	try {
+		 date1 = (Date) dt.parse(fecha1);
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+	Date date2=null;
+	try {
+		 date2 = (Date) dt.parse(fecha2);
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+	q.setParameters(date1,date2);
+	q.setResultClass(Compra.class);
+	return(List<Compra>) q.execute();
+}
+public List<Compra> RFC12(PersistenceManager pm, String fecha1, String fecha2)
+{
+	Query q= pm.newQuery(SQL,"SELECT * FROM A_CLIENTE, A_COMPRA WHERE FECHA <= ? AND FECHA > ? ; SELECT * FROM ( ( SELECT PRODUCTOCODIGO , COUNT ( PRODUCTOCODIGO ) FROM A_COMPRAGROUP BY PRODUCTOCODIGO ) NATURAL INNER JOIN (SELECT MIN ( CONT ) FROM ( SELECT PRODUCTOCODIGO , COUNT (PRODUCTOCODIGO) AS CONT FROM A_COMPRA GROUP BY PRODUCTOCODIGO) GROUP BY(CONT))),A_PRODUCTO, A_COMPRAWHERE FECHA BETWEEN ? AND ? ;" );
+	SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd"); 
+	Date date1=null;
+	try {
+		 date1 = (Date) dt.parse(fecha1);
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+	Date date2=null;
+	try {
+		 date2 = (Date) dt.parse(fecha2);
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+	q.setParameters(date1,date2,date1,date2);
+	q.setResultClass(Compra.class);
+	return(List<Compra>) q.execute();
 }
 		
 }
