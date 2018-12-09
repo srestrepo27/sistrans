@@ -29,6 +29,7 @@ import uniandes.isis2304.superandes.negocio.Compra;
 import uniandes.isis2304.superandes.negocio.Empresa;
 import uniandes.isis2304.superandes.negocio.Pedido;
 import uniandes.isis2304.superandes.negocio.Producto;
+import uniandes.isis2304.superandes.negocio.Proveedor;
 import uniandes.isis2304.superandes.negocio.Sucursal;
 import uniandes.isis2304.superandes.negocio.SuperAndes;
 import uniandes.isis2304.superandes.negocio.VOCliente;
@@ -69,9 +70,9 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	private SuperAndes superAndes;
 
 	private String nombreSucursal;
-	
+
 	private String carrito;
-	
+
 	private long cliente;
 	/* ****************************************************************
 	 * 			Atributos de interfaz
@@ -222,7 +223,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		if(sucursal != null)
 		{
 			nombreSucursal=n;
-			
+
 		}
 		else
 		{
@@ -297,7 +298,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		try 
 		{
 			List<Producto> lista= superAndes.productosEnElCarrito(cliente);
-		
+
 			for(int i=0;i<lista.size();i++)
 			{
 				Producto p= lista.get(i);
@@ -649,15 +650,15 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void RFC7()// analisis de operacion INCOMPLETO
 	{
 		try
 		{
 			String f1=JOptionPane.showInputDialog (this, "PRODUCTO?", "RFC7", JOptionPane.QUESTION_MESSAGE);
 
-		
-			
+
+
 
 		}
 		catch(Exception e)
@@ -666,7 +667,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void RFC8()//clientes frecuentes
 	{
 		try
@@ -685,7 +686,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void RFC9()//productos con poca demanda
 	{
 		try
@@ -712,11 +713,11 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		try
 		{
 			String id=JOptionPane.showInputDialog (this, "id cliente?", "obtener carrito", JOptionPane.QUESTION_MESSAGE);
-			
+
 			long i=Long.parseLong(id);
 			cliente=i;
 			carrito= superAndes.asignarCarrito(cliente);
-			
+
 			superAndes.devolverPorAbandono();
 		}
 		catch(Exception e)
@@ -725,7 +726,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void RF13()//Adicionar al carrito
 	{
 		try
@@ -742,7 +743,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void RF14()//devolver producto
 	{
 		try
@@ -759,8 +760,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
-	
+
+
 	public void mostrarProductos()//mostrar los productos en el carrito
 	{
 		try
@@ -781,7 +782,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void RF15()//pagar la compra, editar el metodo vender
 	{
 		try
@@ -798,7 +799,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void RF16()//abandonar carrito de compras
 	{
 		try
@@ -813,9 +814,156 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
-	
 
+
+
+	public void RFC10()
+	{
+		try
+		{
+			String a= JOptionPane.showInputDialog("Por favor indique si es admin o gerente");
+			if(a.equals("amdin"))
+			{
+				String clave= JOptionPane.showInputDialog("Ingrese la clave");
+				if(clave.equals("1234))"))
+				{
+
+					String producto= JOptionPane.showInputDialog("Indique el producto");
+					String fecha1= JOptionPane.showInputDialog("Indique la fecha de inicio");
+					String fecha2= JOptionPane.showInputDialog("Indique la fecha de fin");
+					String criterio= JOptionPane.showInputDialog("Indique el criterio de busqueda");
+
+					List<Cliente> lista= superAndes.RFC10admin(producto, fecha1, fecha2, criterio);
+					String str="";
+					for(Cliente s: lista)
+					{
+						str+=s.getCodigo() + "\n";
+					}
+					panelDatos.actualizarInterfaz(str);
+				}
+			}
+			else if(a.equals("gerente"))
+			{
+				String producto= JOptionPane.showInputDialog("Indique el producto");
+				String fecha1= JOptionPane.showInputDialog("Indique la fecha de inicio");
+				String fecha2= JOptionPane.showInputDialog("Indique la fecha de fin");
+				String criterio= JOptionPane.showInputDialog("Indique el criterio de busqueda");
+
+				List<Cliente> lista= superAndes.RFC10gerente(producto, fecha1, fecha2, criterio);
+				String str="";
+				for(Cliente s: lista)
+				{
+					str+=s.getCodigo() + "\n";
+				}
+				panelDatos.actualizarInterfaz(str);
+			}
+			
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	public void RFC11()
+	{
+		try
+		{
+			String fecha1= JOptionPane.showInputDialog("Ingrese la fecha 1");
+			String fecha2= JOptionPane.showInputDialog("Ingrese la fecha 2");
+			List<Compra> lista= superAndes.RFC11(fecha1, fecha2);
+			String str="";
+			for(Compra c: lista)
+			{
+				str+= c.getCliente() + "\n";
+			}
+			panelDatos.actualizarInterfaz(str);
+
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void RFC12()
+	{
+		try
+		{
+			String fecha1= JOptionPane.showInputDialog("Ingrese la fecha 1");
+			String fecha2= JOptionPane.showInputDialog("Ingrese la fecha 2");
+			
+			List<Compra> lista= superAndes.RCF121(fecha1, fecha2);
+			String str="Producto mas vendido:";
+			for(Compra c: lista)
+			{
+				str+= c.getProducto() + "\n";
+			}
+			List<Compra> lista2= superAndes.RCF122(fecha1, fecha2);
+			String str2="Producto menos vendido:";
+			for(Compra c: lista2)
+			{
+				str2+= c.getProducto() + "\n";
+			}
+			
+			List<Proveedor>lista3= superAndes.RFC123(fecha1, fecha2);
+			String str3= "Proveedor menos solicitado:";
+			for(Proveedor c: lista3)
+			{
+				str3+= c.getNit() + "\n";
+			}
+			List<Proveedor>lista4= superAndes.RFC124(fecha1, fecha2);
+			String str4= "Proveedor mas solicitado:";
+			for(Proveedor c: lista4)
+			{
+				str4+= c.getNit() + "\n";
+			}
+			
+			String ultimo= str+str2+str3+str4;
+			panelDatos.actualizarInterfaz(ultimo);
+
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	public void RFC13()
+	{
+		try
+		{
+			
+			List<Compra> lista1= superAndes.RFC131();
+			String str1="Clientes que compran un producto cada mes:";
+			for(Compra c: lista1)
+			{
+				str1+= c.getCliente() + "\n";
+			}
+			
+			List<Compra> lista2= superAndes.RFC132();
+			String str2="Clientes que compran un producto con precio alto:";
+			for(Compra c: lista2)
+			{
+				str2+= c.getCliente() + "\n";
+			}
+			
+			List<Compra> lista3= superAndes.RFC133();
+			String str3="Clientes que compran un producto de categoria especial:";
+			for(Compra c: lista3)
+			{
+				str3+= c.getCliente() + "\n";
+			}
+		}
+		catch(Exception e)
+		{
+			String resultado= generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

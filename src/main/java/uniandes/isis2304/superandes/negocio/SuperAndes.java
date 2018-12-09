@@ -400,10 +400,79 @@ public class SuperAndes
 		ps.devolverTodoPorAbandono();
 	}
 	
+	//ITERACION 3
 	
+	public List<Cliente> RFC10admin(String producto, String fecha1, String fecha2, String criterio)
+	{
+		Log.info("Retornando la informacion del producto" + producto+ "en las fechas" + fecha1 +fecha2+ "bajo el criterio:" + criterio		);
+		
+		List<Cliente> ret =ps.RFC10Admin(producto, fecha1, fecha2, criterio);
+		return ret;
+	}
 	
+	public List<Cliente> RFC10gerente(String producto, String fecha1, String fecha2, String criterio)
+	{
+		Log.info("Retornando la informacion del producto" + producto+ "en las fechas" + fecha1 +fecha2+ "bajo el criterio:" + criterio		);
+		
+		List<Cliente> ret =ps.RFC10Gerente(producto, fecha1, fecha2, criterio);
+		return ret;
+	}
 	
+	public List<Compra> RFC11(String fecha1, String fecha2)
+	{
+		Log.info("Obteniendo las compras en las fechas" + fecha1 +"y" +fecha2);
+		List<Compra> ret= ps.RFC11(fecha1, fecha2);
+		return ret;
+	}
 	
+	public List<Compra> RCF121(String fecha1, String fecha2)
+	{
+		Log.info("Obteniendo los productos mas vendidos entre las fechas" + fecha1 +"y" +fecha2);
+		List<Compra> ret= ps.RFC121(fecha1, fecha2);
+		return ret;
+	}
+	
+	public List<Compra> RCF122(String fecha1, String fecha2)
+	{
+		Log.info("Obteniendo los productos menos vendidos entre las fechas" + fecha1 +"y" +fecha2);
+		List<Compra> ret= ps.RFC122(fecha1, fecha2);
+		return ret;
+	}
+	
+	public List<Proveedor> RFC123(String fecha1,String fecha2)
+	{
+		Log.info("Mostrando los proveedores menos solicitados en las fechas:"+fecha1 +"y" +fecha2);
+		List<Proveedor> ret= ps.RFC123(fecha1, fecha2);
+		return ret;
+	}
+	
+	public List<Proveedor> RFC124(String fecha1,String fecha2)
+	{
+		Log.info("Mostrando los proveedores mas solicitados en las fechas:"+fecha1 +"y" +fecha2);
+		List<Proveedor> ret= ps.RFC124(fecha1, fecha2);
+		return ret;
+	}
+	
+	public List<Compra> RFC131()
+	{
+		Log.info("Compras de un producto cada mes");
+		List<Compra> ret= ps.RFC131();
+		return ret;
+	}
+	
+	public List<Compra> RFC132()
+	{
+		Log.info("Compras de un producto con precio alto");
+		List<Compra> ret= ps.RFC132();
+		return ret;
+	}
+	
+	public List<Compra> RFC133()
+	{
+		Log.info("Compras de un producto de tecnologia o herramientas");
+		List<Compra> ret= ps.RFC133();
+		return ret;
+	}
 	
 	
 	

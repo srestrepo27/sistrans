@@ -603,7 +603,265 @@ public class PersistenciaSuperAndes
 		return ret;
 	}
 
+	//---------------------------------------------------------------
+	//REQUERIMIENTOS TODO
+		//-------------------------------------------------
+	
+	public List<Cliente> RFC10Admin(String producto, String fecha1, String fecha2, String criterio)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		List<Cliente> ret= new ArrayList<Cliente>();
+		try
+		{
+			tx.begin();  
+			ret= sqlCompra.RFC10Admin(pm, producto, fecha1, fecha2, criterio);
+		}
+		catch(Exception e)
+		{
+			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return ret;
+	}
+	
+	public List<Cliente> RFC10Gerente(String producto, String fecha1, String fecha2, String criterio)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		List<Cliente> ret= new ArrayList<Cliente>();
+		try
+		{
+			tx.begin();  
+			ret= sqlCompra.RFC10Usuario(pm, producto, fecha1, fecha2, criterio);
+		}
+		catch(Exception e)
+		{
+			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return ret;
+	}
+	
+	
+	public List<Compra> RFC11(String fecha1, String fecha2)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		List<Compra> ret= new ArrayList<Compra>();
+		try
+		{
+			tx.begin();  
+			ret= sqlCompra.RFC11(pm, fecha1, fecha2);
+		}
+		catch(Exception e)
+		{
+			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return ret;
+	}
+	public List<Compra> RFC121( String fecha1, String fecha2)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		List<Compra> ret= new ArrayList<Compra>();
+		try
+		{
+			tx.begin();  
+			ret= sqlCompra.RFC121(pm, fecha1, fecha2);
+		}
+		catch(Exception e)
+		{
+			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return ret;
+	}
+	
+	public List<Compra> RFC122( String fecha1, String fecha2)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		List<Compra> ret= new ArrayList<Compra>();
+		try
+		{
+			tx.begin();  
+			ret= sqlCompra.RFC122(pm, fecha1, fecha2);
+		}
+		catch(Exception e)
+		{
+			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return ret;
+	}
+	public List<Proveedor> RFC123( String fecha1, String fecha2)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		List<Proveedor> ret= new ArrayList<Proveedor>();
+		try
+		{
+			tx.begin();  
+			ret= sqlCompra.RFC123(pm, fecha1, fecha2);
+		}
+		catch(Exception e)
+		{
+			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return ret;
+	}
+	
+	public List<Proveedor> RFC124( String fecha1, String fecha2)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		List<Proveedor> ret= new ArrayList<Proveedor>();
+		try
+		{
+			tx.begin();  
+			ret= sqlCompra.RFC124(pm, fecha1, fecha2);
+		}
+		catch(Exception e)
+		{
+			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return ret;
+	}
+	public List<Compra> RFC131()
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		List<Compra> ret= new ArrayList<Compra>();
 
+		try
+		{
+			tx.begin(); 
+			ret= sqlCompra.RFC131(pm);
+
+		}
+		catch(Exception e)
+		{
+			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return ret;
+
+	}
+	public List<Compra> RFC132()
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		List<Compra> ret= new ArrayList<Compra>();
+
+		try
+		{
+			tx.begin(); 
+			ret= sqlCompra.RFC132(pm);
+
+		}
+		catch(Exception e)
+		{
+			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return ret;
+
+	}
+	
+	public List<Compra> RFC133()
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		List<Compra> ret= new ArrayList<Compra>();
+
+		try
+		{
+			tx.begin(); 
+			ret= sqlCompra.RFC133(pm);
+
+		}
+		catch(Exception e)
+		{
+			log.error("Exception: "+ e.getMessage()+ "\n"+ darDetalleException(e));
+		}
+		finally
+		{
+			if(tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+		return ret;
+
+	}
 	/* ****************************************************************
 	 * 			METODOS AUTOMATICOS
 	 *****************************************************************/
@@ -635,7 +893,6 @@ public class PersistenciaSuperAndes
 				try {
 					fecha = (Date) dt.parse(f);
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
