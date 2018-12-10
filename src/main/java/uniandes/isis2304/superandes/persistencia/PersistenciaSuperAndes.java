@@ -780,11 +780,11 @@ public class PersistenciaSuperAndes
 		}
 		return ret;
 	}
-	public List<Compra> RFC131()
+	public List<String> RFC131()
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
-		List<Compra> ret= new ArrayList<Compra>();
+		List<String> ret= new ArrayList<String>();
 
 		try
 		{

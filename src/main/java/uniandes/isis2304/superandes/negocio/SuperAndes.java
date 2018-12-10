@@ -453,10 +453,10 @@ public class SuperAndes
 		return ret;
 	}
 	
-	public List<Compra> RFC131()
+	public List<String> RFC131()
 	{
-		Log.info("Compras de un producto cada mes");
-		List<Compra> ret= ps.RFC131();
+		Log.info("Clientes que compran cada mes");
+		List<String> ret= ps.RFC131();
 		return ret;
 	}
 	

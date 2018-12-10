@@ -1,5 +1,5 @@
 
-
+select distinct clienteid, extract (month from fecha ) ,count( * )from a_compra  group by  clienteid , extract (month from fecha ) having count (*)>=1
 
 
 

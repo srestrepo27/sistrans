@@ -936,11 +936,11 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		try
 		{
 			
-			List<Compra> lista1= superAndes.RFC131();
+			List<String> lista1= superAndes.RFC131();
 			String str1="Clientes que compran un producto cada mes:";
-			for(Compra c: lista1)
+			for(String c: lista1)
 			{
-				str1+= c.getCliente() + "\n";
+				str1+= c + "\n";
 			}
 			
 			List<Compra> lista2= superAndes.RFC132();

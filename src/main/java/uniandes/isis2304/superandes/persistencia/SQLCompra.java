@@ -281,11 +281,11 @@ class SQLCompra
 		q.setResultClass(Proveedor.class);
 		return(List<Proveedor>) q.execute();
 	}
-	public List<Compra> RFC131(PersistenceManager pm)
+	public List<String> RFC131(PersistenceManager pm)
 	{
-		Query q= pm.newQuery(SQL, "");
-	q.setResultClass(Compra.class);
-	return (List<Compra>) q.execute();
+		Query q= pm.newQuery(SQL, "select distinct clienteid, extract (month from fecha ) ,count( * )from a_compra  group by  clienteid , extract (month from fecha ) having count (*)>=1");
+	q.setResultClass(String.class);
+	return (List<String>) q.execute();
 	}
 	
 	public List<Compra> RFC132(PersistenceManager pm)
